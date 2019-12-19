@@ -1,0 +1,9 @@
+{
+	"_id": "2020010100001",
+	"ts": "2020-01-01T00:00:00Z",
+	"taxCode": "Codigo_ejemplo_tasa",
+	"taxDes": "Descripcion: Tasa Molecula",
+	"from": "2020-01-01",
+	"to": "2020-12-31",
+	"taxVal": 0.0015
+}
