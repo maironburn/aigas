@@ -5,16 +5,14 @@ from src.helper.json_helper import check_field_integrity
 from datetime import datetime
 
 
-class Calendario(object):
+class PrecioFormula(object):
 
-    _id = None  # String
-    _ts = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
-    _calendar_code = None  # String
-    _periods = []  # lista de periodos
+    _formulaDates = []  # Array<Date (ISO8601 (yyyy-MM-dd))>
+    _formulaPrice = []  # Array<Double>
+    _formulaPriceDetail = []  # Array<String>
 
     _logger = None
     entity_data = None
-    is_serie_temporal = True
 
     def __init__(self, **kw):
 
@@ -97,15 +95,3 @@ class Calendario(object):
             self._periods = periods
 
     # </editor-fold>
-
-
-    @property
-    def unique(self):
-        # identificador univoco de la entidad
-        return self._calendar_code
-
-    @property
-    def is_serie_temporal(self):
-        # flag que identifica el proceso de revision que se debe realizar
-        return self.is_serie_temporal
-

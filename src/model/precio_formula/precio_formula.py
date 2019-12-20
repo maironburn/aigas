@@ -8,8 +8,12 @@ from datetime import datetime
 class PrecioFormula(object):
     _id = None  # String
     _ts = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
-    _calendar_code = None  # String
-    _periods = []  # lista de periodos
+    _formulaCode = None  # String
+    _formulaDes = None  # String
+
+    _from = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
+    _to = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
+    _compoundIndex = None
 
     _logger = None
     entity_data = None
