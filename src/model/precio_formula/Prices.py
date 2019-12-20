@@ -1,5 +1,5 @@
 from logger.app_logger import AppLogger
-from src.model.calendario.periods import Periods
+from src.model.calendar.periods import Periods
 from common_config import CALENDARIO_FIELDS, PERIODS_FIELDS
 from src.helper.json_helper import check_field_integrity
 from datetime import datetime
@@ -34,7 +34,7 @@ class PrecioFormula(object):
             periods and self.load_periods(periods)
 
     def load_periods(self, periods):
-        self._logger.info("Iniciando la carga de {} periodos asociados al calendario ".format(len(periods)))
+        self._logger.info("Iniciando la carga de {} periodos asociados al calendar ".format(len(periods)))
         for p in periods:
             if check_field_integrity(PERIODS_FIELDS, p):
                 self.periods.append(Periods(**{'entity_data': p, 'logger': self._logger}))

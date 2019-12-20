@@ -14,7 +14,7 @@ URL_BASE = "https://swapi.co/api/"
 CALENDARIO_SAMPLE = os.path.join(JSON_SAMPLES, 'CalendarioEjemploV0.1.json')
 
 # FIELDS to check data integrity
-CALENDARIO_FIELDS = ['_id', 'ts', 'calendarCode', 'Periods']
+Calendar_FIELDS = ['_id', 'ts', 'calendarCode', 'Periods']
 PERIODS_FIELDS = ['idPeriod', 'from', 'to', 'calendarDates', 'active']
 
 

@@ -2,6 +2,7 @@ import json
 import os
 import urllib3
 from common_config import URL_BASE, CALENDARIO_SAMPLE
+from importlib import import_module
 
 
 def get_entity_from_samples(json_sample_file):
@@ -12,7 +13,8 @@ def get_entity_from_samples(json_sample_file):
 
 
 def check_field_integrity(fields_to_check, entity_data):
-    for i in fields_to_check:
+    module = import_module('common_config')
+    for i in getattr(module, fields_to_check):
         if i not in entity_data.keys():
             return False
     return True
@@ -28,6 +30,3 @@ def get_entity_from_rest(from_date, entity):
     r = http.request('GET', URL_BASE)
 
     return json.loads(r.data.decode('utf-8'))
-
-
-
