@@ -4,9 +4,10 @@ from logger.app_logger import AppLogger
 from src.helper.json_helper import check_field_integrity
 
 
-class Prevision_Details(object):
-    forecastDates = []  # Array<Date (ISO8601 (yyyy-MM-dd))>
-    forecastPrice = []  # Array<Double>
+class ATRPrices(object):
+    TPAId = None  # String
+    TPAConcept = None  # String
+    TPAConceptAmount = None  # Integer
 
     _logger = None
     json_entity_data = None
@@ -21,14 +22,16 @@ class Prevision_Details(object):
         self._logger.info("Checking fields from entity {}".format(self.__class__.__name__))
 
         if check_field_integrity("{}_FIELDS".format(self.__class__.__name__), self.json_entity_data):
-            self.forecastDates = self.json_entity_data['forecastDates']
-            self.forecastPrice = self.json_entity_data['forecastPrice']
+            self.TPAId = self.json_entity_data['TPAId']
+            self.TPAConcept = self.json_entity_data['TPAConcept']
+            self.TPAConceptAmount = self.json_entity_data['TPAConceptAmount']
         else:
             self._logger.error("{} faltan campos en {}".format(self.__class__.__name__,
                                                                json.dumps(self.json_entity_data)))
 
     def get_json(self):
 
-        return {"forecastDates": self.forecastDates,
-                "forecastPrice": self.forecastPrice
+        return {"TPAId": self.TPAId,
+                "TPAConcept": self.TPAConcept,
+                "TPAConceptAmount": self.TPAConceptAmount
                 }

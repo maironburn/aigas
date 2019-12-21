@@ -1,8 +1,5 @@
-from logger.app_logger import AppLogger
-from src.model.calendar.periods import Periods
-
 from src.model.airegas_base import AireGas
-from datetime import datetime
+from src.model.calendar.periods import Periods
 
 
 class Calendar(AireGas):

@@ -1,7 +1,7 @@
+from src.model.airegas_base import AireGas
 from src.model.datos_cli.contract import Contract
 from src.model.datos_cli.invoice import Invoice
 from src.model.datos_cli.supply import Supply
-from src.model.airegas_base import AireGas
 
 
 class DatosCLI(AireGas):
@@ -33,14 +33,11 @@ class DatosCLI(AireGas):
     def load_invoice(self, invoice):
         self.invoice = Invoice(**{'entity_data': invoice, 'logger': self._logger})
 
-
     def load_supply(self, supply):
         self.supply = Supply(**{'entity_data': supply, 'logger': self._logger})
 
-
     def load_contract(self, contract):
         self.contract = Contract(**{'entity_data': contract, 'logger': self._logger})
-
 
     def get_invoice(self):
         return self.invoice.get_json()

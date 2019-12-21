@@ -1,8 +1,6 @@
-import json
-from src.helper.json_helper import get_entity_from_samples
 from common_config import PREVISION_SAMPLE
+from src.helper.json_helper import get_entity_from_samples
 from src.model.prevision.prevision import Prevision
-from src.mongodb.mongo_client import connect_to
 
 if __name__ == '__main__':
 

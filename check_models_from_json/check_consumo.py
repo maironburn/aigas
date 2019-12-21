@@ -1,8 +1,6 @@
-import json
-from src.helper.json_helper import get_entity_from_samples
 from common_config import CONSUMO_SAMPLE
+from src.helper.json_helper import get_entity_from_samples
 from src.model.consumo.consumo import Consumo
-from src.mongodb.mongo_client import connect_to
 
 if __name__ == '__main__':
 

@@ -1,8 +1,6 @@
 import json
+
 import urllib3
-import pymongo
-import os
-import urllib.request
 
 print('Loading function')
 url = "https://swapi.co/api/people"

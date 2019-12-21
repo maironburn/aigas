@@ -1,7 +1,7 @@
-from logger.app_logger import AppLogger
-from src.model.calendar.periods import Periods
-from src.helper.json_helper import check_field_integrity
 import json
+
+from logger.app_logger import AppLogger
+from src.helper.json_helper import check_field_integrity
 
 
 class Prices(object):

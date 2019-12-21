@@ -1,7 +1,8 @@
+import json
+from datetime import datetime
+
 from logger.app_logger import AppLogger
 from src.helper.json_helper import check_field_integrity
-from datetime import datetime
-import json
 
 
 class AireGas(object):

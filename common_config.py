@@ -21,6 +21,8 @@ PRECIOS_REGULADOS_SAMPLE = os.path.join(JSON_SAMPLES, 'PreciosReguladosEjemploV0
 CONSUMO_NOCTURNO_SAMPLE = os.path.join(JSON_SAMPLES, 'ConsumoNocturnoEjemploV0.1.json')
 CONSUMO_SAMPLE = os.path.join(JSON_SAMPLES, 'ConsumoEjemploV0.1.json')
 DATOS_CLI_SAMPLE = os.path.join(JSON_SAMPLES, 'DatosCLIEjemploV0.1.json')
+DETALLE_CALIDAD_GAS_SAMPLE = os.path.join(JSON_SAMPLES, 'DetallesCalidadGasEjemploV0.1.json')
+IMPORTES_ATR_SAMPLE = os.path.join(JSON_SAMPLES, 'ImportesATRPassthroughEjemploV0.1.json')
 
 # FIELDS to check data integrity
 # nombre_clase_FIELDS (se invoca por instrospeccion)
@@ -63,6 +65,15 @@ Supply_FIELDS = ['CUPS', 'address', 'locality', 'postalCode', 'position']
 Contract_FIELDS = ['CounterPartyName', 'CounterPartyDocNumber', 'clientName', 'connectionPoint', 'startDate', 'active',
                    'portfolio', 'broker', 'commission']
 
+# Detalle calidad de gas
+QualityGasDetail_FIELDS = ['_id', 'ts', 'CLI', 'date', 'meter', 'detailPCS', 'detailPCI', 'detailDensity', 'detailN2',
+                           'detailPressure', 'detailTemp', 'detailValueZ', 'detailValueK', 'detailLectm3',
+                           'detailConsm3',
+                           'detailAdjustementskWh', 'detailConskWh', 'detailCO2'
+                           ]
 
+# Importes ATR
+ImportesATRPassthrough_FIELDS = ['_id', 'ts', 'CLI', 'From', 'To', 'ATRPrices']
+ATRPrices_FIELDS = ['TPAId', 'TPAConcept', 'TPAConceptAmount']
 
 ENDPOINT_URL = 'https://swapi.co/api/'

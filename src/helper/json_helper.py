@@ -1,8 +1,10 @@
 import json
 import os
-import urllib3
-from common_config import URL_BASE, CALENDARIO_SAMPLE
 from importlib import import_module
+
+import urllib3
+
+from common_config import URL_BASE
 
 
 def get_entity_from_samples(json_sample_file):

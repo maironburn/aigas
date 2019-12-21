@@ -1,8 +1,6 @@
-import json
-from src.helper.json_helper import get_entity_from_samples
 from common_config import PRECIO_FORMULA_SAMPLE
+from src.helper.json_helper import get_entity_from_samples
 from src.model.precio_formula.precio_formula import PrecioFormula
-from src.mongodb.mongo_client import connect_to
 
 if __name__ == '__main__':
     instance_data = get_entity_from_samples(PRECIO_FORMULA_SAMPLE)
