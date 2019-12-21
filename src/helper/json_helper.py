@@ -12,10 +12,10 @@ def get_entity_from_samples(json_sample_file):
         return data
 
 
-def check_field_integrity(fields_to_check, entity_data):
+def check_field_integrity(fields_to_check, json_entity_data):
     module = import_module('common_config')
     for i in getattr(module, fields_to_check):
-        if i not in entity_data.keys():
+        if i not in json_entity_data.keys():
             return False
     return True
 

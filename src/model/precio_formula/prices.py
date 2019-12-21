@@ -1,15 +1,13 @@
 from logger.app_logger import AppLogger
-from common_config import Periods_FIELDS
+from src.model.calendar.periods import Periods
 from src.helper.json_helper import check_field_integrity
 import json
 
 
-class Periods(object):
-    idPeriod = None  # String
-    From = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
-    To = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
-    calendarDates = []  # Array<Date (ISO8601 (yyyy-MM-dd))>
-    active = []  # Array<Integer>, 1 | 0 (activo/inactivo)
+class Prices(object):
+    formulaDates = []  # Array<Date (ISO8601 (yyyy-MM-dd))>
+    formulaPrice = []  # Array<Double>
+    formulaPriceDetail = []  # Array<String>
 
     _logger = None
     json_entity_data = None
@@ -24,20 +22,17 @@ class Periods(object):
         self._logger.info("Checking fields from entity {}".format(self.__class__.__name__))
 
         if check_field_integrity("{}_FIELDS".format(self.__class__.__name__), self.json_entity_data):
-            self.idPeriod = self.json_entity_data['idPeriod']
-            self.From = self.json_entity_data['from']
-            self.To = self.json_entity_data['to']
-            self.calendarDates = self.json_entity_data['calendarDates']
-            self.active = self.json_entity_data['active']
+            self.formulaDates = self.json_entity_data['formulaDates']
+            self.formulaPrice = self.json_entity_data['formulaPrice']
+            self.formulaPriceDetail = self.json_entity_data['formulaPriceDetail']
+
         else:
             self._logger.error("{} faltan campos en {}".format(self.__class__.__name__,
                                                                json.dumps(self.json_entity_data)))
 
     def get_json(self):
 
-        return {"idPeriod": self.idPeriod,
-                "from": self.From,
-                "to": self.To,
-                "calendarDates": self.calendarDates,
-                "active": self.active
+        return {"formulaDates": self.formulaDates,
+                "formulaPrice": self.formulaPrice,
+                "formulaPriceDetail": self.formulaPriceDetail,
                 }

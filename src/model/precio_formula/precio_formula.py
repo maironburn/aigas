@@ -1,65 +1,55 @@
-from logger.app_logger import AppLogger
-from src.model.calendar.periods import Periods
-from common_config import CALENDARIO_FIELDS, PERIODS_FIELDS
-from src.helper.json_helper import check_field_integrity
-from datetime import datetime
+from src.model.airegas_base import AireGas
+from src.model.precio_formula.prices import Prices
 
 
-class PrecioFormula(object):
-    _id = None  # String
-    ts = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
+class PrecioFormula(AireGas):
     formulaCode = None  # String
     formulaDes = None  # String
-
     From = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
     To = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
-    compoundIndex = None
-
-    _logger = None
-    entity_data = None
+    compoundIndex = []  # Array<String>
+    prices = {}  # segun modelo funcional es un objeto y no una matriz, e.d, relacion 1:1
 
     def __init__(self, **kw):
-
-        self.entity_data = kw.get('entity_data', None)
-        self._logger = AppLogger.create_rotating_log() if not kw.get('logger') else kw.get('logger')
-        if isinstance(self.entity_data, dict):
-            self._logger.info("Loading data {} from json".format(self.__class__.__name__))
-            self.load_data()
+        super().__init__(**kw)
+        self.is_temporal_sequence = True
 
     def load_data(self):
-        self._logger.info("Comprobando la integridad de la entidad {}".format(self.__class__.__name__))
-        if check_field_integrity(CALENDARIO_FIELDS, self.entity_data):
-            self.id = self.entity_data['_id']
-            # self.ts = self.entity_data['ts'] = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
-            self.ts = datetime.now().replace(microsecond=0).isoformat()
-            self.calendar_code = self.entity_data['calendarCode']
-            periods = self.entity_data['Periods']
+        super().load_data()
+        self.formulaCode = self.json_entity_data['formulaCode']
+        self.formulaDes = self.json_entity_data['formulaDes']
+        self.From = self.json_entity_data['from']
+        self.To = self.json_entity_data['to']
+        self.compoundIndex = self.json_entity_data['compoundIndex']
+        prices = self.json_entity_data["prices"]
 
-            periods and self.load_periods(periods)
+        prices and self.load_prices(prices)
 
-    def load_periods(self, periods):
-        self._logger.info("Iniciando la carga de {} periodos asociados al calendar ".format(len(periods)))
-        for p in periods:
-            if check_field_integrity(PERIODS_FIELDS, p):
-                self.periods.append(Periods(**{'entity_data': p, 'logger': self._logger}))
+    def load_prices(self, prices):
+        self._logger.info(
+            "Iniciando la carga de {} prices asociados a {} ".format(len(prices), self.__class__.__name__))
+        self.prices = Prices(**{'entity_data': prices, 'logger': self._logger})
 
-        self._logger.info("Instanciados {} periodos  ".format(len(self.periods)))
-
-    def get_periods(self):
-
-        periods = []
-        for p in self.periods:
-            periods.append(p.get_json())
-
-        return periods
+    def get_prices(self):
+        return self.prices.get_json()
 
     # <editor-fold desc="getter and setters">
     def get_json(self):
+        json_parent = AireGas.get_json(self)
 
-        return {"_id": self.id,
-                "ts": self.ts,
-                "calendarCode": self.calendar_code,
-                "Periods": self.get_periods()
-                }
+        json_parent.update({
+            "formulaCode": self.formulaCode,
+            "formulaDes": self.formulaDes,
+            "from": self.From,
+            "to": self.To,
+            "compoundIndex": self.compoundIndex,
+            "prices": self.get_prices()
+        })
+        return json_parent
+
+    @property
+    def unique(self):
+        # identificador univoco de la entidad
+        return self.formulaCode
 
 
