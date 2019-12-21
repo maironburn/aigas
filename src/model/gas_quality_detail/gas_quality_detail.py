@@ -1,7 +1,7 @@
 from src.model.airegas_base import AireGas
 
 
-class QualityGasDetail(AireGas):
+class Gas_Quality_Detail(AireGas):
     CLI = ""  # String
     date = []  # Array<Date (ISO8601 (yyyy-MM-dd))>
     meter = []  # Array<String>

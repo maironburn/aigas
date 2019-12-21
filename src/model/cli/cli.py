@@ -1,10 +1,10 @@
 from src.model.airegas_base import AireGas
-from src.model.datos_cli.contract import Contract
-from src.model.datos_cli.invoice import Invoice
-from src.model.datos_cli.supply import Supply
+from src.model.cli.contract import Contract
+from src.model.cli.invoice import Invoice
+from src.model.cli.supply import Supply
 
 
-class DatosCLI(AireGas):
+class CLI(AireGas):
     CLI = None  # String
     StartDate = None  # Date (ISO8601 (yyyy-MM-dd))
     EndDate = None  # Date (ISO8601 (yyyy-MM-dd))

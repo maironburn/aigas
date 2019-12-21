@@ -1,7 +1,7 @@
 from src.model.airegas_base import AireGas
 
 
-class Precios_Regulados(AireGas):
+class Regulated_Price(AireGas):
     regulatedPriceName = None  # String
     regulatedDates = []  # Array<Date (ISO8601 (yyyy-MM-dd))>
     regulatedVal = []  # Array<Integer>

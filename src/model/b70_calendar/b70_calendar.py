@@ -1,12 +1,10 @@
 from src.model.airegas_base import AireGas
 
 
-class Tasa_Molecula(AireGas):
-    taxCode = None  # String
-    taxDes = None  # String
+class B70_Calendar(AireGas):
+    CLI = None  # String
     From = None  # Date (ISO8601 (yyyy-MM-dd))
     To = None  # Date (ISO8601 (yyyy-MM-dd))
-    taxVal = None  # Integer
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -14,25 +12,21 @@ class Tasa_Molecula(AireGas):
 
     def load_data(self):
         super().load_data()
-        self.taxCode = self.json_entity_data['taxCode']
-        self.taxDes = self.json_entity_data['taxDes']
+        self.CLI = self.json_entity_data['CLI']
         self.From = self.json_entity_data['from']
         self.To = self.json_entity_data['to']
-        self.taxVal = self.json_entity_data['taxVal']
 
+    # <editor-fold desc="getter and setters">
     def get_json(self):
         json_parent = AireGas.get_json(self)
         json_parent.update({
-            "taxCode": self.taxCode,
-            "taxDes": self.taxDes,
+            "CLI": self.CLI,
             "from": self.From,
             "to": self.To,
-            "taxVal": self.taxVal
-
         })
         return json_parent
 
     @property
     def unique(self):
         # identificador univoco de la entidad
-        return self.taxCode
+        return self.CLI

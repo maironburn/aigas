@@ -1,8 +1,8 @@
 from src.model.airegas_base import AireGas
-from src.model.precio_formula.prices import Prices
+from src.model.formula_price.prices import Prices
 
 
-class PrecioFormula(AireGas):
+class Formula_Price(AireGas):
     formulaCode = None  # String
     formulaDes = None  # String
     From = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
@@ -51,5 +51,3 @@ class PrecioFormula(AireGas):
     def unique(self):
         # identificador univoco de la entidad
         return self.formulaCode
-
-

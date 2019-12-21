@@ -1,7 +1,7 @@
 from src.model.airegas_base import AireGas
 
 
-class Consumo_Nocturno(AireGas):
+class Night_Consumption(AireGas):
     CLI = None  # String
     dates = None  # Array<Date (ISO8601 (yyyy-MM-dd))>
     origin = None  # Array<String>

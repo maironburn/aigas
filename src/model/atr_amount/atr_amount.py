@@ -1,7 +1,7 @@
 from src.model.airegas_base import AireGas
-from src.model.importes_atr_passthrough.atr_prices import ATRPrices
+from src.model.atr_amount.atr_prices import ATRPrices
 
-class ImportesATRPassthrough(AireGas):
+class Atr_Amount(AireGas):
     CLI = None  # String
     From = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
     To = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))

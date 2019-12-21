@@ -4,7 +4,7 @@ from logger.app_logger import AppLogger
 from src.helper.json_helper import check_field_integrity
 
 
-class Prevision_Details(object):
+class Forecast_Details(object):
     forecastDates = []  # Array<Date (ISO8601 (yyyy-MM-dd))>
     forecastPrice = []  # Array<Double>
 

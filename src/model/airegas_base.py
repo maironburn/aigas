@@ -23,7 +23,7 @@ class AireGas(object):
     def load_data(self):
         self._logger.info("Comprobando la integridad de la entidad {}".format(self.__class__.__name__))
         if check_field_integrity("{}_FIELDS".format(self.__class__.__name__), self.json_entity_data):
-            self.id = self.json_entity_data['_id']
+            self._id = self.json_entity_data['_id']
             # self.ts = self.entity_data['ts'] = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
             self.ts = datetime.now().replace(microsecond=0).isoformat()
         else:
@@ -32,7 +32,7 @@ class AireGas(object):
 
     # <editor-fold desc="getter and setters">
     def get_json(self):
-        return {"_id": self.id,
+        return {"_id": self._id,
                 "ts": self.ts
                 }
 
