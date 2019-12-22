@@ -12,12 +12,17 @@ class AireGas(object):
     json_entity_data = None
     is_temporal_sequence = None
 
+    collection_name = None  # coleccion para instancias de nueva creacion | actualizadas
+    collection_name_rev = None  # coleccion para historico
+
     def __init__(self, **kw):
 
         self.json_entity_data = kw.get('entity_data', None)
         self._logger = AppLogger.create_rotating_log() if not kw.get('logger') else kw.get('logger')
         if isinstance(self.json_entity_data, dict):
             self._logger.info("Loading data {} from json".format(self.__class__.__name__))
+            self.collection_name = "{}".format(self.__class__.__name__.lower())
+            self.collection_name_rev = "{}_old".format(self.__class__.__name__.lower())
             self.load_data()
 
     def load_data(self):
@@ -40,5 +45,4 @@ class AireGas(object):
     def unique(self):
         # identificador univoco de la entidad
         raise NotImplementedError
-
 
