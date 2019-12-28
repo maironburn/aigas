@@ -67,14 +67,21 @@ Contract_FIELDS = ['CounterPartyName', 'CounterPartyDocNumber', 'clientName', 'c
 
 # Detalle calidad de gas
 Gas_Quality_Detail_FIELDS = ['_id', 'ts', 'CLI', 'date', 'meter', 'detailPCS', 'detailPCI', 'detailDensity', 'detailN2',
-                           'detailPressure', 'detailTemp', 'detailValueZ', 'detailValueK', 'detailLectm3',
-                           'detailConsm3',
-                           'detailAdjustementskWh', 'detailConskWh', 'detailCO2'
-                           ]
+                             'detailPressure', 'detailTemp', 'detailValueZ', 'detailValueK', 'detailLectm3',
+                             'detailConsm3',
+                             'detailAdjustementskWh', 'detailConskWh', 'detailCO2'
+                             ]
 
 # Importes ATR
 Atr_Amount_FIELDS = ['_id', 'ts', 'CLI', 'From', 'To', 'ATRPrices']
 ATRPrices_FIELDS = ['TPAId', 'TPAConcept', 'TPAConceptAmount']
+
+MONGODB_TEST = {'db_name': "airegas",
+                'host': 'localhost',
+                'port': "27017",
+                'user': '',
+                'pwd': ''
+                }
 
 # URL API REST
 ENDPOINT_URL = 'https://swapi.co/api/'

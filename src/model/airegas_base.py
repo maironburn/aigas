@@ -41,6 +41,9 @@ class AireGas(object):
                 "ts": self.ts
                 }
 
+    def get_db_last_update(self):
+        pass
+
     @property
     def unique(self):
         # identificador univoco de la entidad
