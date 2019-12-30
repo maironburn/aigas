@@ -11,7 +11,7 @@ from src.model.forecast.forecast import Forecast
 from src.model.regulated_price.regulated_price import Regulated_Price
 from src.model.molecule_tax.molecule_tax import Molecule_Tax
 
-from src.helper.airegas_rest import get_last_modifications_from_api_rest
+from src.helper.api_airegas_client import get_last_modifications_from_api_rest
 import sys
 
 dict_instances = {'Calendar': Calendar, 'B70_Calendar': B70_Calendar}
