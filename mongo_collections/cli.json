@@ -1,0 +1,33 @@
+{
+	"_id" : "202001010001",
+	"CLI" : "CLI001",
+	"contract" : {
+		"CounterPartyName" : "Palacios",
+		"CounterPartyDocNumber" : "1236255F",
+		"clientName" : "ENCE Agosto",
+		"connectionPoint" : "RdGN",
+		"startDate" : "2020-01-01T12:01:03",
+		"active" : NumberInt(1),
+		"portfolio" : "S_ESP_GASPHYS2",
+		"broker" : "Artizia",
+		"commission" : 0.4
+	},
+	"EndDate" : "30-01-2020",
+	"invoice" : {
+		"email" : "email@example.com",
+		"name" : "NombreEjemplo",
+		"IBAN" : "ES12 2121 2145 3586 2154",
+		"swift" : "BBVAESMMxx",
+		"paymentTerm" : NumberInt(25),
+		"paymentMethod" : "DOM"
+	},
+	"StartDate" : "01-01-2020",
+	"supply" : {
+		"CUPS" : "ES0123321443234543",
+		"address" : "C/Lo que sea NÂº23 Pol.Indus.NÂº1",
+		"locality" : NumberInt(9294),
+		"postalCode" : NumberInt(28000),
+		"position" : "H16X"
+	},
+	"ts" : "2019-12-31T11:40:00"
+},

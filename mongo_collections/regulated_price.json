@@ -1,0 +1,15 @@
+{
+	"_id" : "202001010001",
+	"regulatedDates" : [
+		"2020-01-01",
+		"2020-01-02",
+		"2020-01-03"
+	],
+	"regulatedPriceName" : "Peaje",
+	"regulatedVal" : [
+		NumberInt(1231),
+		NumberInt(6542),
+		NumberInt(41414)
+	],
+	"ts" : "2019-12-31T11:40:58"
+},

@@ -1,0 +1,40 @@
+{
+	"_id" : "202001010001",
+	"CLI" : "CLI001",
+	"dates" : [
+		"2020-01-01",
+		"2020-01-02",
+		"2020-01-02"
+	],
+	"origin" : [
+		"prevision",
+		"manual",
+		"B70"
+	],
+	"qd" : [
+		NumberInt(1000),
+		NumberInt(2000),
+		NumberInt(3000)
+	],
+	"qdElec" : [
+		NumberInt(250),
+		NumberInt(0),
+		NumberInt(100)
+	],
+	"qdRed" : [
+		NumberInt(0),
+		NumberInt(500),
+		NumberInt(500)
+	],
+	"qdSupRed" : [
+		NumberInt(500),
+		NumberInt(500),
+		NumberInt(500)
+	],
+	"qdTerm" : [
+		NumberInt(250),
+		NumberInt(1000),
+		NumberInt(1900)
+	],
+	"ts" : "2019-12-31T11:39:29"
+},

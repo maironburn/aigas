@@ -1,0 +1,19 @@
+{
+	"_id" : "202001010001",
+	"ATRPrices" : [
+		{
+			"TPAId" : "id001",
+			"TPAConcept" : "Termino Fijo",
+			"TPAConceptAmount" : NumberInt(1252)
+		},
+		{
+			"TPAId" : "id002",
+			"TPAConcept" : "Termino Variable",
+			"TPAConceptAmount" : NumberInt(1255)
+		}
+	],
+	"CLI" : "CLI001",
+	"From" : "2020-01-01T12:00:00",
+	"To" : "2020-01-30T12:00:00",
+	"ts" : "2019-12-31T11:40:23"
+},
