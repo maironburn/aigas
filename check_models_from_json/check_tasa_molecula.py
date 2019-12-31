@@ -4,7 +4,6 @@ from src.model.molecule_tax.molecule_tax import Molecule_Tax
 from src.mongodb.mongo_client import MongoAireGas
 
 if __name__ == '__main__':
-
     instance_data = get_entity_from_samples(TASA_MOLECULA_SAMPLE)
     instance = Molecule_Tax(**{'entity_data': instance_data})
     instance_json = instance.get_json()
@@ -13,7 +12,7 @@ if __name__ == '__main__':
                  instance.collection_name_rev))
     print("Entidad:\n {}".format(instance_json))
 
-    mongo_client= MongoAireGas()
+    mongo_client = MongoAireGas()
     # instance.__class__.__name__.lower()
     inserted_id = mongo_client.client[instance.__class__.__name__.lower()].insert_one(instance_json).inserted_id
     print("{}".format(inserted_id))
