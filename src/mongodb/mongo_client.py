@@ -14,19 +14,19 @@ class MongoAireGas(object):
 
     def __init__(self, **kwargs):
         self._logger = AppLogger.create_rotating_log() if not kwargs.get('logger') else kwargs.get('logger')
-        self._logger.info ("Iniciando {}".format(self.__class__.__name__))
+        self._logger.info("Iniciando {}".format(self.__class__.__name__))
         db_data = kwargs if kwargs and isinstance(kwargs, dict) else MONGODB_TEST
         self.load_data_for_string_connection(db_data)
         self._client = self.connect_db()
 
     def load_data_for_string_connection(self, kwargs):
 
-        self._logger.info ("Loading data to build string connection")
+        self._logger.info("Loading data to build string connection")
         self.db_name = kwargs.get('db_name')
         self.host = kwargs.get('host')
         self.port = kwargs.get('port')
 
-        self._logger.info ("DB_NAME : {}\nHOST: {}\nPORT: {}".format(self.db_name,
+        self._logger.info("DB_NAME : {} , HOST: {}, PORT: {}".format(self.db_name,
                                                                      self.host,
                                                                      self.port))
 
