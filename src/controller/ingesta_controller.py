@@ -24,9 +24,9 @@ class IngestaController(object):
     def __init__(self, **kw):
         self._logger = AppLogger.create_rotating_log() if not kw.get('logger') else kw.get('logger')
 
-        if kw.get ('db_client') and kw.get ('api_consumer'):
+        if kw.get ('db_client') and kw.get ('api_client'):
             self._db_client = kw.get('db_client')
-            self._api_consumer = kw.get('api_consumerapi_consumer')
+            self._api_consumer = kw.get('api_client')
 
     @property
     def db_client(self):
@@ -51,10 +51,12 @@ if __name__ == '__main__':
 
     kwdata = {'db_client': None, 'api_client': None}
     mongo_airegas = MongoAireGas()
-    api_client = Api_AireGas_Client()
-    if mongo_airegas.connect_db() and api_client.test_connection_to_url():
-        kwdata['db_client'] = mongo_airegas.connect_db()
+    mongo_airegas.connect_db()
+    api_client = Api_AireGas_Client(**{'logger': mongo_airegas.logger})
+    if mongo_airegas.client and api_client.test_connection_to_url():
+        kwdata['db_client'] = mongo_airegas.client
         kwdata['api_client'] = api_client.http
+        kwdata['logger'] = mongo_airegas.logger
         ingesta_controller = IngestaController(**kwdata)
 
     else:

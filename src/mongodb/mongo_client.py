@@ -17,7 +17,6 @@ class MongoAireGas(object):
         self._logger.info("Iniciando {}".format(self.__class__.__name__))
         db_data = kwargs if kwargs and isinstance(kwargs, dict) else MONGODB_TEST
         self.load_data_for_string_connection(db_data)
-        self._client = self.connect_db()
 
     def load_data_for_string_connection(self, kwargs):
 
@@ -37,9 +36,10 @@ class MongoAireGas(object):
             #test db no auth  
             # cliente = MongoClient("mongodb://{}:{}@{}:{}".format(usuario, palabra_secreta, host, puerto))
             '''
-            self._client = MongoClient("mongodb://{}:{}".format(self.host, self.port))
+            mongo_con = MongoClient("mongodb://{}:{}".format(self.host, self.port))
             self._logger.info("connect_db: Succesful Connection ")
-            return self._client[self.db_name]
+            self._client = mongo_con[self.db_name]
+            return True
 
         self._logger.error("connect_db: No succesful connection ")
         return None
@@ -56,6 +56,15 @@ class MongoAireGas(object):
         pass
 
     # <editor-fold desc="Getter/ Setters">
+
+    @property
+    def logger(self):
+        return self._logger
+
+    @logger.setter
+    def logger(self, value):
+        if value:
+            self._logger = value
 
     @property
     def db_name(self):
