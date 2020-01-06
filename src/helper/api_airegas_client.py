@@ -19,8 +19,8 @@ class Api_AireGas_Client(object):
         self._logger.info("Iniciando {}".format(self.__class__.__name__))
         self.init_pool_request()
 
-        if kwargs and kwargs.get('url'):
-            self._url = kwargs.get('url')
+        if kwargs and kwargs.get('rest_url'):
+            self._url = kwargs.get('rest_url')
 
 
     def init_pool_request(self):
@@ -43,6 +43,7 @@ class Api_AireGas_Client(object):
         return False
 
     def get_data_from_query (self ):
+        pass
 
 
     def get_last_modifications_from_api_rest(self):

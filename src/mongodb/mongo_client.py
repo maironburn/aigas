@@ -45,6 +45,7 @@ class MongoAireGas(object):
         return None
 
     def get_last_update(self):
+
         """
         funcion que recupera la fecha de la ultima actualizacion de la entidad
         para despues consumir en el api rest de airegas
