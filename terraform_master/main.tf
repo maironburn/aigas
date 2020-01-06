@@ -28,6 +28,17 @@ EOF
 }
 
 
+
+resource "aws_lambda_permission" "allow_bucket" {
+  statement_id  = "AllowExecutionFromS3Bucket"
+  action        = "lambda:InvokeFunction"
+  function_name = "${aws_lambda_function.test_lambda_tf.arn}"
+  principal     = "s3.amazonaws.com"
+  source_arn    = "${aws_s3_bucket.bucket.arn}"
+}
+
+
+
 resource "aws_lambda_function" "test_lambda_tf" {
   filename      = "test_lambda.zip"
   function_name = "test_lambda_function_name"
@@ -50,6 +61,16 @@ resource "aws_lambda_function" "test_lambda_tf" {
 
 resource "aws_s3_bucket" "bucket" {
   bucket = "s3mario"
+}
+
+
+resource "aws_s3_bucket_notification" "bucket_notification" {
+  bucket = "${aws_s3_bucket.bucket.id}"
+
+  lambda_function {
+    lambda_function_arn = "${aws_lambda_function.test_lambda_tf.arn}"
+    events              = ["s3:ObjectCreated:*"]
+  }
 }
 
 output "s3mario_bucket_id" {
