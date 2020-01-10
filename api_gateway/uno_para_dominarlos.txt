@@ -1,0 +1,232 @@
+openapi: 3.0.0
+info:
+  description: API tracker productos
+  version: 1.0.0
+  title: Api productos AXPO
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+paths:
+  /product:
+    post:
+      summary: tracker de productos
+      responses:
+        '200':
+          description: producto creado con exito
+        '400':
+          description: 'invalid input, object invalid'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        ProductCode:
+          type: string
+          title: ProductCode
+          example: BloqueFirme261120191130320001
+        productVersion:
+          type: string
+          title: productVersion
+          description: productVersion
+        status:
+          type: string
+          title: ''
+          description: 'Posibles valores Draft, Active, Old, Cancelled'
+          enum:
+            - Draft
+            - Active
+            - Old
+            - Cancelled
+        previousStatus:
+          type: string
+          title: previousStatus
+          description: previousStatus
+        type:
+          type: string
+          title: type
+          description: type
+        subtype:
+          type: string
+          title: subtype
+          description: subtype
+        descriptionBillFix:
+          type: string
+          title: descriptionBillFix
+          description: descriptionBillFix
+        descriptionBillFree:
+          type: string
+          title: descriptionBillFree
+          description: descriptionBillFree
+        navConcept:
+          type: string
+          title: navConcept
+          description: navConcept
+        billSection:
+          type: string
+          title: billSection
+          description: billSection
+        startDate:
+          type: string
+          format: date
+        updateStartDateWithCLI:
+          type: boolean
+          title: ''
+          description: ''
+          default: false
+        endDate:
+          type: string
+          format: date
+        updateEndDateWithCLI:
+          type: boolean
+          title: ''
+          description: ''
+          default: false
+        lastSettlementDate:
+          type: string
+          format: date
+        meta:
+          $ref: '#/components/schemas/meta'
+        calendar:
+          $ref: '#/components/schemas/calendar'
+        currency:
+          type: string
+          title: ''
+          description: 'Posibles valores EUR, USD, GBP'
+          enum:
+            - EUR
+            - USD
+            - GBP
+        units:
+          type: string
+          title: ''
+          description: 'Posibles valores MWh, kWh, MMBTU, Gj'
+          enum:
+            - MWh
+            - kWh
+            - MMBTU
+            - Gj
+        lambda:
+          type: string
+          title: ''
+          description: ''
+        dependencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/dependencies'
+        offsets:
+          type: array
+          items:
+            $ref: '#/components/schemas/offsets'
+    meta:
+      type: object
+      title: ''
+      description: Se crearan un numero de metas entre 2 y 10
+      properties:
+        meta01:
+          type: string
+          title: ''
+          description: ''
+        meta02:
+          type: string
+          title: ''
+          description: ''
+    calendar:
+      type: object
+      title: ''
+      description: ''
+      properties:
+        calendarWhenDays:
+          type: string
+          title: ''
+          description: ''
+        calendarLiqPeriod:
+          type: string
+          title: ''
+          description: ''
+        calendarCalcSubPeriod:
+          type: string
+          title: ''
+          description: ''
+        invoiceCalendar:
+          $ref: '#/components/schemas/invoiceCalendar'
+    invoiceCalendar:
+      type: object
+      title: ''
+      description: ''
+      properties:
+        calendarInvDays:
+          type: array
+          title: ''
+          description: ''
+          items:
+            type: string
+            format: date
+        dynamicInvCalendar:
+          type: string
+          title: ''
+          description: ''
+        invoiceCalendarLiqOffset:
+          $ref: '#/components/schemas/invoiceCalendarLiqOffset'
+    invoiceCalendarLiqOffset:
+      type: object
+      title: ''
+      description: ''
+      properties:
+        source:
+          type: string
+          title: ''
+          description: ''
+        operation:
+          type: string
+          title: ''
+          description: ''
+        numDay:
+          type: number
+          title: ''
+          description: ''
+    dependencies:
+      type: object
+      title: ''
+      properties:
+        dependencyType:
+          type: string
+          title: ''
+          description: 'Posibles valores Product, Settlement Line'
+          enum:
+            - Product
+            - Settlement Line
+        product:
+          type: string
+          title: ''
+        dependentAttribute:
+          type: string
+          title: ''
+          enum:
+            - Quantity
+            - PeriodProductAmountGrandTotal
+        dependencyCalc:
+          type: string
+          title: ''
+          enum:
+            - Sum
+            - Sub
+            - Mult
+            - Div
+    offsets:
+      type: object
+      title: ''
+      description: ''
+      properties:
+        from:
+          type: string
+          format: date
+        to:
+          type: string
+          format: date
+        offset:
+          type: number
