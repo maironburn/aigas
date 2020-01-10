@@ -4,7 +4,7 @@ from src.model.cli.invoice import Invoice
 from src.model.cli.supply import Supply
 
 
-class CLI(AireGas):
+class Cli(AireGas):
     CLI = None  # String
     StartDate = None  # Date (ISO8601 (yyyy-MM-dd))
     EndDate = None  # Date (ISO8601 (yyyy-MM-dd))

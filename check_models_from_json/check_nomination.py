@@ -14,6 +14,7 @@ if __name__ == '__main__':
     print("Entidad:\n {}".format(instance_json))
 
     mongo_client= MongoAireGas()
-    # instance.__class__.__name__.lower()
-    inserted_id = mongo_client.client[instance.__class__.__name__.lower()].insert_one(instance_json).inserted_id
-    print("{}".format(inserted_id))
+    if mongo_client.connect_db():
+        # instance.__class__.__name__.lower()
+        inserted_id = mongo_client.client[instance.__class__.__name__.lower()].insert_one(instance_json).inserted_id
+        print("{}".format(inserted_id))

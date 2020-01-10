@@ -1,0 +1,24 @@
+- Las collecciones son nombradas de acuerdo a su correspondiente modelo en minúsculas
+- Driver de conexión MongoDB
+- El api de Airegas aun no está operativo, por ello, los datos de entrada son mockeados por los ficheros json incluídos en el modelo de datos
+- String de conexión en common_config.py
+    Para el testeo he usado una MongoDb local
+
+	MONGODB_TEST = {'db_name': "airegas",
+					'host': 'localhost',
+					'port': "27017",
+					'user': '',
+					'pwd': ''
+					}
+
+
+- Este código en su versión final residirá en una imagen de docker
+ y a través de la definición de trabajo de Batch AWS se le pasará un parámetro que especifique
+ el procesamiento a realizar (ingesta de calendario, consumo nocturno ...etc)
+ En esta primer versión tenemos un solo punto de entrada que realiza el procesamiento de todas las
+ entidades
+
+- Aun no está implementada la lógica de versionado
+
+- Punto de entrada main.py
+Hará un insert en todas las colecciones

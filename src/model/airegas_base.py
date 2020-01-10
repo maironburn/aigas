@@ -37,7 +37,7 @@ class AireGas(object):
 
     # <editor-fold desc="getter and setters">
     def get_json(self):
-        return {"_id": self._id,
+        return {#"_id": self._id,
                 "ts": self.ts
                 }
 
