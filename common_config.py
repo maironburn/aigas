@@ -5,8 +5,6 @@ ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 # logger stuff
 LOGGER_NAME = "AWS_Batch_Processing"
 LOG_FILE = os.path.join(ROOT_DIR, "logger{}{}".format(os.path.sep, LOGGER_NAME))
-
-# URL_BASE = "https://swapi.co/api/people"
 URL_BASE = "https://swapi.co/api/"
 
 # JSON SAMPLE FILES

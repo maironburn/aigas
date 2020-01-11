@@ -113,6 +113,6 @@ class MongoAireGas(object):
     @connection_string.setter
     def connection_string(self, value):
         if value:
-            pass
+            self._connection_string= value
 
     # </editor-fold>

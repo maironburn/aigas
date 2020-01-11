@@ -7,7 +7,7 @@ print('Loading function')
 url = "https://swapi.co/api/people"
 
 
-class Api_AireGas_Client(object):
+class AiregasRestConsumer(object):
     _url = None
     _logger = None
     _http = None
@@ -26,23 +26,21 @@ class Api_AireGas_Client(object):
             self._logger.info("urllib3 request iniciado con exito")
             return True
         except Exception as e:
-            self._logger.error("Error iniciando urllib3")
+            self._logger.error("Error iniciando urllib3->{}".format(e))
 
         return None
 
     def test_connection_to_url(self):
         try:
             url_get = self._url if self._url else ENDPOINT_URL
-            r = self.http.request('GET', url_get)
+            self.http.request('GET', url_get)
             self._logger.info("Connection to {} successful".format(url_get))
             return True
         except Exception as e:
-            self._logger.error("Cannot connect to {}".format(url))
+            self._logger.error("Cannot connect to {}-> {}".format(url, e))
 
         return False
 
-    def get_data_from_query (self ):
-        pass
 
 
     def get_last_modifications_from_api_rest(self):
@@ -51,7 +49,7 @@ class Api_AireGas_Client(object):
             self._logger.info("Connection to {} successful".format(self.url))
             return json.loads(r.data.decode('utf-8'))
         except Exception as e:
-            self._logger.error("Cannot connect to {}".format(self.url))
+            self._logger.error("Cannot connect to {}-> {}".format(url, e))
 
     @property
     def url(self):
@@ -72,6 +70,3 @@ class Api_AireGas_Client(object):
             self._http = value
 
 
-if __name__ == '__main__':
-    pass
-    # print("{}", format(get_last_modifications_from_api_rest(None, None)))

@@ -1,6 +1,6 @@
 from common_config import MONGODB_TEST, ENDPOINT_URL
 from src.mongodb.mongo_client import MongoAireGas
-from src.helper.api_airegas_client import Api_AireGas_Client
+from src.helper.airegasrestconsumer import AiregasRestConsumer
 from logger.app_logger import AppLogger
 
 
@@ -52,7 +52,7 @@ if __name__ == '__main__':
     kwdata = {'db_client': None, 'api_client': None}
     mongo_airegas = MongoAireGas()
     mongo_airegas.connect_db()
-    api_client = Api_AireGas_Client(**{'logger': mongo_airegas.logger})
+    api_client = AiregasRestConsumer(**{'logger': mongo_airegas.logger})
     if mongo_airegas.client and api_client.test_connection_to_url():
         kwdata['db_client'] = mongo_airegas.client
         kwdata['api_client'] = api_client.http

@@ -1,0 +1,686 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Product",
+	"description": "",
+	"type": "object",
+	"required": [
+		"productCode",
+		"productVersion",
+		"type",
+		"status",
+		"CLIs",
+		"calendars",
+		"currency",
+		"units",
+		"splitType",
+		"descriptionBillFix",
+		"descriptionBillFree",
+		"navConcept"],
+	"properties":
+	{
+		"productCode":{
+			"type": "string",
+			"title": "product code for identification purpose"
+		},
+		"productVersion":{
+			"type": "string",
+			"title":"",
+			"description":""
+		},
+		"status":{
+			"type":"string",
+			"title":"",
+			"description":"Posibles valores Draft, Active, Old, Cancelled",
+			"enum":["Draft", "Active", "Old", "Cancelled"]
+		},
+		"previousStatus":{
+			"type":"string",
+			"title":"",
+			"description":""
+		},
+		"type":{
+			"type":"string",
+			"title":"",
+			"description":""
+		},
+		"subtype":{
+			"type":"string",
+			"title":"",
+			"description":""
+		},
+		"descriptionBillFix":{
+			"type":"string",
+			"title":"",
+			"description":""
+		},
+		"descriptionBillFree":{
+			"type":"string",
+			"title":"",
+			"description":""
+		},
+		"navConcept":{
+			"type":"string",
+			"title":"",
+			"description":""
+		},
+		"billSection":{
+			"type":"string",
+			"title":"",
+			"description":""
+		},
+		"startDate":{
+			"type":"date",
+			"title":"",
+			"description":""
+		},
+		"updateStartDateWithCLI":{
+			"type":"boolean",
+			"title":"",
+			"description":"",
+			"default": false
+		},
+		"endDate":{
+			"type":"date",
+			"title":"",
+			"description":""
+		},
+		"updateEndDateWithCLI":{
+			"type":"boolean",
+			"title":"",
+			"description":"",
+			"default": false
+		},
+		"lastSettlementDate":{
+			"type":"date",
+			"title":"",
+			"description":""
+		},
+		"meta":{
+			"$ref": "#/definitions/meta",
+			"title":"",
+			"description":""
+		},
+		"calendar":{
+			"$ref": "#/definitions/calendar",
+			"title":"",
+			"description":""
+		},
+		"currency":{
+			"type":"string",
+			"title":"",
+			"description":"Posibles valores EUR, USD, GBP",
+			"enum":["EUR", "USD", "GBP"]
+		},
+		"units":{
+			"type":"string",
+			"title":"",
+			"description":"Posibles valores MWh, kWh, MMBTU, Gj",
+			"enum":["MWh", "kWh","MMBTU","Gj"]
+		},
+		"lambda":{
+			"type":"string",
+			"title":"",
+			"description":""
+		},
+		"dependencies":{
+			"type": "array",
+			"items":{
+				"$ref": "#/definitions/dependencies"
+			}
+		},
+		"offsets":{
+			"type": "array",
+			"items":{
+				"$ref": "#/definitions/offsets"
+			}
+		},
+		"splitType":{
+			"type": "string",
+			"title":"",
+			"description":"Posibles valores FixPercentage,Forecast,BestConsumption,MoleculeService",
+			"enum":["FixPercentage", "Forecast", "BestConsumption", "MoleculeService"]
+		},
+		"CLIs":{
+			"type": "array",
+			"items":{
+				"$ref": "#/definitions/cli"
+			}
+		},
+		"prices":{
+			"$ref": "#/definitions/price",
+			"title":"",
+			"description":"Precio de los productos Bloque Firme y Costes y Tasas"
+		},
+		"quantities":{
+			"type": "array",
+			"title":"",
+			"description":"Para Bloque Firme, Cobertura y Tolerancia solo tiene un elemento, para Servicio de Molecula puede tener entre 0 y el total de thresholds",
+			"items":{
+				"$ref": "#/definitions/quantity"
+			}
+		},
+		"thresholds":{
+			"type": "array",
+			"title":"",
+			"description":"Bandas del Servicio de Molecula, margenes de error de la Bonificacion por nominacion. Para limite de Tolerancia solo admite un elemento",
+			"items":{
+				"$ref": "#/definitions/threshold"
+			}
+		},
+		"moleculeTaxes":{
+			"type": "array",
+			"items":{
+				"$ref": "#/definitions/moleculeTax"
+			},
+			"title":"",
+			"description":"Para Bloque Firme y Servicio de Molecula"
+		},
+		"fees":{
+			"$ref": "#/definitions/fee",
+			"title":"",
+			"description":"Cobertura"
+		},
+		"digitalPayment":{
+			"$ref": "#/definitions/digitalPayment",
+			"title":"",
+			"description":"Cobertura"
+		},
+		"fixPrices":{
+			"type": "array",
+			"title":"",
+			"description":"",
+			"items":{
+				"$ref": "#/definitions/range"
+			}
+		},
+		"TPA":{
+			"$ref": "#/definitions/TPA",
+			"title":"",
+			"description":""
+		}
+	},
+	"definitions":
+	{
+		"meta":{
+			"type":"object",
+			"title":"",
+			"description":"Se crearan un numero de metas entre 2 y 10",
+			"required":[],
+			"properties":{
+				"meta01":{
+					"type":"string",
+					"title":"",
+					"description":""
+				},
+				"meta02":{
+					"type":"string",
+					"title":"",
+					"description":""
+				}
+			}
+		},
+		"TPA":{
+			"type":"object",
+			"title":"",
+			"description":"ATR Distribucion, ATR Upstream",
+			"required":[],
+			"properties":{
+				"passthrough":{
+					"type":"boolean",
+					"title":"",
+					"description":"",
+					"default": false
+				},
+				"concepts":{
+					"type":"array",
+					"items":{
+						 "$ref": "#/definitions/concept"
+					}
+				}
+			}
+		},
+		"concept":{
+			"type":"object",
+			"title":"",
+			"properties":{
+				"id":{
+					"type":"string",
+					"title":"",
+					"description":""
+				},
+				"subtype":{
+					"type":"string",
+					"title":"",
+					"description":""
+				},
+				"qds":{
+					"type":"array",
+					"items":{
+						"$ref": "#definitions/qd"
+					}
+				},
+				"qdCalctype":{
+					"type":"string",
+					"title":"",
+					"description":""
+				},
+				"qdM-1":{
+					"type":"number",
+					"title":"",
+					"description":""
+				},
+				"qdM-2":{
+					"type":"number",
+					"title":"",
+					"description":""
+				},
+				"tollPresureGroup":{
+					"type":"number",
+					"title":"",
+					"description":"",
+					"enum":[1, 2, 3]
+				},
+				"tollConsumptionStep":{
+					"type":"number",
+					"title":"",
+					"description":"",
+					"enum":[0, 1, 2, 3, 4, 5, 6]
+				},
+				"vtPrice":{
+					"$ref": "#/definitions/price",
+					"title":"",
+					"description":""
+				},
+				"ftPrice":{
+					"$ref": "#/definitions/price",
+					"title":"",
+					"description":""
+				},
+				"transportFixTermPrice":{
+					"title":"",
+					"$ref": "#/definitions/range"
+				},
+				"regasFixTermPrice":{
+					"title":"",
+					"$ref": "#/definitions/range"
+				},
+				"type":{
+					"type":"string",
+					"enum":["MeterRent", "Other","TFTV"]
+				},
+				"amounts":{
+					"type":"array",
+					"items":{
+						"$ref":"#/definitions/amount"
+					}
+				},
+				"codConceptoB70in":{
+					"type":"array",
+					"items":{
+						"type":"number"
+					}
+				},
+				"codConceptoB70out":{
+					"type":"array",
+					"items":{
+						"type":"number"
+					}
+				}
+			}
+		},
+		"digitalPayment":{
+			"type":"object",
+			"title":"",
+			"description":"Cobertura",
+			"required":[],
+			"properties":{
+				"prorrate":{
+					"type":"string",
+					"title":"",
+					"description":""
+				},
+				"formula":{
+					"type":"string",
+					"title":"",
+					"description":""
+				},
+				"margin":{
+					"type":"number",
+					"title":"",
+					"description":""
+				}
+			}
+		},
+		"fee":{
+			"type":"object",
+			"title":"",
+			"description":"",
+			"required": [],
+			"properties":{
+				"prorrate":{
+					"type":"string",
+					"title":"",
+					"description":""
+				},
+				"prices":{
+					"type": "array",
+					"title":"",
+					"description":"",
+					"items":{
+						"$ref": "#/definitions/range"
+					}
+				}
+			}
+		},
+		"calendar":{
+			"type":"object",
+			"title":"",
+			"description":"",
+			"required": [],
+			"properties":{
+				"calendarWhenDays":{
+					"type": "string",
+					"title":"",
+					"description":""
+				},
+				"calendarLiqPeriod":{
+					"type": "string",
+					"title":"",
+					"description":""
+				},
+				"calendarCalcSubPeriod":{
+					"type": "string",
+					"title":"",
+					"description":""
+				},
+				"invoiceCalendar":{
+					"$ref": "#/definitions/invoiceCalendar",
+					"title":"",
+					"description":""
+				}
+			}
+		},
+		"invoiceCalendar":{
+			"type":"object",
+			"title":"",
+			"description":"",
+			"required": [],
+			"properties":{
+				"calendarInvDays":{
+					"type": "array",
+					"title":"",
+					"description":"",
+					"items":{
+						"type":"date"
+					}
+				},
+				"dynamicInvCalendar":{
+					"type": "string",
+					"title":"",
+					"description":""
+				},
+				"invoiceCalendarLiqOffset":{
+					"type": "#/definitions/invoiceCalendarLiqOffset",
+					"title":"",
+					"description":""
+				}
+			}
+		},
+		"invoiceCalendarLiqOffset":{
+			"type":"object",
+			"title":"",
+			"description":"",
+			"required": [],
+			"properties":{
+				"source":{
+					"type": "string",
+					"title":"",
+					"description":""
+				},
+				"operation":{
+					"type": "string",
+					"title":"",
+					"description":""
+				},
+				"numDay":{
+					"type": "number",
+					"title":"",
+					"description":""
+				}
+			}
+		},
+		"dependencies":{
+			"type":"object",
+			"title": "",
+			"required":[],
+			"properties":
+			{
+				"dependencyType":
+				{
+					"type":"string",
+					"title": "",
+					"description":"Posibles valores Product, Settlement Line",
+					"enum":["Product", "Settlement Line"]
+				},
+				"product":
+				{
+					"type":"string",
+					"title": ""
+				},
+				"dependentAttribute":
+				{
+					"type": "string",
+					"title": "",
+					"enum":["Quantity", "PeriodProductAmountGrandTotal"]
+				},
+				"dependencyCalc":
+				{
+					"type": "string",
+					"title": "",
+					"enum":["Sum", "Sub", "Mult", "Div"]
+				}
+			}
+		},
+		"price":{
+			"type":"object",
+			"title": "",
+			"required":[],
+			"properties":
+			{
+				"priceType":
+				{
+					"type":"string",
+					"title": "",
+					"enum":["precio1", "precio2", "General", "Electrico", "Termico", "SuperReducidoIndustrial", "ReducidoIndustrial"]
+				},
+				"formula":
+				{
+					"type":"string",
+					"title": ""
+				},
+				"margin":
+				{
+					"type":"number",
+					"title": ""
+				}
+			}
+		},
+		"moleculeTax":{
+			"type":"object",
+			"required":[],
+			"properties":{
+				"moleculeTaxConcept":{
+					"type":"string",
+					"title":"",
+					"description":""
+				},
+				"moleculeTaxValue":{
+					"type":"string",
+					"title":"",
+					"description":""
+				}
+			}
+		},
+		"cli":{
+			"type":"object",
+			"title":"",
+			"description":"",
+			"required": [],
+			"properties":{
+				"identifier":{
+					"type": "string",
+					"title":"",
+					"description":""
+				},
+				"percentages":{
+					"type": "array",
+					"title":"",
+					"description":"",
+					"items":{
+						"$ref": "#/definitions/range"
+					}
+				}
+			}
+		},
+		"quantity":{
+			"type":"object",
+			"title":"",
+			"description":"",
+			"required": [],
+			"properties":{
+				"from":{
+					"type":"date"
+				},
+				"to":{
+					"type":"date"
+				},
+				"quantity":{
+					"type":"number"
+				},
+				"type":{
+					"type":"string",
+					"title":"",
+					"description":"Cobertura y Tolerancia. Posibles valores Abs, %",
+					"enum":["Abs", "%"]
+				},
+				"reference":{
+					"type":"string",
+					"title":"",
+					"description":"Cobertura y Tolerancia//Posibles valores Forecast,BestConsumption. Si Type=Abs , Abs.",
+					"enum":["Abs", "Forecast","BestConsumption"]
+				}
+			}
+		},
+		"threshold":{
+			"type":"object",
+			"title":"",
+			"description":"",
+			"properties":{
+				"from":{
+					"type":"date"
+				},
+				"to":{
+					"type":"date"
+				},
+				"limitTo":{
+					"type":"number"
+				},
+				"type":{
+					"type":"string",
+					"title":"",
+					"description":"Posibles valores Abs, %. Para Bonificacion por nominacion solo %.",
+					"enum":["Abs", "%"]
+				},
+				"formula":{
+					"type":"string",
+					"title":""
+				},
+				"margin":{
+					"type":"number"
+				}
+			}
+
+		},
+		"qd":{
+			"type":"object",
+			"title":"",
+			"description":"",
+			"required": [],
+			"properties":
+			{
+				"from":
+				{
+					"type":"date"
+				},
+				"to":
+				{
+					"type":"date"
+				},
+				"qd":
+				{
+					"type":"number"
+				}
+			}
+		},
+		"amount":{
+			"type": "object",
+			"title":"",
+			"description":"",
+			"properties":
+			{
+				"from":
+				{
+					"type":"date"
+				},
+				"to":
+				{
+					"type":"date"
+				},
+				"amount":
+				{
+					"type":"number"
+				}
+			}
+		},
+		"offsets":{
+			"type": "object",
+			"title":"",
+			"description":"",
+			"properties":
+			{
+				"from":
+				{
+					"type":"date"
+				},
+				"to":
+				{
+					"type":"date"
+				},
+				"offset":
+				{
+					"type":"number"
+				}
+			}
+		},
+		"range":{
+			"type":"object",
+			"title":"",
+			"required":[],
+			"properties":
+			{
+				"from":
+				{
+					"type":"date"
+				},
+				"to":
+				{
+					"type":"date"
+				},
+				"value":
+				{
+					"type":"number"
+				}
+			}
+		}
+	}
+}

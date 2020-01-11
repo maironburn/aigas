@@ -29,7 +29,6 @@ class AireGas(object):
         self._logger.info("Comprobando la integridad de la entidad {}".format(self.__class__.__name__))
         if check_field_integrity("{}_FIELDS".format(self.__class__.__name__), self.json_entity_data):
             self._id = self.json_entity_data['_id']
-            # self.ts = self.entity_data['ts'] = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
             self.ts = datetime.now().replace(microsecond=0).isoformat()
         else:
             self._logger.error("{} faltan campos en {}".format(self.__class__.__name__,
@@ -42,7 +41,7 @@ class AireGas(object):
                 }
 
     def get_db_last_update(self):
-        pass
+        print("todo")
 
     @property
     def unique(self):

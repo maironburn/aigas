@@ -24,11 +24,10 @@ def check_field_integrity(fields_to_check, json_entity_data):
 
 def get_entity_from_rest(from_date, entity):
     '''
-
+   params = {
+    }
     '''
     http = urllib3.PoolManager()
-    params = {
-    }
     r = http.request('GET', URL_BASE)
 
     return json.loads(r.data.decode('utf-8'))
