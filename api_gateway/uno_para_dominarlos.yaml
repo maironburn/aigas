@@ -59,7 +59,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Product'
         '400':
-          description: bad input parameter
+          description: bad input parameters
 
 components:
   schemas:
