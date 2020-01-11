@@ -22,7 +22,7 @@ paths:
               $ref: '#/components/schemas/Product'
 
     get:
-      summary: search products
+      summary: search for products
       operationId: searchProducts
       description: |
         By passing in the appropriate options, you can search for
@@ -30,7 +30,7 @@ paths:
       parameters:
         - in: query
           name: product_code
-          description: pass an optional search string for looking up inventory
+          description: pass an optional search string for looking up products
           required: false
           schema:
             type: string
