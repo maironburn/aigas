@@ -43,6 +43,12 @@ paths:
             format: date
 
         - in: query
+          name: type
+          description: search by type
+          schema:
+            type: string
+
+        - in: query
           name: enddate
           description: search by end date
           schema:
