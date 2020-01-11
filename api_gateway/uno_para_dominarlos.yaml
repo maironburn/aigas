@@ -20,6 +20,47 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Product'
+
+    get:
+      summary: search products
+      operationId: searchProducts
+      description: |
+        By passing in the appropriate options, you can search for
+        available products in the system
+      parameters:
+        - in: query
+          name: product_code
+          description: pass an optional search string for looking up inventory
+          required: false
+          schema:
+            type: string
+
+        - in: query
+          name: startdate
+          description: search by startdate
+          schema:
+            type: string
+            format: date
+
+        - in: query
+          name: enddate
+          description: search by end date
+          schema:
+            type: string
+            format: date
+
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '400':
+          description: bad input parameter
+
 components:
   schemas:
     Product:
