@@ -3,18 +3,16 @@ info:
   description: API tracker productos
   version: 1.0.0
   title: Api productos AXPO
-  license:
-    name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
 paths:
   /product:
     post:
       summary: tracker de productos
       responses:
         '200':
-          description: producto creado con exito
+          description: 'Successfully completed execution'
         '400':
-          description: 'invalid input, object invalid'
+          description: 'Invalid input, object invalid'
       requestBody:
         content:
           application/json:
