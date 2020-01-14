@@ -6,7 +6,7 @@ info:
 
 paths:
   /product:
-    post:
+    put:
       summary: tracker de productos
       responses:
         '200':
@@ -18,7 +18,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Product'
-
+  /list:
     get:
       summary: search for products
       operationId: searchProducts
@@ -75,7 +75,7 @@ components:
         - type
         - status
         - CLIs
-        - calendars
+        - calendar
         - currency
         - units
         - splitType
@@ -86,6 +86,7 @@ components:
         productCode:
           type: string
           title: ProductCode
+          description: product code for identification purpose
           example: BloqueFirme261120191130320001
         productVersion:
           type: string
@@ -108,14 +109,17 @@ components:
           type: string
           title: type
           description: type
+          
         subtype:
           type: string
           title: subtype
           description: subtype
+          
         descriptionBillFix:
           type: string
           title: descriptionBillFix
           description: descriptionBillFix
+          
         descriptionBillFree:
           type: string
           title: descriptionBillFree
@@ -124,13 +128,16 @@ components:
           type: string
           title: navConcept
           description: navConcept
+          
         billSection:
           type: string
           title: billSection
           description: billSection
+          
         startDate:
           type: string
           format: date
+          
         updateStartDateWithCLI:
           type: boolean
           title: ''
@@ -149,7 +156,7 @@ components:
           format: date
         meta:
           $ref: '#/components/schemas/meta'
-        calendars:
+        calendar:
           $ref: '#/components/schemas/calendar'
         currency:
           type: string
@@ -193,8 +200,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/cli'
+            
         prices:
-          $ref: '#/components/schemas/price'
+          type: array
+          items:
+            $ref: '#/components/schemas/price'
         quantities:
           type: array
           title: ''
@@ -344,7 +354,7 @@ components:
           type: string
           title: ''
           enum:
-            - precio1
+            - Precio1
             - precio2
             - General
             - Electrico
@@ -529,11 +539,11 @@ components:
 
         transportFixTermPrice:
 
-          $ref: '#/components/schemas/range'
+          $ref: '#/components/schemas/price'
 
         regasFixTermPrice:
 
-          $ref: '#/components/schemas/range'
+          $ref: '#/components/schemas/price'
 
         type:
           type: string
@@ -548,11 +558,11 @@ components:
         codConceptoB70in:
           type: array
           items:
-            type: number
+            type: string
         codConceptoB70out:
           type: array
           items:
-            type: number
+            type: string
     digitalPayment:
       type: object
       title: ''

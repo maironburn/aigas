@@ -3,23 +3,68 @@ info:
   description: API tracker productos
   version: 1.0.0
   title: Api productos AXPO
-  license:
-    name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
 paths:
   /product:
     put:
       summary: tracker de productos
       responses:
         '200':
-          description: producto creado con exito
+          description: 'Successfully completed execution'
         '400':
-          description: 'invalid input, object invalid'
+          description: 'Invalid input, object invalid'
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Product'
+  /list:
+    get:
+      summary: search for products
+      operationId: searchProducts
+      description: |
+        By passing in the appropriate options, you can search for
+        available products in the system
+      parameters:
+        - in: query
+          name: product_code
+          description: pass an optional search string for looking up products
+          required: false
+          schema:
+            type: string
+
+        - in: query
+          name: startdate
+          description: search by startdate
+          schema:
+            type: string
+            format: date
+
+        - in: query
+          name: type
+          description: search by type
+          schema:
+            type: string
+
+        - in: query
+          name: enddate
+          description: search by end date
+          schema:
+            type: string
+            format: date
+
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '400':
+          description: bad input parameters
+
 components:
   schemas:
     Product:
@@ -30,7 +75,7 @@ components:
         - type
         - status
         - CLIs
-        - calendars
+        - calendar
         - currency
         - units
         - splitType
@@ -38,9 +83,10 @@ components:
         - descriptionBillFree
         - navConcept
       properties:
-        ProductCode:
+        productCode:
           type: string
           title: ProductCode
+          description: product code for identification purpose
           example: BloqueFirme261120191130320001
         productVersion:
           type: string
@@ -63,14 +109,17 @@ components:
           type: string
           title: type
           description: type
+
         subtype:
           type: string
           title: subtype
           description: subtype
+
         descriptionBillFix:
           type: string
           title: descriptionBillFix
           description: descriptionBillFix
+
         descriptionBillFree:
           type: string
           title: descriptionBillFree
@@ -79,13 +128,16 @@ components:
           type: string
           title: navConcept
           description: navConcept
+
         billSection:
           type: string
           title: billSection
           description: billSection
+
         startDate:
           type: string
           format: date
+
         updateStartDateWithCLI:
           type: boolean
           title: ''
@@ -148,8 +200,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/cli'
+
         prices:
-          $ref: '#/components/schemas/price'
+          type: array
+          items:
+            $ref: '#/components/schemas/price'
         quantities:
           type: array
           title: ''
@@ -299,13 +354,15 @@ components:
           type: string
           title: ''
           enum:
-            - precio1
-            - precio2
+            - Precio1
+            - Precio2
             - General
             - Electrico
             - Termico
             - SuperReducidoIndustrial
             - ReducidoIndustrial
+            - NonRegulated
+            - Regulated
         formula:
           type: string
           title: ''
@@ -478,18 +535,18 @@ components:
             - 6
         vtPrice:
           $ref: '#/components/schemas/price'
-          title: ''
-          description: ''
+
         ftPrice:
           $ref: '#/components/schemas/price'
-          title: ''
-          description: ''
+
         transportFixTermPrice:
-          title: ''
-          $ref: '#/components/schemas/range'
+
+          $ref: '#/components/schemas/price'
+
         regasFixTermPrice:
-          title: ''
-          $ref: '#/components/schemas/range'
+
+          $ref: '#/components/schemas/price'
+
         type:
           type: string
           enum:
@@ -503,11 +560,11 @@ components:
         codConceptoB70in:
           type: array
           items:
-            type: number
+            type: string
         codConceptoB70out:
           type: array
           items:
-            type: number
+            type: string
     digitalPayment:
       type: object
       title: ''
@@ -551,3 +608,4 @@ components:
           format: date
         amount:
           type: number
+
