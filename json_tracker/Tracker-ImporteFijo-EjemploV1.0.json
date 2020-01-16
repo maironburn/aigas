@@ -1,0 +1,56 @@
+{
+	"productCode":"ImporteFijo202001011200000001",
+	"productVersion":"0",
+	"status":"Draft",
+	"type":"Importe Fijo",
+	"descriptionBillFix":"IF_CLI0002",
+	"descriptionBillFree":"Importe Fijo CLI0002",
+	"navConcept":"TerminoFijo",
+	"billSection":"Termino Fijo",
+	"startDate":"2020-01-01",
+	"updateStartDateWithCLI":false,	
+	"endDate":"2020-12-31",
+	"updateEndDateWithCLI":false,
+	"meta":
+	{
+		"meta01":"CLI"
+	},
+	"calendar":
+	{	
+		"calendarWhenDay":"TodosLosDias",	
+		"calendarLiqPeriod":"MesualEstandarTodosLosDias",
+		"invoiceCalendar":
+		{
+			"invoiceCalendarLiqOffset":
+			{
+				"source":"To",
+				"operation":"+",
+				"numDay":15
+			}
+		}
+	},
+	"currency":"EUR",
+	"units":"MWh",	
+	"offsets":
+	[{
+		"from":"2020-01-01",
+		"to":"2020-12-31",
+		"offset":0
+	}],
+	"splitType":"Forecast",	
+	"CLIs":
+	[{
+		"identifier":"CLI0002"
+	}],
+	"fixPrice":
+	[{
+		"from":"2020-01-01",
+		"to":"2020-07-31",
+		"value":15
+	},
+	{
+		"from":"2020-08-01",
+		"to":"2020-12-31",
+		"value":150
+	}]
+}

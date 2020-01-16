@@ -1,0 +1,76 @@
+{
+	"productCode":"ServicioMolecula202001011200000001",
+	"productVersion":"0",
+	"status":"Draft",
+	"type":"Servicio de Molecula",
+	"descriptionBillFix":"SM_CLI0641",
+	"descriptionBillFree":"Servicio Molecula CLI0641",
+	"navConcept":"ServicioMolecula",
+	"billSection":"Termino Fijo",
+	"startDate":"2020-01-01",
+	"updateStartDateWithCLI":false,	
+	"endDate":"2020-12-31",
+	"updateEndDateWithCLI":false,
+	"meta":
+	{
+		"meta01":"CLI",
+		"meta02":"BF"
+	},
+	"calendar":
+	{	
+		"calendarWhenDay":"TodosLosDias",	
+		"calendarLiqPeriod":"MesualEstandarTodosLosDias",
+		"calendarCalcSubPeriod":"MesualEstandarTodosLosDias",
+		"invoiceCalendar":
+		{
+			"dynamicInvCalendar":"CodigoInventadoPorEjemplo"
+		}
+	},
+	"currency":"EUR",
+	"units":"MWh",	
+	"offsets":
+	[{
+		"from":"2020-01-01",
+		"to":"2020-12-31",
+		"offset":0
+	}],
+	"splitType":"MoleculeService",	
+	"CLIs":
+	[{
+		"identifier":"CLI0641"
+	}],
+	"thresholds":
+	[{
+		"from":"2020-01-01",
+		"to":"2020-12-31",
+		"limitTo":0,
+		"type":"Abs",
+		"formula":"Prof_Standard",
+		"margin":0
+	},
+	{
+		"from":"2020-01-01",
+		"to":"2020-12-31",
+		"limitTo":80,
+		"type":"%",
+		"formula":"Prof_Standard",
+		"margin":0
+	},
+	{
+		"from":"2020-01-01",
+		"to":"2020-12-31",
+		"limitTo":999999999,
+		"type":"%",
+		"formula":"Prof_Standard",
+		"margin":0
+	}],	
+	"moleculeTaxes":
+	[{
+		"moleculeTaxConcept":"Mermas", 
+		"moleculeTaxValue":"MERMAS"
+	},
+	{
+		"moleculeTaxConcept":"Tasa Municipal", 
+		"moleculeTaxValue":"TASAM"
+	}]
+}

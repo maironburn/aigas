@@ -1,0 +1,47 @@
+{
+	"productCode":"TasaUso202001011200000001",
+	"productVersion":"0",
+	"status":"Draft",
+	"type":"Tasa Uso",
+	"descriptionBillFix":"TU_CLI0001",
+	"descriptionBillFree":"Tasa Uso CLI0001",
+	"navConcept":"TasaUso",
+	"billSection":"Termino Variable",
+	"startDate":"2020-01-01",
+	"updateStartDateWithCLI":false,	
+	"endDate":"2020-12-31",
+	"updateEndDateWithCLI":false,
+	"calendar":
+	{	
+		"calendarWhenDay":"TodosLosDias",	
+		"calendarLiqPeriod":"MesualEstandarTodosLosDias",
+		"invoiceCalendar":
+		{
+			"invoiceCalendarLiqOffset":
+			{
+				"source":"To",
+				"operation":"+",
+				"numDay":15
+			}
+		}
+	},
+	"currency":"EUR",
+	"units":"MWh",	
+	"offsets":
+	[{
+		"from":"2020-01-01",
+		"to":"2020-12-31",
+		"offset":0
+	}],
+	"splitType":"BestConsumption",	
+	"CLIs":
+	[{
+		"identifier":"CLI0001"
+	}],
+	"prices":
+	[{
+		"priceType":"Electrico",
+		"formula":"",
+		"margin":18
+	}]	
+}

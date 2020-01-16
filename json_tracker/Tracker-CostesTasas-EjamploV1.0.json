@@ -1,0 +1,53 @@
+{
+	"productCode":"CostesTasas202001011200000001",
+	"productVersion":"0",
+	"status":"Draft",
+	"type":"Coste Tasas",
+	"descriptionBillFix":"CT_CLI0003",
+	"descriptionBillFree":"Costes tasas CLI0003",
+	"navConcept":"CostesTasas",
+	"billSection":"Termino Variable",
+	"startDate":"2020-01-01",
+	"updateStartDateWithCLI":false,	
+	"endDate":"2020-12-31",
+	"updateEndDateWithCLI":false,
+	"meta":
+	{
+		"meta01":"CLI",
+		"meta02":"Variable"
+	},
+	"calendar":
+	{	
+		"calendarWhenDay":"TodosLosDias",	
+		"calendarLiqPeriod":"BimesualEstandarTodosLosDias",
+		"invoiceCalendar":
+		{
+			"calendarInvDays":["2020-03-01","2020-05-01","2020-07-01","2020-09-01","2020-11-01","2021-01-01"]
+		}
+	},
+	"currency":"EUR",
+	"units":"MWh",	
+	"offsets":
+	[{
+		"from":"2020-01-01",
+		"to":"2020-12-31",
+		"offset":0
+	}],
+	"splitType":"FixPercentage",	
+	"CLIs":
+	[{
+		"identifier":"CLI0003",
+		"percentages":
+		[{
+			"from":"2020-01-01",
+			"to":"2020-12-31",
+			"value":100
+		}]
+	}],
+	"prices":
+	[{
+		"Subtype":"TasaAASS",
+		"Formula":"INDEX001",
+		"Margin":1.8
+	}],		
+}

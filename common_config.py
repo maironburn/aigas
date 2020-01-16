@@ -22,6 +22,22 @@ CLI_SAMPLE = os.path.join(JSON_SAMPLES, 'DatosCLIEjemploV0.1.json')
 GAS_QUALITY_DETAIL_SAMPLE = os.path.join(JSON_SAMPLES, 'DetallesCalidadGasEjemploV0.1.json')
 ATR_AMOUNT_SAMPLE = os.path.join(JSON_SAMPLES, 'ImportesATRPassthroughEjemploV0.1.json')
 
+
+# test para AWS Gateway
+
+
+TRACKER_SAMPLES = os.path.join(ROOT_DIR, 'json_tracker')
+ATR_DISTRIBUTION_SAMPLE = os.path.join(TRACKER_SAMPLES, 'Tracker-ATRDistribucion-EjemploV1.0.json')
+ATR_UPSTREAM_SAMPLE = os.path.join(TRACKER_SAMPLES, 'Tracker-ATRUpstream-EjemploV1.0.json')
+BLOQUE_SAMPLE = os.path.join(TRACKER_SAMPLES, 'Tracker-BloqueFirme-EjemploV1.0.json')
+BONIFICACION_SAMPLE = os.path.join(TRACKER_SAMPLES, 'Tracker-BonificacionNominacion-EjemploV1.0.json')
+COBERTURA_SWAP_SAMPLE = os.path.join(TRACKER_SAMPLES, 'Tracker-CoberturaSWAP-EjemploV1.0.json')
+COSTES_TASAS_SAMPLE = os.path.join(TRACKER_SAMPLES, 'Tracker-CostesTasas-EjamploV1.0.json')
+IMPORTE_FIJO_SAMPLE = os.path.join(TRACKER_SAMPLES, 'Tracker-ImporteFijo-EjemploV1.0.json')
+SERVICIO_MOLECULA_SAMPLE = os.path.join(TRACKER_SAMPLES, 'Tracker-ServicioMolecula-EjemploV1.0.json')
+TASA_USO_SAMPLE = os.path.join(TRACKER_SAMPLES, 'Tracker-TasaUso-EjemploV1.0.json')
+TOLERANCIA_SAMPLE = os.path.join(TRACKER_SAMPLES, 'Tracker-Tolerancia-EjemploV1.0.json')
+
 # FIELDS to check data integrity
 # nombre_clase_FIELDS (se invocan por instrospeccion)
 
