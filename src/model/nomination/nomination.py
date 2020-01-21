@@ -2,9 +2,10 @@ from src.model.airegas_base import AireGas
 from src.model.nomination.nomination_details import Nomination_Details
 
 
-class Nomination(AireGas):
+class Nominacion(AireGas):
     CLI = None  # String
     nomination = {}  # segun modelo funcional es un objeto y no una matriz, e.d, relacion 1:1
+    _cli = str
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -13,6 +14,7 @@ class Nomination(AireGas):
     def load_data(self):
         super().load_data()
         self.CLI = self.json_entity_data['CLI']
+        self._cli = self.json_entity_data['cli']
         nomination = self.json_entity_data['nomination']
 
         nomination and self.load_nomination(nomination)

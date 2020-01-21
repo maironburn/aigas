@@ -42,19 +42,24 @@ TOLERANCIA_SAMPLE = os.path.join(TRACKER_SAMPLES, 'Tracker-Tolerancia-EjemploV1.
 # nombre_clase_FIELDS (se invocan por instrospeccion)
 
 # Calendar
-Calendar_FIELDS = ['_id', 'ts', 'calendarCode', 'Periods']
-Periods_FIELDS = ['idPeriod', 'from', 'to', 'calendarDates', 'active']
+Calendario_FIELDS = ['_id', 'ts', 'calendar_code', 'list_periods']
+Periods_FIELDS = ['id_period', 'from', 'to', 'calendar_dates', 'active']
+
+# Nomination
+Nominacion_FIELDS = ['_id', 'ts', 'CLI', 'nomination']
+Nomination_Details_FIELDS = ['calendar_dates', 'nominationVal']
+
+# Tasa_Molecula
+TasaMolecula_FIELDS = ['_id', 'ts', 'taxCode', 'taxDes', 'from', 'to', 'taxVal']
+
+
 
 # Precio formula
 Formula_Price_FIELDS = ['_id', 'ts', 'formulaCode', 'formulaDes', 'from', 'to', 'compoundIndex', 'prices']
 Prices_FIELDS = ["formulaDates", "formulaPrice", "formulaPriceDetail"]
 
-# Tasa_Molecula
-Molecule_Tax_FIELDS = ['_id', 'ts', 'taxCode', 'taxDes', 'from', 'to', 'taxVal']
 
-# Nomination
-Nomination_FIELDS = ['_id', 'ts', 'CLI', 'nomination']
-Nomination_Details_FIELDS = ['nominationDates', 'nominationVal']
+
 
 # Prevision
 Forecast_FIELDS = ['_id', 'ts', 'CLI', 'forecast']
@@ -98,4 +103,7 @@ MONGODB_TEST = {'db_name': "airegas",
                 }
 
 # URL API REST
-ENDPOINT_URL = 'https://swapi.co/api/'
+#ENDPOINT_URL = 'https://swapi.co/api/'
+
+ENDPOINT_URL = 'http://airegastestapp1.axpohosting.local:8081/'
+#CALENDARIO_ENDPOINT = 'http://airegastestapp1.axpohosting.local:8081/Calendario?from=2020-01-01'

@@ -2,9 +2,9 @@ from src.model.airegas_base import AireGas
 from src.model.calendar.periods import Periods
 
 
-class Calendar(AireGas):
-    calendarCode = None  # String
-    periods = []  # lista de periodos
+class Calendario(AireGas):
+    calendar_code = str
+    list_periods = []  # lista de periodos
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -13,21 +13,21 @@ class Calendar(AireGas):
     def load_data(self):
 
         super().load_data()
-        self.calendarCode = self.json_entity_data['calendarCode']
-        periods = self.json_entity_data['Periods']
+        self.calendar_code = self.json_entity_data['calendar_code']
+        periods = self.json_entity_data['list_periods']
         periods and self.load_periods(periods)
 
     def load_periods(self, periods):
         self._logger.info("Iniciando la carga de {} periodos asociados al calendar ".format(len(periods)))
         for p in periods:
-            self.periods.append(Periods(**{'entity_data': p, 'logger': self._logger}))
+            self.list_periods.append(Periods(**{'entity_data': p, 'logger': self._logger}))
 
-        self._logger.info("Instanciados {} periodos  ".format(len(self.periods)))
+        self._logger.info("Instanciados {} periodos  ".format(len(self.list_periods)))
 
     def get_periods(self):
 
         periods = []
-        for p in self.periods:
+        for p in self.list_periods:
             periods.append(p.get_json())
 
         return periods
@@ -37,13 +37,13 @@ class Calendar(AireGas):
 
         json_parent = AireGas.get_json(self)
         json_parent.update({
-            "calendarCode": self.calendarCode,
-            "Periods": self.get_periods()
+            "calendar_code": self.calendar_code,
+            "list_periods": self.get_periods()
         })
         return json_parent
 
     @property
     def unique(self):
         # identificador univoco de la entidad
-        return self.calendarCode
+        return self.calendar_code
 

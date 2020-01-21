@@ -5,10 +5,10 @@ from src.helper.json_helper import check_field_integrity
 
 
 class Periods(object):
-    idPeriod = None  # String
+    id_period = None  # String
     From = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
     To = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
-    calendarDates = []  # Array<Date (ISO8601 (yyyy-MM-dd))>
+    calendar_dates = []  # Array<Date (ISO8601 (yyyy-MM-dd))>
     active = []  # Array<Integer>, 1 | 0 (activo/inactivo)
 
     _logger = None
@@ -24,10 +24,10 @@ class Periods(object):
         self._logger.info("Checking fields from entity {}".format(self.__class__.__name__))
 
         if check_field_integrity("{}_FIELDS".format(self.__class__.__name__), self.json_entity_data):
-            self.idPeriod = self.json_entity_data['idPeriod']
+            self.id_period = self.json_entity_data['id_period']
             self.From = self.json_entity_data['from']
             self.To = self.json_entity_data['to']
-            self.calendarDates = self.json_entity_data['calendarDates']
+            self.calendar_dates = self.json_entity_data['calendar_dates']
             self.active = self.json_entity_data['active']
         else:
             self._logger.error("{} faltan campos en {}".format(self.__class__.__name__,
@@ -35,9 +35,9 @@ class Periods(object):
 
     def get_json(self):
 
-        return {"idPeriod": self.idPeriod,
+        return {"id_period": self.id_period,
                 "from": self.From,
                 "to": self.To,
-                "calendarDates": self.calendarDates,
+                "calendar_dates": self.calendar_dates,
                 "active": self.active
                 }

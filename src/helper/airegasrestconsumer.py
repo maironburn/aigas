@@ -4,7 +4,7 @@ from logger.app_logger import AppLogger
 import urllib3
 
 print('Loading function')
-url = "https://swapi.co/api/people"
+url = "http://airegastestapp1.axpohosting.local:8081/"
 
 
 class AiregasRestConsumer(object):
@@ -41,15 +41,14 @@ class AiregasRestConsumer(object):
 
         return False
 
-
-
-    def get_last_modifications_from_api_rest(self):
+    def get_last_modifications_from_api_rest(self, _from='2020-01-01'):
         try:
-            r = self.http.request('GET', self.url)
+
+            r = self.http.request('GET', self.url, fields={'from': _from})
             self._logger.info("Connection to {} successful".format(self.url))
             return json.loads(r.data.decode('utf-8'))
         except Exception as e:
-            self._logger.error("Cannot connect to {}-> {}".format(url, e))
+            self._logger.error("Cannot connect to {}-> {}".format(self.url, e))
 
     @property
     def url(self):
@@ -68,5 +67,3 @@ class AiregasRestConsumer(object):
     def http(self, value):
         if value:
             self._http = value
-
-

@@ -1,9 +1,7 @@
 import json
 import os
 from importlib import import_module
-
 import urllib3
-
 from common_config import URL_BASE
 
 

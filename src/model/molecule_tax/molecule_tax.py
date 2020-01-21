@@ -1,7 +1,7 @@
 from src.model.airegas_base import AireGas
 
 
-class Molecule_Tax(AireGas):
+class TasaMolecula(AireGas):
     taxCode = None  # String
     taxDes = None  # String
     From = None  # Date (ISO8601 (yyyy-MM-dd))

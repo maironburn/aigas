@@ -5,7 +5,7 @@ from src.helper.json_helper import check_field_integrity
 
 
 class Nomination_Details(object):
-    nominationDates = []  # Array<Date (ISO8601 (yyyy-MM-dd))>
+    calendar_dates = []  # Array<Date (ISO8601 (yyyy-MM-dd))>
     nominationVal = []  # Array<Integer>
 
     _logger = None
@@ -21,7 +21,7 @@ class Nomination_Details(object):
         self._logger.info("Checking fields from entity {}".format(self.__class__.__name__))
 
         if check_field_integrity("{}_FIELDS".format(self.__class__.__name__), self.json_entity_data):
-            self.nominationDates = self.json_entity_data['nominationDates']
+            self.calendar_dates = self.json_entity_data['calendar_dates']
             self.nominationVal = self.json_entity_data['nominationVal']
         else:
             self._logger.error("{} faltan campos en {}".format(self.__class__.__name__,
@@ -29,6 +29,6 @@ class Nomination_Details(object):
 
     def get_json(self):
 
-        return {"nominationDates": self.nominationDates,
+        return {"calendar_dates": self.calendar_dates,
                 "nominationVal": self.nominationVal
                 }
