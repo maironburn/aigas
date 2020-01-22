@@ -13,9 +13,6 @@ class AiregasRestConsumer(object):
     _http = None
 
     def __init__(self, **kwargs):
-
-        self._logger = AppLogger.create_rotating_log() if not kwargs.get('logger') else kwargs.get('logger')
-        self._logger.info("Iniciando {}".format(self.__class__.__name__))
         self.init_pool_request()
 
         self._url = kwargs.get('url') if kwargs and kwargs.get('url') else ENDPOINT_URL
@@ -23,10 +20,10 @@ class AiregasRestConsumer(object):
     def init_pool_request(self):
         try:
             self._http = urllib3.PoolManager()
-            self._logger.info("urllib3 request iniciado con exito")
+
             return True
         except Exception as e:
-            self._logger.error("Error iniciando urllib3->{}".format(e))
+           print("Error iniciando urllib3->{}".format(e))
 
         return None
 
@@ -34,10 +31,10 @@ class AiregasRestConsumer(object):
         try:
             url_get = self._url if self._url else ENDPOINT_URL
             self.http.request('GET', url_get)
-            self._logger.info("Connection to {} successful".format(url_get))
+            print("Connection to {} successful".format(url_get))
             return True
         except Exception as e:
-            self._logger.error("Cannot connect to {}-> {}".format(url, e))
+            print("Cannot connect to {}-> {}".format(url, e))
 
         return False
 
@@ -45,7 +42,7 @@ class AiregasRestConsumer(object):
         try:
 
             r = self.http.request('GET', self.url, fields={'from': _from})
-            self._logger.info("Connection to {} successful".format(self.url))
+            print("Connection to {} successful".format(self.url))
             return json.loads(r.data.decode('utf-8'))
         except Exception as e:
             self._logger.error("Cannot connect to {}-> {}".format(self.url, e))

@@ -16,9 +16,9 @@ class TasaMolecula(AireGas):
         super().load_data()
         self.taxCode = self.json_entity_data['taxCode']
         self.taxDes = self.json_entity_data['taxDes']
-        self.From = self.json_entity_data['from']
+        self.From = self.json_entity_data['from']  # aaray
         self.To = self.json_entity_data['to']
-        self.taxVal = self.json_entity_data['taxVal']
+        self.taxVal = self.json_entity_data['taxVal']  # aaray
 
     def get_json(self):
         json_parent = AireGas.get_json(self)
@@ -36,3 +36,8 @@ class TasaMolecula(AireGas):
     def unique(self):
         # identificador univoco de la entidad
         return self.taxCode
+
+    @property
+    def unique_str(self):
+        # identificador univoco de la entidad
+        return "taxCode"

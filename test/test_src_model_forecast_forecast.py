@@ -33,7 +33,7 @@ import src.model.forecast.forecast_details
 from src.model.forecast.forecast_details import Forecast_Details
 import src.model.formula_price.formula_price
 from src.model.formula_price.formula_price import AireGas
-from src.model.formula_price.formula_price import Formula_Price
+from src.model.formula_price.formula_price import PrecioFormula
 import src.model.formula_price.prices
 from src.model.formula_price.prices import Prices
 import src.model.gas_quality_detail.gas_quality_detail

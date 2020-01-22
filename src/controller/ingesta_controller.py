@@ -1,4 +1,4 @@
-from common_config import MONGODB_TEST, ENDPOINT_URL
+from common_config import ENDPOINT_URL
 from src.mongodb.mongo_client import MongoAireGas
 from src.helper.airegasrestconsumer import AiregasRestConsumer
 from logger.app_logger import AppLogger

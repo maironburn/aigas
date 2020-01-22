@@ -1,11 +1,11 @@
 from common_config import CALENDAR_SAMPLE, MONGODB_TEST
 from src.helper.json_helper import get_entity_from_samples
-from src.model.calendar.calendar import Calendario
+from src.model.calendar.calendar import Calendar
 from src.mongodb.mongo_client import MongoAireGas
 
 if __name__ == '__main__':
     instance_data = get_entity_from_samples(CALENDAR_SAMPLE)
-    instance = Calendario(**{'entity_data': instance_data})
+    instance = Calendar(**{'entity_data': instance_data})
     instance_json = instance.get_json()
     print("unique id: {}, is_temporal_sequence: {}, collection: {} , rev_collection: {} ".
           format(instance.unique, instance.is_temporal_sequence, instance.collection_name,

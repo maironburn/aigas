@@ -20,8 +20,8 @@ class Nominacion(AireGas):
         nomination and self.load_nomination(nomination)
 
     def load_nomination(self, nomination):
-        self._logger.info(
-            "Iniciando la carga del objeto nomination asociada a {} ".format(self.__class__.__name__))
+        # self._logger.info(
+        #     "Iniciando la carga del objeto nomination asociada a {} ".format(self.__class__.__name__))
         self.nomination = Nomination_Details(**{'entity_data': nomination, 'logger': self._logger})
 
     def get_nomination(self):

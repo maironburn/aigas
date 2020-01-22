@@ -2,7 +2,7 @@ from src.model.airegas_base import AireGas
 from src.model.formula_price.prices import Prices
 
 
-class Formula_Price(AireGas):
+class PrecioFormula(AireGas):
     formulaCode = None  # String
     formulaDes = None  # String
     From = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))

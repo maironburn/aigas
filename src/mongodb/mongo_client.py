@@ -1,13 +1,15 @@
 from pymongo import MongoClient
-from common_config import MONGODB_TEST
 from logger.app_logger import AppLogger
+from common_config import MONGODB_LOCAL, MONGODB_ATLAS
 
 
 class MongoAireGas(object):
     _connection_string = None
-    _db_name = None
-    _host = None
-    _port = None
+    _db_name = str
+    _host = str
+    _port = str
+    _user = str
+    _password = str
 
     _client = None
     _logger = None
@@ -15,34 +17,28 @@ class MongoAireGas(object):
     def __init__(self, **kwargs):
         self._logger = AppLogger.create_rotating_log() if not kwargs.get('logger') else kwargs.get('logger')
         self._logger.info("Iniciando {}".format(self.__class__.__name__))
-        db_data = kwargs if kwargs and isinstance(kwargs, dict) else MONGODB_TEST
-        self.load_data_for_string_connection(db_data)
+        # db_data = kwargs if kwargs and isinstance(kwargs, dict) else MONGODB_TESTl
+        self.connection_string = MONGODB_LOCAL if kwargs.get('connection_type') == 'local' else MONGODB_ATLAS
 
-    def load_data_for_string_connection(self, kwargs):
-
-        self._logger.info("Loading data to build string connection")
-        self.db_name = kwargs.get('db_name')
-        self.host = kwargs.get('host')
-        self.port = kwargs.get('port')
-
-        self._logger.info("DB_NAME : {} , HOST: {}, PORT: {}".format(self.db_name,
-                                                                     self.host,
-                                                                     self.port))
-
-    def connect_db(self):
-
-        if self.db_name:
-            '''
-            #test db no auth  
-            # cliente = MongoClient("mongodb://{}:{}@{}:{}".format(usuario, palabra_secreta, host, puerto))
-            '''
-            mongo_con = MongoClient("mongodb://{}:{}".format(self.host, self.port))
+    def connect_db(self, db_name='db_test'):
+        try:
+            mongo_con = MongoClient(self.connection_string)
             self._logger.info("connect_db: Succesful Connection ")
-            self._client = mongo_con[self.db_name]
+            self._client = mongo_con[db_name]
             return True
 
-        self._logger.error("connect_db: No succesful connection ")
-        return None
+        except Exception as e:
+            self._logger.error("Cant connect with Document DB ->{}".format(e))
+
+        return False
+
+    def insert_or_version(self):
+
+        pass
+        # coleccion = collection_mapper[k].lower()
+        # inserted_id = mongo_client.client[coleccion].insert_one(
+        #     instance_json).inserted_id
+        # print("{}".format(inserted_id))
 
     def get_last_update(self):
 
@@ -95,6 +91,24 @@ class MongoAireGas(object):
             self._port = value
 
     @property
+    def user(self):
+        return self._user
+
+    @user.setter
+    def user(self, value):
+        if value:
+            self._user = value
+
+    @property
+    def password(self):
+        return self._password
+
+    @password.setter
+    def password(self, value):
+        if value:
+            self._password = value
+
+    @property
     def client(self):
         # cliente de la bbdd
         return self._client
@@ -113,6 +127,6 @@ class MongoAireGas(object):
     @connection_string.setter
     def connection_string(self, value):
         if value:
-            self._connection_string= value
+            self._connection_string = value
 
     # </editor-fold>

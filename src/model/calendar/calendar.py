@@ -18,11 +18,11 @@ class Calendario(AireGas):
         periods and self.load_periods(periods)
 
     def load_periods(self, periods):
-        self._logger.info("Iniciando la carga de {} periodos asociados al calendar ".format(len(periods)))
+        print("Iniciando la carga de {} periodos asociados al calendar ".format(len(periods)))
         for p in periods:
             self.list_periods.append(Periods(**{'entity_data': p, 'logger': self._logger}))
 
-        self._logger.info("Instanciados {} periodos  ".format(len(self.list_periods)))
+        print("Instanciados {} periodos  ".format(len(self.list_periods)))
 
     def get_periods(self):
 
@@ -47,3 +47,8 @@ class Calendario(AireGas):
         # identificador univoco de la entidad
         return self.calendar_code
 
+
+    @property
+    def unique_str(self):
+        # identificador univoco de la entidad
+        return "calendar_code"

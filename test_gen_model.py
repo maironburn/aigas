@@ -8,11 +8,11 @@ from src.model.consumption.consumption import Consumption
 from src.model.night_consumption.night_consumption import Night_Consumption
 from src.model.cli.cli import Cli
 from src.model.gas_quality_detail.gas_quality_detail import Gas_Quality_Detail
-from src.model.nomination.nomination import Nomination
-from src.model.formula_price.formula_price import Formula_Price
+from src.model.nomination.nomination import Nominacion
+from src.model.formula_price.formula_price import PrecioFormula
 from src.model.forecast.forecast import Forecast
 from src.model.regulated_price.regulated_price import Regulated_Price
-from src.model.molecule_tax.molecule_tax import Molecule_Tax
+from src.model.molecule_tax.molecule_tax import TasaMolecula
 import auger
 
 dict_instances = {'Calendar': Calendar,
@@ -22,11 +22,11 @@ dict_instances = {'Calendar': Calendar,
                   'Night_Consumption' : Night_Consumption,
                   'Cli' : Cli,
                   'Gas_Quality_Detail': Gas_Quality_Detail,
-                  'Nomination' : Nomination,
-                  'Formula_Price' : Formula_Price,
+                  'Nomination' : Nominacion,
+                  'Formula_Price' : PrecioFormula,
                   'Forecast' : Forecast,
                   'Regulated_Price' : Regulated_Price,
-                  'Molecule_Tax' : Molecule_Tax
+                  'Molecule_Tax' : TasaMolecula
                   }
 
 def main():
@@ -42,6 +42,7 @@ def main():
 
 
 if __name__ == "__main__":
+
  with auger.magic([
      Atr_Amount,
      B70_Calendar,
@@ -50,10 +51,10 @@ if __name__ == "__main__":
      Consumption,
      Night_Consumption,
      Gas_Quality_Detail,
-     Nomination,
-     Formula_Price,
+     Nominacion,
+     PrecioFormula,
      Forecast,
      Regulated_Price,
-     Molecule_Tax
+     TasaMolecula
  ]):   # this is the new line and invokes Auger
     main()

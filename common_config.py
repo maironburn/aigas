@@ -22,7 +22,6 @@ CLI_SAMPLE = os.path.join(JSON_SAMPLES, 'DatosCLIEjemploV0.1.json')
 GAS_QUALITY_DETAIL_SAMPLE = os.path.join(JSON_SAMPLES, 'DetallesCalidadGasEjemploV0.1.json')
 ATR_AMOUNT_SAMPLE = os.path.join(JSON_SAMPLES, 'ImportesATRPassthroughEjemploV0.1.json')
 
-
 # test para AWS Gateway
 
 
@@ -52,14 +51,9 @@ Nomination_Details_FIELDS = ['calendar_dates', 'nominationVal']
 # Tasa_Molecula
 TasaMolecula_FIELDS = ['_id', 'ts', 'taxCode', 'taxDes', 'from', 'to', 'taxVal']
 
-
-
 # Precio formula
-Formula_Price_FIELDS = ['_id', 'ts', 'formulaCode', 'formulaDes', 'from', 'to', 'compoundIndex', 'prices']
+PrecioFormula_FIELDS = ['_id', 'ts', 'formulaCode', 'formulaDes', 'from', 'to', 'compoundIndex', 'prices']
 Prices_FIELDS = ["formulaDates", "formulaPrice", "formulaPriceDetail"]
-
-
-
 
 # Prevision
 Forecast_FIELDS = ['_id', 'ts', 'CLI', 'forecast']
@@ -95,15 +89,27 @@ Gas_Quality_Detail_FIELDS = ['_id', 'ts', 'CLI', 'date', 'meter', 'detailPCS', '
 Atr_Amount_FIELDS = ['_id', 'ts', 'CLI', 'From', 'To', 'ATRPrices']
 ATRPrices_FIELDS = ['TPAId', 'TPAConcept', 'TPAConceptAmount']
 
-MONGODB_TEST = {'db_name': "airegas",
-                'host': 'localhost',
-                'port': "27017",
-                'user': '',
-                'pwd': ''
-                }
+DATA_LOCAL = {'db_name': "airegas",
+              'host': 'localhost',
+              'port': "27017",
+              'user': '',
+              'pwd': ''
+              }
+
+ATLAS_DATA = {'db_name': "db_test",
+              'host': 'liqgas-develop-nfezk.mongodb.net',
+              'port': "27017",
+              'user': '',
+              'pwd': ''
+              }
+
+MONGODB_LOCAL = "mongodb://{}:{}".format(DATA_LOCAL['host'], DATA_LOCAL['port'], DATA_LOCAL['db_name'])
+MONGODB_ATLAS = "mongodb+srv://{}:{}@{}".format(ATLAS_DATA['user'], ATLAS_DATA['pwd'],ATLAS_DATA['host'],ATLAS_DATA['db_name'])
+
+
 
 # URL API REST
-#ENDPOINT_URL = 'https://swapi.co/api/'
+# ENDPOINT_URL = 'https://swapi.co/api/'
 
 ENDPOINT_URL = 'http://airegastestapp1.axpohosting.local:8081/'
-#CALENDARIO_ENDPOINT = 'http://airegastestapp1.axpohosting.local:8081/Calendario?from=2020-01-01'
+# CALENDARIO_ENDPOINT = 'http://airegastestapp1.axpohosting.local:8081/Calendario?from=2020-01-01'
