@@ -65,3 +65,8 @@ class Cli(AireGas):
     def unique(self):
         # identificador univoco de la entidad
         return self.CLI
+
+    @property
+    def unique_str(self):
+        # identificador univoco de la entidad
+        return "CLI"

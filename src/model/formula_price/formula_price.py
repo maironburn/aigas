@@ -51,3 +51,9 @@ class PrecioFormula(AireGas):
     def unique(self):
         # identificador univoco de la entidad
         return self.formulaCode
+
+
+    @property
+    def unique_str(self):
+        # identificador univoco de la entidad
+        return "formulaCode"

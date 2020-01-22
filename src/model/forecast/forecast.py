@@ -17,7 +17,6 @@ class Forecast(AireGas):
         prevision and self.load_prevision(prevision)
 
     def load_prevision(self, prevision):
-
         self.prevision = Forecast_Details(**{'entity_data': prevision, 'logger': self._logger})
 
     def get_prevision(self):
@@ -38,4 +37,7 @@ class Forecast(AireGas):
         # identificador univoco de la entidad
         return self.CLI
 
-
+    @property
+    def unique_str(self):
+        # identificador univoco de la entidad
+        return "CLI"

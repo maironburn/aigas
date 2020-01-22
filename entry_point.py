@@ -52,12 +52,12 @@ if __name__ == '__main__':
     # 6 - Logica de versionado
     # 7 - insercion/es nombre_coleccion /nombre_coleccion_old
 
-    #print("the script has the name %s" % (sys.argv[0]))
+    # print("the script has the name %s" % (sys.argv[0]))
 
     start_time = time.time()
     module = import_module("common_config")
-    mongolo=MongoController(**{'connection_type': 'atlas'})
-    #mongo_client = MongoAireGas(**{'connection_type': 'atlas'})
+    mongolo = MongoController(**{'connection_type': 'atlas'})
+    # mongo_client = MongoAireGas(**{'connection_type': 'atlas'})
 
     if mongolo.connect_db():
 
@@ -67,7 +67,7 @@ if __name__ == '__main__':
             rest_consumer = AiregasRestConsumer(**{'url': url})
             response = rest_consumer.get_last_modifications_from_api_rest()
 
-            if isinstance(response, list) : #la devolucion de list implica response ok
+            if isinstance(response, list):  # la devolucion de list implica response ok
                 for elements in response:
                     # instanciacion de la clase
                     instance = v(**{'entity_data': elements})
@@ -81,7 +81,6 @@ if __name__ == '__main__':
                     mongolo.insert_or_version()
 
             else:
-                print ("Error al consumir la API de {}".format(k))
-
+                print("Error al consumir la API de {}".format(k))
 
     print("--- Ejecucion de la carga masiva %s seconds ---" % (time.time() - start_time))

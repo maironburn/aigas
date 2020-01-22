@@ -3,6 +3,7 @@ from src.model.airegas_base import AireGas
 
 
 class MongoController(MongoAireGas):
+
     _instance = AireGas
 
     def __init__(self, **kw):
