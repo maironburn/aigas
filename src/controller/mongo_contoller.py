@@ -2,7 +2,7 @@ from src.mongodb.mongo_client import MongoAireGas
 from src.model.airegas_base import AireGas
 
 
-class MongoController(MongoAireGas):
+class MongoVersionController(MongoAireGas):
     _instance = AireGas
 
     def __init__(self, **kw):

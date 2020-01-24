@@ -15,7 +15,7 @@ from src.model.forecast.forecast import Forecast
 from src.model.regulated_price.regulated_price import Regulated_Price
 from src.model.molecule_tax.molecule_tax import TasaMolecula
 from src.helper.airegasrestconsumer import AiregasRestConsumer
-from src.controller.mongo_contoller import MongoController
+from src.controller.mongo_contoller import MongoVersionController
 
 import time
 import sys
@@ -56,7 +56,7 @@ if __name__ == '__main__':
 
     start_time = time.time()
     module = import_module("common_config")
-    mongolo=MongoController(**{'connection_type': 'atlas'})
+    mongolo=MongoVersionController(**{'connection_type': 'atlas'})
     #mongo_client = MongoAireGas(**{'connection_type': 'atlas'})
 
     if mongolo.connect_db():
