@@ -3,7 +3,9 @@ from src.model.forecast.forecast_details import Forecast_Details
 
 
 class Forecast(AireGas):
-    CLI = None  # String
+    CLI = str
+    _cli = str
+    unidad = str
     prevision = {}  # segun modelo funcional es un objeto y no una matriz, e.d, relacion 1:1
 
     def __init__(self, **kw):

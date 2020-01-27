@@ -8,6 +8,8 @@ class PrecioFormula(AireGas):
     From = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
     To = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
     compoundIndex = []  # Array<String>
+    unidad = str
+    divisia = str
     prices = {}  # segun modelo funcional es un objeto y no una matriz, e.d, relacion 1:1
 
     def __init__(self, **kw):

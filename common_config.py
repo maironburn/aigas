@@ -41,52 +41,52 @@ TOLERANCIA_SAMPLE = os.path.join(TRACKER_SAMPLES, 'Tracker-Tolerancia-EjemploV1.
 # nombre_clase_FIELDS (se invocan por instrospeccion)
 
 # Calendar
-Calendario_FIELDS = ['_id', 'ts', 'calendar_code', 'list_periods']
+Calendario_FIELDS = ['calendar_code', 'Expiration_Date', 'list_periods']
 Periods_FIELDS = ['id_period', 'from', 'to', 'calendar_dates', 'active']
 
 # Nomination
-Nominacion_FIELDS = ['_id', 'ts', 'CLI', 'nomination']
+Nominacion_FIELDS = ['CLI', 'nomination']
 Nomination_Details_FIELDS = ['calendar_dates', 'nominationVal']
 
 # Tasa_Molecula
-TasaMolecula_FIELDS = ['_id', 'ts', 'taxCode', 'taxDes', 'from', 'to', 'taxVal']
+TasaMolecula_FIELDS = ['taxCode', 'taxDes', 'from', 'to', 'taxVal']
 
 # Precio formula
-PrecioFormula_FIELDS = ['_id', 'ts', 'formulaCode', 'formulaDes', 'from', 'to', 'compoundIndex', 'prices']
+PrecioFormula_FIELDS = ['formulaCode', 'formulaDes', 'from', 'to', 'compoundIndex', 'prices']
 Prices_FIELDS = ["formulaDates", "formulaPrice", "formulaPriceDetail"]
 
 # Prevision
-Forecast_FIELDS = ['_id', 'ts', 'CLI', 'forecast']
+Forecast_FIELDS = ['CLI', 'forecast']
 Forecast_Details_FIELDS = ['forecastDates', 'forecastPrice']
 
 # Calendario_B70
-B70_Calendar_FIELDS = ['_id', 'ts', 'CLI', 'from', 'to']
+B70_Calendar_FIELDS = ['CLI', 'from', 'to']
 
 # Precios_regulados
-Regulated_Price_FIELDS = ['_id', 'ts', 'regulatedPriceName', 'regulatedDates', 'regulatedVal']
+Regulated_Price_FIELDS = ['regulatedPriceName', 'regulatedDates', 'regulatedVal']
 
 # Consumo_Nocturno
-Night_Consumption_FIELDS = ['_id', 'ts', 'CLI', 'dates', 'origin', 'qd']
+Night_Consumption_FIELDS = ['CLI', 'dates', 'origin', 'qd']
 
 # Consumo
-Consumption_FIELDS = ['_id', 'ts', 'CLI', 'dates', 'origin', 'qd', 'qdElec', 'qdTerm', 'qdRed', 'qdSupRed']
+Consumption_FIELDS = ['CLI', 'dates', 'origin', 'qd', 'qdElec', 'qdTerm', 'qdRed', 'qdSupRed']
 
 # Datos_CLI
-Cli_FIELDS = ['_id', 'ts', 'StartDate', 'EndDate']
+Cli_FIELDS = ['StartDate', 'EndDate']
 Invoice_FIELDS = ['email', 'name', 'IBAN', 'swift', 'paymentTerm', 'paymentMethod']
 Supply_FIELDS = ['CUPS', 'address', 'locality', 'postalCode', 'position']
 Contract_FIELDS = ['CounterPartyName', 'CounterPartyDocNumber', 'clientName', 'connectionPoint', 'startDate', 'active',
                    'portfolio', 'broker', 'commission']
 
 # Detalle calidad de gas
-Gas_Quality_Detail_FIELDS = ['_id', 'ts', 'CLI', 'date', 'meter', 'detailPCS', 'detailPCI', 'detailDensity', 'detailN2',
+Gas_Quality_Detail_FIELDS = ['CLI', 'date', 'meter', 'detailPCS', 'detailPCI', 'detailDensity', 'detailN2',
                              'detailPressure', 'detailTemp', 'detailValueZ', 'detailValueK', 'detailLectm3',
                              'detailConsm3',
                              'detailAdjustementskWh', 'detailConskWh', 'detailCO2'
                              ]
 
 # Importes ATR
-Atr_Amount_FIELDS = ['_id', 'ts', 'CLI', 'From', 'To', 'ATRPrices']
+Atr_Amount_FIELDS = ['CLI', 'From', 'To', 'ATRPrices']
 ATRPrices_FIELDS = ['TPAId', 'TPAConcept', 'TPAConceptAmount']
 
 DATA_LOCAL = {'db_name': "airegas",
@@ -103,13 +103,20 @@ ATLAS_DATA = {'db_name': "db_test",
               'pwd': ''
               }
 
+collection_mapper = {
+    'Calendario': 'Calendar',
+    'Nominacion': 'Nomination',
+    'TasaMolecula': 'Molecule_Tax',
+    'PrecioFormula': 'Formula_Price'
+}
+
 MONGODB_LOCAL = "mongodb://{}:{}".format(DATA_LOCAL['host'], DATA_LOCAL['port'], DATA_LOCAL['db_name'])
-MONGODB_ATLAS = "mongodb+srv://{}:{}@{}".format(ATLAS_DATA['user'], ATLAS_DATA['pwd'],ATLAS_DATA['host'],ATLAS_DATA['db_name'])
-
-
+MONGODB_ATLAS = "mongodb+srv://{}:{}@{}".format(ATLAS_DATA['user'], ATLAS_DATA['pwd'], ATLAS_DATA['host'],
+                                                ATLAS_DATA['db_name'])
 
 # URL API REST
 # ENDPOINT_URL = 'https://swapi.co/api/'
 
 ENDPOINT_URL = 'http://airegastestapp1.axpohosting.local:8081/'
+LOCAL_ENDPOINT_URL = 'http://127.0.0.1:8080/'
 # CALENDARIO_ENDPOINT = 'http://airegastestapp1.axpohosting.local:8081/Calendario?from=2020-01-01'

@@ -16,7 +16,6 @@ from src.model.regulated_price.regulated_price import Regulated_Price
 from src.model.molecule_tax.molecule_tax import TasaMolecula
 from src.helper.airegasrestconsumer import AiregasRestConsumer
 from src.controller.mongo_contoller import MongoVersionController
-
 import time
 import sys
 
@@ -27,20 +26,15 @@ dict_instances = {'Calendario': Calendario,
                   # 'Night_Consumption': Night_Consumption,
                   # 'Cli': Cli,
                   # 'Gas_Quality_Detail': Gas_Quality_Detail,
-                  'Nominacion': Nominacion,
-                  'Formula_Price': PrecioFormula,
+                  # 'Nominacion': Nominacion,
+                  # 'Formula_Price': PrecioFormula,
                   # 'Forecast': Forecast,
                   # 'Regulated_Price': Regulated_Price,
                   'TasaMolecula': TasaMolecula
                   }
 
 # mapea las clases con sus colecciones en MongoDB para la persistencia
-collection_mapper = {
-    'Calendario': 'Calendar',
-    'Nominacion': 'Nomination',
-    'TasaMolecula': 'Molecule_Tax',
-    'PrecioFormula': 'Formula_Price'
-}
+
 
 if __name__ == '__main__':
     # @todo
@@ -52,36 +46,38 @@ if __name__ == '__main__':
     # 6 - Logica de versionado
     # 7 - insercion/es nombre_coleccion /nombre_coleccion_old
 
-    #print("the script has the name %s" % (sys.argv[0]))
+    # print("the script has the name %s" % (sys.argv[0]))
 
     start_time = time.time()
     module = import_module("common_config")
-    mongolo=MongoVersionController(**{'connection_type': 'atlas'})
-    #mongo_client = MongoAireGas(**{'connection_type': 'atlas'})
+    num_arguments = len(sys.argv)
 
-    if mongolo.connect_db():
+    if num_arguments == 1: # iniciado desde cron, no hay argumentos de entrada
+        mongolo = MongoVersionController(**{'connection_type': 'local'})
+        # mongo_client = MongoAireGas(**{'connection_type': 'atlas'})
 
-        for k, v in dict_instances.items():
+        if mongolo.connect_db():
 
-            url = "{}/{}".format(ENDPOINT_URL, k)
-            rest_consumer = AiregasRestConsumer(**{'url': url})
-            response = rest_consumer.get_last_modifications_from_api_rest()
+            for k, v in dict_instances.items():
 
-            if isinstance(response, list) : #la devolucion de list implica response ok
-                for elements in response:
-                    # instanciacion de la clase
-                    instance = v(**{'entity_data': elements})
-                    instance_json = instance.get_json()
-                    print("unique id: {}, is_temporal_sequence: {}, collection: {} , rev_collection: {} ".
-                          format(instance.unique, instance.is_temporal_sequence, instance.collection_name,
-                                 instance.collection_name_old))
-                    print("Entidad:\n {}".format(instance_json))
-                    coleccion = collection_mapper[k].lower()
-                    mongolo.set_collection_info(instance)
-                    mongolo.insert_or_version()
+                url = "{}/{}".format(LOCAL_ENDPOINT_URL, k)
+                rest_consumer = AiregasRestConsumer(**{'url': url})
+                response = rest_consumer.get_last_modifications_from_api_rest()
 
-            else:
-                print ("Error al consumir la API de {}".format(k))
+                if isinstance(response, list):
+                    for elements in response:
+                        # instanciacion de la clase
+                        instance = v(**{'entity_data': elements})
+                        mongolo.instance = instance
+                        instance_json = instance.get_json()
+                        print("unique id: {}, is_temporal_sequence: {}, collection: {} , rev_collection: {} ".
+                              format(instance.unique, instance.is_temporal_sequence, instance.collection_name,
+                                     instance.collection_name_old))
+                        print("Entidad:\n {}".format(instance_json))
 
+                        mongolo.set_collection_info()
+                        mongolo.insert_or_version()
+                else:
+                    print("Error al consumir la API de {}".format(k))
 
     print("--- Ejecucion de la carga masiva %s seconds ---" % (time.time() - start_time))

@@ -1,6 +1,6 @@
 import json
 from datetime import datetime
-
+from common_config import collection_mapper
 from logger.app_logger import AppLogger
 from src.helper.json_helper import check_field_integrity
 
@@ -21,8 +21,8 @@ class AireGas(object):
         #self._logger = AppLogger.create_rotating_log() if not kw.get('logger') else kw.get('logger')
         if isinstance(self.json_entity_data, dict):
             print("Loading data {} from json".format(self.__class__.__name__))
-            self.collection_name = "{}".format(self.__class__.__name__.lower())
-            self.collection_name_old = "{}_old".format(self.__class__.__name__.lower())
+            self.collection_name ="{}".format(collection_mapper[self.__class__.__name__]).lower()
+            self.collection_name_old = "{}_old".format(collection_mapper[self.__class__.__name__]).lower()
             self.load_data()
 
     def load_data(self):
@@ -39,7 +39,7 @@ class AireGas(object):
     # <editor-fold desc="getter and setters">
     def get_json(self):
         return {#"_id": self._id,
-                "ts": self.ts,
+                #"ts": self.ts,
                 "last_modified": self._last_modified
                 }
 
@@ -56,7 +56,17 @@ class AireGas(object):
         # identificador univoco de la entidad
         return self._collection_name
 
+    @collection_name.setter
+    def collection_name(self, value):
+        if value:
+            self._collection_name = value
+
     @property
     def collection_name_old(self):
         # identificador univoco de la entidad
         return self._collection_name_old
+
+    @collection_name_old.setter
+    def collection_name_old(self, value):
+        if value:
+            self._collection_name_old = value

@@ -3,7 +3,9 @@ from src.model.calendar.periods import Periods
 
 
 class Calendario(AireGas):
+
     calendar_code = str
+    Expiration_Date = str
     list_periods = []  # lista de periodos
 
     def __init__(self, **kw):
