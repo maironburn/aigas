@@ -52,6 +52,11 @@ class AireGas(object):
         raise NotImplementedError
 
     @property
+    def unique_str(self):
+        # identificador univoco de la entidad
+        raise NotImplementedError
+
+    @property
     def collection_name(self):
         # identificador univoco de la entidad
         return self._collection_name

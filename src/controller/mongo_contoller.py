@@ -4,7 +4,9 @@ from datetime import datetime
 from bson.objectid import ObjectId
 
 
+
 class MongoVersionController(MongoAireGas):
+
     _instance = AireGas
     '''
     Clase para satisfacer las necesidades del versionado

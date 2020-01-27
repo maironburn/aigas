@@ -51,6 +51,8 @@ if __name__ == '__main__':
     start_time = time.time()
     module = import_module("common_config")
     num_arguments = len(sys.argv)
+    mongolo = MongoVersionController(**{'connection_type': 'atlas'})
+
 
     if num_arguments == 1: # iniciado desde cron, no hay argumentos de entrada
         mongolo = MongoVersionController(**{'connection_type': 'local'})
