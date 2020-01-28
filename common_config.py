@@ -114,6 +114,8 @@ MONGODB_LOCAL = "mongodb://{}:{}".format(DATA_LOCAL['host'], DATA_LOCAL['port'],
 MONGODB_ATLAS = "mongodb+srv://{}:{}@{}".format(ATLAS_DATA['user'], ATLAS_DATA['pwd'], ATLAS_DATA['host'],
                                                 ATLAS_DATA['db_name'])
 
+XLXS_CARGA_MASIVA = os.path.join(os.path.join(ROOT_DIR, 'plantilla_carga_masiva'), 'PlantillaLanzamientoManual.xlsx')
+
 # URL API REST
 # ENDPOINT_URL = 'https://swapi.co/api/'
 

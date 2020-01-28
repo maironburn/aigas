@@ -1,0 +1,74 @@
+{
+  "TasaMolecula": {
+    "From": 1577836800000,
+    "To": 1580515200000,
+    "FromLastModified": "",
+    "ToLastModified": "",
+    "ListCode": "",
+    "CLI": "CLI003,CLI054,CLI055,CLI061"
+  },
+  "PrecioFormula": {
+    "From": 1577923200000,
+    "To": 1580601600000,
+    "FromLastModified": null,
+    "ToLastModified": null,
+    "ListCode": null,
+    "CLI": null
+  },
+  "Calendario": {
+    "From": 1578009600000,
+    "To": 1580688000000,
+    "FromLastModified": null,
+    "ToLastModified": null,
+    "ListCode": null,
+    "CLI": null
+  },
+  "Prevision": {
+    "From": 1578096000000,
+    "To": 1580774400000,
+    "FromLastModified": null,
+    "ToLastModified": null,
+    "ListCode": null,
+    "CLI": null
+  },
+  "Nominacion": {
+    "From": 1578182400000,
+    "To": 1580860800000,
+    "FromLastModified": null,
+    "ToLastModified": null,
+    "ListCode": null,
+    "CLI": null
+  },
+  "5": {
+    "From": 1578182400000,
+    "To": 1580947200000,
+    "FromLastModified": null,
+    "ToLastModified": null,
+    "ListCode": null,
+    "CLI": null
+  },
+  "6": {
+    "From": 1578268800000,
+    "To": 1580947200000,
+    "FromLastModified": null,
+    "ToLastModified": null,
+    "ListCode": null,
+    "CLI": null
+  },
+  "7": {
+    "From": 1578355200000,
+    "To": 1581033600000,
+    "FromLastModified": null,
+    "ToLastModified": null,
+    "ListCode": null,
+    "CLI": null
+  },
+  "8": {
+    "From": 1578441600000,
+    "To": 1581120000000,
+    "FromLastModified": null,
+    "ToLastModified": null,
+    "ListCode": null,
+    "CLI": null
+  }
+}
