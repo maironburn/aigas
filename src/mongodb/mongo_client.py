@@ -41,15 +41,6 @@ class MongoAireGas(object):
         # print("{}".format(inserted_id))
 
     def get_last_update(self):
-
-        """
-        funcion que recupera la fecha de la ultima actualizacion de la entidad
-        para despues consumir en el api rest de airegas
-
-        db.calendar.where("_id").eq("2020010100001").limit(100)
-        db.calendar.find().max(ts)
-        db.calendar.find( ,{max(ts):1} )
-            """
         pass
 
     # <editor-fold desc="Getter/ Setters">
