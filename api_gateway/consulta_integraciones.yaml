@@ -13,6 +13,8 @@ paths:
           description: 'Successfully completed execution'
         '400':
           description: 'Invalid input, object invalid'
+        '404':
+          description: 'Product code not found'
       requestBody:
         content:
           application/json:

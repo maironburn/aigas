@@ -2,7 +2,7 @@ from src.helper.json_helper import get_entity_from_samples
 from src.mongodb.mongo_client import MongoAireGas
 from common_config import *
 from importlib import import_module
-from src.model.calendar.calendar import Calendar
+from src.model.calendar.calendar import Calendario
 from src.model.b70_calendar.b70_calendar import B70_Calendar
 from src.model.atr_amount.atr_amount import Atr_Amount
 from src.model.consumption.consumption import Consumption
@@ -18,7 +18,7 @@ from src.helper.airegasrestconsumer import AiregasRestConsumer
 
 import sys
 
-dict_instances = {'Calendario': Calendar,
+dict_instances = {'Calendario': Calendario,
                   # 'B70_Calendar': B70_Calendar,
                   # 'Atr_Amount': Atr_Amount,
                   # 'Consumption': Consumption,

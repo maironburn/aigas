@@ -19,22 +19,31 @@ from src.controller.mongo_contoller import MongoVersionController
 import time
 import sys
 
-dict_instances = {'Calendario': Calendario,
-                  # 'B70_Calendar': B70_Calendar,
-                  # 'Atr_Amount': Atr_Amount,
-                  # 'Consumption': Consumption,
-                  # 'Night_Consumption': Night_Consumption,
-                  # 'Cli': Cli,
-                  # 'Gas_Quality_Detail': Gas_Quality_Detail,
-                  # 'Nominacion': Nominacion,
-                  # 'Formula_Price': PrecioFormula,
-                  # 'Forecast': Forecast,
-                  # 'Regulated_Price': Regulated_Price,
-                  'TasaMolecula': TasaMolecula
-                  }
+dict_instances_mapper = {'Calendario': Calendario,
+                         # 'B70_Calendar': B70_Calendar,
+                         # 'Atr_Amount': Atr_Amount,
+                         # 'Consumption': Consumption,
+                         # 'Night_Consumption': Night_Consumption,
+                         # 'Cli': Cli,
+                         # 'Gas_Quality_Detail': Gas_Quality_Detail,
+                         # 'Nominacion': Nominacion,
+                         # 'Formula_Price': PrecioFormula,
+                         # 'Forecast': Forecast,
+                         # 'Regulated_Price': Regulated_Price,
+                         'TasaMolecula': TasaMolecula
+                         }
 
 # mapea las clases con sus colecciones en MongoDB para la persistencia
+'''
+si llegan argumentos
+el batch consulta en DocumentDB por la fecha max lastmodified...
+consume la api informando este param en la query, se trae los datos y los persiste en DocumentDB según su lógica de versionado
 
+si no llegan argumentos
+los respectivos .py del batch (q conforman el proceso de cada coleccion) consultan en DocumentDB por la fecha max lastmodified...
+-> consume la api informando este param en la query, se trae los datos y los persiste en DocumentDB según su lógica de versionado
+
+'''
 
 if __name__ == '__main__':
 
@@ -50,7 +59,7 @@ if __name__ == '__main__':
 
         if mongolo.connect_db():
 
-            for k, v in dict_instances.items():
+            for k, v in dict_instances_mapper.items():
 
                 url = "{}/{}".format(LOCAL_ENDPOINT_URL, k)
                 rest_consumer = AiregasRestConsumer(**{'url': url})
