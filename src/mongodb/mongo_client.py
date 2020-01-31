@@ -40,6 +40,19 @@ class MongoAireGas(object):
         #     instance_json).inserted_id
         # print("{}".format(inserted_id))
 
+    def database_exist(self,dbname):
+
+        if self.mongo_con:
+            dbnames = self.mongo_con.list_database_names()
+            if dbname in dbnames:
+                return True
+        return False
+
+
+    def collection_exists(self, collection_name):
+
+        return collection_name in self.db_name.list_collection_names()
+
     def get_last_update(self):
         pass
 
