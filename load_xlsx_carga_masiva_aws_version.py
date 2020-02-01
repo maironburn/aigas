@@ -60,6 +60,33 @@ def do_pandas_job(download_path):
     return None
 
 
+def send_job_to_batch():
+    client = boto3.client('batch')
+
+    logger.info("lambda_invoke_batch")
+    trabajos = ['job_calendar', 'job_nomination']
+    jobQueue = 'test_batch_queue_V1'
+
+    try:
+        # response = client.submit_job(
+        #     jobName='trabajo_test',
+        #     jobQueue='test_batch_queue_V1',
+        #     jobDefinition='calendario:1'
+        # )
+        for j in trabajos:
+            response = client.submit_job(
+                jobName=j,
+                jobQueue=jobQueue,
+                jobDefinition='calendario:1'
+            )
+            logger.info("trabajo :{}, enviado a la cola: {}".format(j, jobQueue))
+        return True
+    except Exception as e:
+        logger.error("Error al despachar los trabajos al Batch: {}".format(e))
+
+    return False
+
+
 def lambda_handler(event, context):
     logger.info("lambda para la carga masiva instanciada")
     s3_client = boto3.client('s3')
@@ -84,6 +111,8 @@ def lambda_handler(event, context):
                   'key': bucket_key}
 
             write_to_s3(**kw)
+            if  not send_job_to_batch():
+                logger.error("Error al enviar los trabajos a Batch")
 
         else:
             logger.error("No se pudo completar el proceso, fichero corrupto: {}".format(key))
