@@ -24,7 +24,7 @@ class BatchController(object):
 
         return False
 
-    def process_carga_masiva(self):
+    def process_data_carga_masiva(self):
         processed_json = {}
         json_masivo = read_s3_bucket(self.bucket, self.key)
         for k, v in json_masivo[self.collection.__name__].items():

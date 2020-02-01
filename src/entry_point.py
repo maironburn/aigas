@@ -18,6 +18,7 @@ from src.helper.airegasrestconsumer import AiregasRestConsumer
 from src.controller.mongo_contoller import MongoVersionController
 import time
 import sys
+import logging
 import boto3
 import os
 from src.helper.aws_helper import *
@@ -69,6 +70,7 @@ Comprobamos si el fichero carga masiva existe en el bucket
 BUCKET_NAME = os.getenv('BUCKET_NAME') or 'liqgas-des'
 FILE = os.getenv('BUCKET_NAME') or 'airegas_carga_masiva_batch.json'
 
+logger = get_aws_logger('aws_bath_logger')
 # def process_carga_masiva(collecion_to_ingest):
 #     json_masivo = read_s3_bucket(BUCKET_NAME, FILE)
 #         if json_masivo and collecion_to_ingest in json_masivo.keys():
@@ -87,12 +89,15 @@ if __name__ == '__main__':
 
     if num_arguments == 2 and set_credentials():  # iniciado desde cron, no hay argumentos de entrada
         collecion_to_ingest = sys.argv[1]
+
+        #comprobacion de q el argumento es valido
         if collecion_to_ingest in dict_instances_mapper.keys():
+            # clase asociada en dict
             instance = dict_instances_mapper[collecion_to_ingest]
             batch_controller = BatchController(**{'bucket': BUCKET_NAME, 'key': FILE, 'collection': instance})
 
             if batch_controller.check_if_carga_masiva():
-                data_to_build_query = batch_controller.process_carga_masiva()
+                data_to_build_query = batch_controller.process_data_carga_masiva()
 
                 '''
                 carga masiva true
