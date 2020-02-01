@@ -2,7 +2,7 @@ import json
 import os
 from importlib import import_module
 import urllib3
-from common_config import URL_BASE
+from common_config import LOCAL_ENDPOINT_URL
 
 
 def get_entity_from_samples(json_sample_file):
@@ -26,6 +26,6 @@ def get_entity_from_rest(from_date, entity):
     }
     '''
     http = urllib3.PoolManager()
-    r = http.request('GET', URL_BASE)
+    r = http.request('GET', LOCAL_ENDPOINT_URL)
 
     return json.loads(r.data.decode('utf-8'))

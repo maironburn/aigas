@@ -11,7 +11,7 @@ class AireGas(object):
     _logger = None
     json_entity_data = None
     is_temporal_sequence = None
-    _last_modified = datetime
+    _maxLastModified = datetime
     _collection_name = None  # coleccion para instancias de nueva creacion | actualizadas
     _collection_name_old = None  # coleccion para historico
 
@@ -31,7 +31,7 @@ class AireGas(object):
             self._id = self.json_entity_data['_id']
             self.ts = self.json_entity_data['ts'] if 'ts' in self.json_entity_data.keys() else 'None'
             #self._last_modified =datetime.now().replace(microsecond=0).isoformat()
-            self._last_modified = self.json_entity_data['last_modified'] if 'last_modified' in self.json_entity_data.keys() else '2020-01-01'
+            self._maxLastModified = self.json_entity_data['last_modified'] if 'last_modified' in self.json_entity_data.keys() else '2020-01-01'
         else:
             print("{} faltan campos en {}".format(self.__class__.__name__,
                                                                json.dumps(self.json_entity_data)))
@@ -40,7 +40,7 @@ class AireGas(object):
     def get_json(self):
         return {#"_id": self._id,
                 #"ts": self.ts,
-                "last_modified": self._last_modified
+                "last_modified": self._maxLastModified
                 }
 
     def get_db_last_update(self):

@@ -32,13 +32,6 @@ class MongoAireGas(object):
 
         return False
 
-    def insert_or_version(self):
-
-        pass
-        # coleccion = collection_mapper[k].lower()
-        # inserted_id = mongo_client.client[coleccion].insert_one(
-        #     instance_json).inserted_id
-        # print("{}".format(inserted_id))
 
     def database_exist(self,dbname):
 

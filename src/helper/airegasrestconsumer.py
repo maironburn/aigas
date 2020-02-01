@@ -11,6 +11,8 @@ class AiregasRestConsumer(object):
     _url = None
     _logger = None
     _http = None
+    _query_params = None
+
 
     def __init__(self, **kwargs):
         self.init_pool_request()
@@ -64,3 +66,14 @@ class AiregasRestConsumer(object):
     def http(self, value):
         if value:
             self._http = value
+
+    @property
+    def query_params(self):
+        return self._query_params
+
+    @http.setter
+    def query_params(self, value):
+        if value:
+            self._query_params = value
+
+

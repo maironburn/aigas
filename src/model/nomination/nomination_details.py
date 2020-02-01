@@ -5,30 +5,29 @@ from src.helper.json_helper import check_field_integrity
 
 
 class Nomination_Details(object):
-    calendar_dates = []  # Array<Date (ISO8601 (yyyy-MM-dd))>
-    nominationVal = []  # Array<Integer>
-
+    day = str
+    expirationDate = str
+    lastModified = str
+    nomination = None
     _logger = None
     json_entity_data = None
 
     def __init__(self, **kw):
-
         self.json_entity_data = kw.get('entity_data', None)
-        #self._logger = AppLogger.create_rotating_log() if not kw.get('logger') else kw.get('logger')
+        # self._logger = AppLogger.create_rotating_log() if not kw.get('logger') else kw.get('logger')
         self.load_data()
 
     def load_data(self):
-        #self._logger.info("Checking fields from entity {}".format(self.__class__.__name__))
+        # self._logger.info("Checking fields from entity {}".format(self.__class__.__name__))
 
-        if check_field_integrity("{}_FIELDS".format(self.__class__.__name__), self.json_entity_data):
-            self.calendar_dates = self.json_entity_data['calendar_dates']
-            self.nominationVal = self.json_entity_data['nominationVal']
-        else:
-            print("{} faltan campos en {}".format(self.__class__.__name__,
-                                                               json.dumps(self.json_entity_data)))
+        self.day = self.json_entity_data['day']
+        self.expirationDate = self.json_entity_data['expirationDate']
+        self.lastModified = self.json_entity_data['lastModified']
+        self.nomination = self.json_entity_data['nomination']
 
     def get_json(self):
-
-        return {"calendar_dates": self.calendar_dates,
-                "nominationVal": self.nominationVal
+        return {"day": self.day,
+                "expirationDate": self.expirationDate,
+                "lastModified": self.lastModified,
+                "nomination": self.nomination
                 }

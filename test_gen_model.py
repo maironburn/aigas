@@ -1,7 +1,7 @@
 from common_config import *
 from src.helper.json_helper import get_entity_from_samples
 from importlib import import_module
-from src.model.calendar.calendar import Calendar
+from src.model.calendar.calendar import Calendario
 from src.model.b70_calendar.b70_calendar import B70_Calendar
 from src.model.atr_amount.atr_amount import Atr_Amount
 from src.model.consumption.consumption import Consumption
@@ -15,7 +15,7 @@ from src.model.regulated_price.regulated_price import Regulated_Price
 from src.model.molecule_tax.molecule_tax import TasaMolecula
 import auger
 
-dict_instances = {'Calendar': Calendar,
+dict_instances = {'Calendar': Calendario,
                   'B70_Calendar': B70_Calendar,
                   'Atr_Amount': Atr_Amount,
                   'Consumption': Consumption,
@@ -46,7 +46,7 @@ if __name__ == "__main__":
  with auger.magic([
      Atr_Amount,
      B70_Calendar,
-     Calendar,
+     Calendario,
      Cli,
      Consumption,
      Night_Consumption,

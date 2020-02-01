@@ -35,13 +35,25 @@ dict_instances_mapper = {'Calendario': Calendario,
 
 # mapea las clases con sus colecciones en MongoDB para la persistencia
 '''
-si llegan argumentos
-el batch consulta en DocumentDB por la fecha max lastmodified...
-consume la api informando este param en la query, se trae los datos y los persiste en DocumentDB según su lógica de versionado
 
 si no llegan argumentos
 los respectivos .py del batch (q conforman el proceso de cada coleccion) consultan en DocumentDB por la fecha max lastmodified...
 -> consume la api informando este param en la query, se trae los datos y los persiste en DocumentDB según su lógica de versionado
+
+
+Logica de la carga masiva / delta
+
+si existe el fichero json de la carga masiva
+Las colecciones que esten informadas consumiran la API a partir de esos datos
+
+Las colecciones no informadas procederan a la mecanica  delta
+-el batch consulta en DocumentDB por la fecha max lastmodified...
+-consume la api informando este param en la query, se trae los datos y los persiste en DocumentDB según su lógica de versionado
+
+
+FINALLY:
+    persistencia en DocumentDB
+
 
 '''
 
@@ -51,7 +63,6 @@ if __name__ == '__main__':
     module = import_module("common_config")
     num_arguments = len(sys.argv)
     mongolo = MongoVersionController(**{'connection_type': 'atlas'})
-
 
     if num_arguments == 1: # iniciado desde cron, no hay argumentos de entrada
         mongolo = MongoVersionController(**{'connection_type': 'local'})
