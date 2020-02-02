@@ -4,8 +4,8 @@ from src.model.calendar.periods import Periods
 
 class Calendario(AireGas):
 
-    calendarCode = str
-    expirationDate = str
+    calendarCode = ''
+    expirationDate = ''
     Periods = []  # lista de periodos
 
     def __init__(self, **kw):
@@ -22,7 +22,7 @@ class Calendario(AireGas):
     def load_periods(self, periods):
         print("Iniciando la carga de {} periodos asociados al calendar ".format(len(periods)))
         for p in periods:
-            self.list_periods.append(Periods(**{'entity_data': p, 'logger': self._logger}))
+            self.Periods.append(Periods(**{'entity_data': p, 'logger': self._logger}))
 
         print("Instanciados {} periodos  ".format(len(self.Periods)))
 
@@ -39,8 +39,9 @@ class Calendario(AireGas):
 
         json_parent = AireGas.get_json(self)
         json_parent.update({
-            "calendar_code": self.calendarCode,
-            "list_periods": self.get_periods()
+            #'maxLastModified' : self._maxLastModified,
+            "calendarCode": self.calendarCode,
+            "periods": self.get_periods()
         })
         return json_parent
 

@@ -27,20 +27,17 @@ class AireGas(object):
 
     def load_data(self):
         print("Comprobando la integridad de la entidad {}".format(self.__class__.__name__))
-        if check_field_integrity("{}_FIELDS".format(self.__class__.__name__), self.json_entity_data):
-            self._id = self.json_entity_data['_id']
-            self.ts = self.json_entity_data['ts'] if 'ts' in self.json_entity_data.keys() else 'None'
-            #self._last_modified =datetime.now().replace(microsecond=0).isoformat()
-            self._maxLastModified = self.json_entity_data['last_modified'] if 'last_modified' in self.json_entity_data.keys() else '2020-01-01'
-        else:
-            print("{} faltan campos en {}".format(self.__class__.__name__,
-                                                               json.dumps(self.json_entity_data)))
+
+        self._id = self.json_entity_data['_id']
+        self.ts = self.json_entity_data['ts'] if 'ts' in self.json_entity_data.keys() else 'None'
+        #self._last_modified =datetime.now().replace(microsecond=0).isoformat()
+        self._maxLastModified = self.json_entity_data['maxLastModified'] if 'maxLastModified' in self.json_entity_data.keys() else ''
 
     # <editor-fold desc="getter and setters">
     def get_json(self):
         return {#"_id": self._id,
-                #"ts": self.ts,
-                "last_modified": self._maxLastModified
+                "ts": self.ts,
+                "maxLastModified": self._maxLastModified
                 }
 
     def get_db_last_update(self):

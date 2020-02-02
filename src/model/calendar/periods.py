@@ -34,9 +34,11 @@ class Periods(object):
         self.active = self.json_entity_data['active']
 
     def get_json(self):
-        return {"id_period": self.idPeriod,
+        return {"idPeriod": self.idPeriod,
                 "from": self.From,
                 "to": self.To,
-                "calendar_dates": self.calendarDates,
+                "calendarDates": self.calendarDates,
+                "dates" : self.dates,
+                "lastModified" : self.lastModified,
                 "active": self.active
                 }

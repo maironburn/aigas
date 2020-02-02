@@ -24,6 +24,7 @@ import os
 from src.helper.aws_helper import *
 from src.controller.batch_controller import BatchController
 
+
 dict_instances_mapper = {'Calendario': Calendario
                          # 'B70_Calendar': B70_Calendar,
                          # 'Atr_Amount': Atr_Amount,
@@ -69,17 +70,8 @@ Comprobamos si el fichero carga masiva existe en el bucket
 
 BUCKET_NAME = os.getenv('BUCKET_NAME') or 'liqgas-des'
 FILE = os.getenv('BUCKET_NAME') or 'airegas_carga_masiva_batch.json'
-
-logger = get_aws_logger('aws_bath_logger')
-# def process_carga_masiva(collecion_to_ingest):
-#     json_masivo = read_s3_bucket(BUCKET_NAME, FILE)
-#         if json_masivo and collecion_to_ingest in json_masivo.keys():
-#             if is_informated_collection(json_masivo[collecion_to_ingest]):
-#                 json_collection = json_masivo[collecion_to_ingest]
-#
-#                 print("ou yeah")
-#                 return True
-
+DOCUMENTDB_URL= os.getenv('DOCUMENTDB_URL')
+DATABASE= os.getenv('DATABASE')
 
 if __name__ == '__main__':
 
@@ -87,7 +79,7 @@ if __name__ == '__main__':
     module = import_module("common_config")
     num_arguments = len(sys.argv)
 
-    if num_arguments == 2 and set_credentials():  # iniciado desde cron, no hay argumentos de entrada
+    if num_arguments == 2 and set_credentials():
         collecion_to_ingest = sys.argv[1]
 
         #comprobacion de q el argumento es valido
@@ -96,16 +88,38 @@ if __name__ == '__main__':
             instance = dict_instances_mapper[collecion_to_ingest]
             batch_controller = BatchController(**{'bucket': BUCKET_NAME, 'key': FILE, 'collection': instance})
 
-            if batch_controller.check_if_carga_masiva():
-                data_to_build_query = batch_controller.process_data_carga_masiva()
+            mongolo = MongoVersionController(**{'DOCUMENTDB_URL': DOCUMENTDB_URL, 'DATABASE': DATABASE})
+            if mongolo.connect_db():
+                # se comprueba si existe en S3 el ficero json de carga masiva
+                if batch_controller.check_if_carga_masiva():
+                    # se procesan los datos del json de carga masiva relativos a la colleccion que entra como argumento
+                    data_to_build_query = batch_controller.process_data_carga_masiva()
+                    url = "{}/{}".format(LOCAL_ENDPOINT_URL, instance.__name__)
+                    # construccion de la query para consumir de AireGas
+                    rest_consumer = AiregasRestConsumer(**{'url': url})
+                    response = rest_consumer.query_for_api_rest(**data_to_build_query)
+                    if isinstance(response, list):
+                        # insercion de DocumentDB de la coleccion recuperada del API
+                        for elements in response:
+                            collection_entity = instance(**{'entity_data': elements})
+                            mongolo.instance = collection_entity
+                            instance_json = collection_entity.get_json()
+                            inserted_id=mongolo.insert_or_version()
+                            print("Insercion en Document DB, coleccion: {} , id: {}".format(instance.__name__, inserted_id))
+                    else:
+                        print("Sin acesso a  la API, url : {}".format(url))
+                else:
+                    print ("Modo Delta")
 
-                '''
-                carga masiva true
-                read data from json to get params to build query to consume airegas API
-                '''
+            else:
+                print ("Sin conexion a la base de datos, URL: {}, Database: {}".format(DOCUMENTDB_URL, DATABASE))
+                # consulta por lastModified
+                # consume APi
+                # persiste
+                pass
 
-            mongolo = MongoVersionController(**{'connection_type': 'atlas'})
-
+        else:
+            print("Batch no pudo iniciarse, Argumento no reconocido: {}".format(sys.argv[1]))
     #
     #
     #

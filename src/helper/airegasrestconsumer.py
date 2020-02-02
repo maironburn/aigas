@@ -40,10 +40,10 @@ class AiregasRestConsumer(object):
 
         return False
 
-    def get_last_modifications_from_api_rest(self, _from='2020-01-01'):
+    def query_for_api_rest(self, **query_prams):
         try:
 
-            r = self.http.request('GET', self.url, fields={'from': _from})
+            r = self.http.request('GET', self.url, fields=query_prams)
             print("Connection to {} successful".format(self.url))
             return json.loads(r.data.decode('utf-8'))
         except Exception as e:

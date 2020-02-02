@@ -111,7 +111,7 @@ def lambda_handler(event, context):
                   'key': bucket_key}
 
             write_to_s3(**kw)
-            if  not send_job_to_batch():
+            if not send_job_to_batch():
                 logger.error("Error al enviar los trabajos a Batch")
 
         else:

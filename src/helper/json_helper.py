@@ -3,7 +3,7 @@ import os
 from importlib import import_module
 import urllib3
 from common_config import LOCAL_ENDPOINT_URL
-
+import datetime
 
 def get_entity_from_samples(json_sample_file):
     if os.path.exists(json_sample_file):
@@ -18,6 +18,13 @@ def check_field_integrity(fields_to_check, json_entity_data):
         if i not in json_entity_data.keys():
             return False
     return True
+
+def valid_date(datestring):
+    try:
+        datetime.datetime.strptime(datestring, '%Y-%m-%d')
+        return True
+    except ValueError:
+        return False
 
 
 def get_entity_from_rest(from_date, entity):

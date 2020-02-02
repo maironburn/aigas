@@ -18,13 +18,14 @@ class MongoAireGas(object):
         self._logger = AppLogger.create_rotating_log() if not kwargs.get('logger') else kwargs.get('logger')
         self._logger.info("Iniciando {}".format(self.__class__.__name__))
         # db_data = kwargs if kwargs and isinstance(kwargs, dict) else MONGODB_TESTl
-        self.connection_string = MONGODB_LOCAL if kwargs.get('connection_type') == 'local' else MONGODB_ATLAS
+        self.connection_string = kwargs.get('DOCUMENTDB_URL')
+        self.db_name = kwargs.get('DATABASE')
 
-    def connect_db(self, db_name='db_test'):
+    def connect_db(self):
         try:
             mongo_con = MongoClient(self.connection_string)
             self._logger.info("connect_db: Succesful Connection ")
-            self._client = mongo_con[db_name]
+            self.client = mongo_con[self.db_name]
             return True
 
         except Exception as e:
