@@ -6,7 +6,7 @@ class Calendario(AireGas):
 
     calendarCode = ''
     expirationDate = ''
-    Periods = []  # lista de periodos
+    Periods = []
 
     def __init__(self, **kw):
         super().__init__(**kw)

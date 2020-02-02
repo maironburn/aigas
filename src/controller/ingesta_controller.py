@@ -5,16 +5,14 @@ from logger.app_logger import AppLogger
 
 
 class IngestaController(object):
-
-
     _db_client = None
     _api_consumer = None
-    _logger  = None
+    _logger = None
 
     def __init__(self, **kw):
         self._logger = AppLogger.create_rotating_log() if not kw.get('logger') else kw.get('logger')
 
-        if kw.get ('db_client') and kw.get ('api_client'):
+        if kw.get('db_client') and kw.get('api_client'):
             self._db_client = kw.get('db_client')
             self._api_consumer = kw.get('api_client')
 

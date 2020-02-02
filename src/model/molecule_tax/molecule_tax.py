@@ -2,11 +2,11 @@ from src.model.airegas_base import AireGas
 
 
 class TasaMolecula(AireGas):
-    taxCode = None  # String
-    taxDes = None  # String
-    From = None  # Date (ISO8601 (yyyy-MM-dd))
-    To = None  # Date (ISO8601 (yyyy-MM-dd))
-    taxVal = None  # Integer
+    taxCode = None
+    taxDes = None
+    From = None
+    To = None
+    taxVal = None
 
     def __init__(self, **kw):
         super().__init__(**kw)

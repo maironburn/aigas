@@ -25,7 +25,8 @@ def do_pandas_job(download_path):
 
     df = pd.read_excel(download_path)
     logger.info("EXCEL leido de {}".format(download_path))
-    df = df.loc[:12, 'colecciones':'ListCode'].astype('str')  # filtro columnas
+    # filtro columnas
+    df = df.loc[:12, 'colecciones':'ListCode'].astype('str')
     logger.info("EXCEL sliced")
     df = df.rename(index=pandas_row_mapper)
     logger.info("Renombrado de rows")

@@ -49,9 +49,9 @@ class MongoVersionController(MongoAireGas):
                     {'activo_hasta': str(datetime.now().replace(microsecond=0).isoformat().replace('T', ' '))})
                 self.client[info_db_dict['version_collection']].insert_one(element)
 
-                print("Borrando {} con id: {} a {}".format(self.instance.__class__.__name__,
+                print("Borrando {} con id: {} de {}".format(self.instance.__class__.__name__,
                                                            element['_id'],
-                                                           info_db_dict['version_collection']))
+                                                           info_db_dict['collection']))
                 self.client[info_db_dict['collection']].delete_one({'_id': ObjectId(element['_id'])})
 
             return self.client[info_db_dict['collection']].insert_one(self.instance.get_json()).inserted_id

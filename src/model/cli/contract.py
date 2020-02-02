@@ -5,11 +5,11 @@ from src.helper.json_helper import check_field_integrity
 
 
 class Contract(object):
-    CounterPartyName = None  # String
-    CounterPartyDocNumber = None  # String
-    clientName = None  # String
-    connectionPoint = []  # String
-    startDate = []  # String
+    counter_party_name = None  # String
+    counter_party_doc_number = None  # String
+    client_name = None  # String
+    connection_point = []  # String
+    start_date = []  # String
     active = None  # Integer
     portfolio = None  # String
     broker = None  # String
@@ -29,11 +29,11 @@ class Contract(object):
         self._logger.info("Checking fields from entity {}".format(self.__class__.__name__))
 
         if check_field_integrity("{}_FIELDS".format(self.__class__.__name__), self.json_entity_data):
-            self.CounterPartyName = self.json_entity_data['CounterPartyName']
-            self.CounterPartyDocNumber = self.json_entity_data['CounterPartyDocNumber']
-            self.clientName = self.json_entity_data['clientName']
-            self.connectionPoint = self.json_entity_data['connectionPoint']
-            self.startDate = self.json_entity_data['startDate']
+            self.counter_party_name = self.json_entity_data['CounterPartyName']
+            self.counter_party_doc_number = self.json_entity_data['CounterPartyDocNumber']
+            self.client_name = self.json_entity_data['clientName']
+            self.connection_point = self.json_entity_data['connectionPoint']
+            self.start_date = self.json_entity_data['startDate']
             self.active = self.json_entity_data['active']
             self.portfolio = self.json_entity_data['portfolio']
             self.broker = self.json_entity_data['broker']
@@ -45,11 +45,11 @@ class Contract(object):
 
     def get_json(self):
 
-        return {"CounterPartyName": self.CounterPartyName,
-                "CounterPartyDocNumber": self.CounterPartyDocNumber,
-                "clientName": self.clientName,
-                "connectionPoint": self.connectionPoint,
-                "startDate": self.startDate,
+        return {"CounterPartyName": self.counter_party_name,
+                "CounterPartyDocNumber": self.counter_party_doc_number,
+                "clientName": self.client_name,
+                "connectionPoint": self.connection_point,
+                "startDate": self.start_date,
                 "active": self.active,
                 "portfolio": self.portfolio,
                 "broker": self.broker,

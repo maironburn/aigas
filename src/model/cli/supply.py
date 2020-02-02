@@ -5,10 +5,10 @@ from src.helper.json_helper import check_field_integrity
 
 
 class Supply(object):
-    CUPS = None  # String
+    cups = None  # String
     address = None  # String
     locality = None  # String
-    postalCode = []  # String
+    postal_code = []  # String
     position = []  # String
 
     _logger = None
@@ -24,10 +24,10 @@ class Supply(object):
         self._logger.info("Checking fields from entity {}".format(self.__class__.__name__))
 
         if check_field_integrity("{}_FIELDS".format(self.__class__.__name__), self.json_entity_data):
-            self.CUPS = self.json_entity_data['CUPS']
+            self.cups = self.json_entity_data['CUPS']
             self.address = self.json_entity_data['address']
             self.locality = self.json_entity_data['locality']
-            self.postalCode = self.json_entity_data['postalCode']
+            self.postal_code = self.json_entity_data['postalCode']
             self.position = self.json_entity_data['position']
         else:
             self._logger.error("{} faltan campos en {}".format(self.__class__.__name__,
@@ -35,9 +35,9 @@ class Supply(object):
 
     def get_json(self):
 
-        return {"CUPS": self.CUPS,
+        return {"CUPS": self.cups,
                 "address": self.address,
                 "locality": self.locality,
-                "postalCode": self.postalCode,
+                "postalCode": self.postal_code,
                 "position": self.position
                 }

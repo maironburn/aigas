@@ -1,27 +1,30 @@
-import json
 from datetime import datetime
 from common_config import collection_mapper
-from logger.app_logger import AppLogger
-from src.helper.json_helper import check_field_integrity
 
 
 class AireGas(object):
-    _id = None  # String
-    ts = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
+    '''
+    Clase base de todas las colecciones de la ingesta de Datos (airegas)
+    '''
+
+    _id = None
+    ts = None
     _logger = None
     json_entity_data = None
     is_temporal_sequence = None
-    _maxLastModified = datetime
-    _collection_name = None  # coleccion para instancias de nueva creacion | actualizadas
-    _collection_name_old = None  # coleccion para historico
+    _max_last_modified = datetime
+    # coleccion para instancias de nueva creacion | actualizadas
+    _collection_name = None
+    # coleccion para historico
+    _collection_name_old = None
 
     def __init__(self, **kw):
 
         self.json_entity_data = kw.get('entity_data', None)
-        #self._logger = AppLogger.create_rotating_log() if not kw.get('logger') else kw.get('logger')
+
         if isinstance(self.json_entity_data, dict):
             print("Loading data {} from json".format(self.__class__.__name__))
-            self.collection_name ="{}".format(collection_mapper[self.__class__.__name__]).lower()
+            self.collection_name = "{}".format(collection_mapper[self.__class__.__name__]).lower()
             self.collection_name_old = "{}_old".format(collection_mapper[self.__class__.__name__]).lower()
             self.load_data()
 
@@ -30,18 +33,16 @@ class AireGas(object):
 
         self._id = self.json_entity_data['_id']
         self.ts = self.json_entity_data['ts'] if 'ts' in self.json_entity_data.keys() else 'None'
-        #self._last_modified =datetime.now().replace(microsecond=0).isoformat()
-        self._maxLastModified = self.json_entity_data['maxLastModified'] if 'maxLastModified' in self.json_entity_data.keys() else ''
+        self._max_last_modified = self.json_entity_data['maxLastModified'] \
+            if 'maxLastModified' in self.json_entity_data.keys() else ''
 
     # <editor-fold desc="getter and setters">
     def get_json(self):
-        return {#"_id": self._id,
-                "ts": self.ts,
-                "maxLastModified": self._maxLastModified
-                }
+        return {
+            "ts": self.ts,
+            "maxLastModified": self._max_last_modified
+        }
 
-    def get_db_last_update(self):
-        print("todo")
 
     @property
     def unique(self):

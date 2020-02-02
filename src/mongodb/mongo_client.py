@@ -17,7 +17,6 @@ class MongoAireGas(object):
     def __init__(self, **kwargs):
         self._logger = AppLogger.create_rotating_log() if not kwargs.get('logger') else kwargs.get('logger')
         self._logger.info("Iniciando {}".format(self.__class__.__name__))
-        # db_data = kwargs if kwargs and isinstance(kwargs, dict) else MONGODB_TESTl
         self.connection_string = kwargs.get('DOCUMENTDB_URL')
         self.db_name = kwargs.get('DATABASE')
 

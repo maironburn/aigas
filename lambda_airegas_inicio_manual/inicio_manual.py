@@ -25,7 +25,8 @@ def do_pandas_job(path_file):
         logger.info("do_pandas_job  ")
         df = pd.read_excel(path_file)
         logger.info("EXCEL leido de {}".format(path_file))
-        df = df.loc[:12, 'colecciones':'ListCode'].astype('str')  # filtro columnas
+        # filtro columnas
+        df = df.loc[:12, 'colecciones':'ListCode'].astype('str')
         logger.info("EXCEL sliced")
         df = df.rename(index=pandas_row_mapper)
         logger.info("Renombrado de rows")
@@ -41,7 +42,6 @@ def do_pandas_job(path_file):
 
 
 def lambda_handler(event, context):
-    # TODO implement
     logger.info("lambda para la carga masiva instanciada")
 
     s3_client = boto3.client('s3')

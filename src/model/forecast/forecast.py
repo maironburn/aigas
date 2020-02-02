@@ -1,12 +1,12 @@
 from src.model.airegas_base import AireGas
-from src.model.forecast.forecast_details import Forecast_Details
+from src.model.forecast.forecastdetails import ForecastDetails
 
 
 class Forecast(AireGas):
     CLI = str
     _cli = str
     unidad = str
-    prevision = {}  # segun modelo funcional es un objeto y no una matriz, e.d, relacion 1:1
+    prevision = {}
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -19,7 +19,7 @@ class Forecast(AireGas):
         prevision and self.load_prevision(prevision)
 
     def load_prevision(self, prevision):
-        self.prevision = Forecast_Details(**{'entity_data': prevision, 'logger': self._logger})
+        self.prevision = ForecastDetails(**{'entity_data': prevision, 'logger': self._logger})
 
     def get_prevision(self):
         return self.prevision.get_json()

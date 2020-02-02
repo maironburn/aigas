@@ -28,10 +28,7 @@ def valid_date(datestring):
 
 
 def get_entity_from_rest(from_date, entity):
-    '''
-   params = {
-    }
-    '''
+
     http = urllib3.PoolManager()
     r = http.request('GET', LOCAL_ENDPOINT_URL)
 

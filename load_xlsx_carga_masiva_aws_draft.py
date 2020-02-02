@@ -4,12 +4,8 @@ import boto3
 import logging
 import uuid
 from urllib.parse import unquote_plus
-# from src.helper.aws_helper import write_to_s3
 import os
 from aws_logging_handlers.S3 import S3Handler
-
-# logger = logging.getLogger()
-# logger.setLevel(logging.INFO)
 
 bucket_key = os.getenv('BUCKET_KEY_MASSIVE')
 bucket_key_cli = os.getenv('BUCKET_KEY_CLI')
@@ -17,7 +13,6 @@ log_bucket = os.getenv('LOG_BUCKET_NAME')
 
 
 def get_aws_logger(log_file_name):
-
     s3_handler = S3Handler(log_file_name, log_bucket)
     formatter = logging.Formatter('[%(asctime)s] %(filename)s:%(lineno)d} %(levelname)s - %(message)s')
     s3_handler.setFormatter(formatter)
@@ -27,11 +22,12 @@ def get_aws_logger(log_file_name):
 
     return logger
 
-pandas_row_mapper = {0: 'TasaMoleAcula', 1: 'PrecioFormula', 2: 'Calendario', 3: 'Prevision',
+
+pandas_row_mapper = {0: 'TasaMolecula', 1: 'PrecioFormula', 2: 'Calendario', 3: 'Prevision',
                      4: 'Nominacion', 5: 'precio', 6: 'CLI', 7: 'Consumo', 8: 'Calidad_gas', 9: 'calendariob70',
                      10: 'importeAtr', 11: 'Coeficiente', 12: 'idContract'}
 
-logger= get_aws_logger("test_aws_log")
+logger = get_aws_logger("test_aws_log")
 
 
 def write_to_s3(**kwargs):
@@ -44,7 +40,7 @@ def write_to_s3(**kwargs):
 def do_pandas_job(download_path):
     df = pd.read_excel(download_path)
     logger.info("EXCEL leido de {}".format(download_path))
-    df = df.loc[:12, 'colecciones':'ListCode'].astype('str')  # filtro columnas
+    df = df.loc[:12, 'colecciones':'ListCode'].astype('str')
     logger.info("EXCEL sliced")
     df = df.rename(index=pandas_row_mapper)
     logger.info("Renombrado de rows")

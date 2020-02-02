@@ -5,9 +5,9 @@ from src.model.cli.supply import Supply
 
 
 class Cli(AireGas):
-    CLI = None  # String
-    StartDate = None  # Date (ISO8601 (yyyy-MM-dd))
-    EndDate = None  # Date (ISO8601 (yyyy-MM-dd))
+    CLI = None
+    StartDate = None
+    EndDate = None
     invoice = {}
     supply = {}
     contract = {}

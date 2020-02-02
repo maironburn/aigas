@@ -1,15 +1,16 @@
 from src.model.airegas_base import AireGas
 
 
+
 class Consumption(AireGas):
-    CLI = None  # String
-    dates = None  # Array<Date (ISO8601 (yyyy-MM-dd))>
-    origin = None  # Array<String>
-    qd = None  # Array<Integer>
-    qdElec = None  # Array<Integer>
-    qdTerm = None  # Array<Integer>
-    qdRed = None  # Array<Integer>
-    qdSupRed = None  # Array<Integer>
+    CLI = None
+    dates = None
+    origin = None
+    qd = None
+    qdElec = None
+    qdTerm = None
+    qdRed = None
+    qdSupRed = None
 
     def __init__(self, **kw):
         super().__init__(**kw)

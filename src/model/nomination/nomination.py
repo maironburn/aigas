@@ -4,8 +4,8 @@ from src.model.nomination.nomination_details import Nomination_Details
 
 class Nominacion(AireGas):
 
-    idContract = str  # String
-    nominations = {}  # segun modelo funcional es un objeto y no una matriz, e.d, relacion 1:1
+    idContract = str
+    nominations = {}
     unit = str
 
     def __init__(self, **kw):

@@ -1,10 +1,11 @@
 from src.model.airegas_base import AireGas
 
 
-class B70_Calendar(AireGas):
-    CLI = None  # String
-    From = None  # Date (ISO8601 (yyyy-MM-dd))
-    To = None  # Date (ISO8601 (yyyy-MM-dd))
+class NightConsumption(AireGas):
+    CLI = None
+    dates = None
+    origin = None
+    qd = None
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -13,16 +14,17 @@ class B70_Calendar(AireGas):
     def load_data(self):
         super().load_data()
         self.CLI = self.json_entity_data['CLI']
-        self.From = self.json_entity_data['from']
-        self.To = self.json_entity_data['to']
+        self.dates = self.json_entity_data['dates']
+        self.origin = self.json_entity_data['origin']
+        self.qd = self.json_entity_data['qd']
 
-    # <editor-fold desc="getter and setters">
     def get_json(self):
         json_parent = AireGas.get_json(self)
         json_parent.update({
             "CLI": self.CLI,
-            "from": self.From,
-            "to": self.To,
+            "dates": self.dates,
+            "origin": self.origin,
+            "qd": self.qd
         })
         return json_parent
 
@@ -30,3 +32,8 @@ class B70_Calendar(AireGas):
     def unique(self):
         # identificador univoco de la entidad
         return self.CLI
+
+    @property
+    def unique_str(self):
+        # identificador univoco de la entidad
+        return "CLI"

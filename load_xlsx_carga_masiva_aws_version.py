@@ -4,7 +4,6 @@ import boto3
 import logging
 import uuid
 from urllib.parse import unquote_plus
-# from src.helper.aws_helper import write_to_s3
 import os
 from aws_logging_handlers.S3 import S3Handler
 
@@ -43,7 +42,7 @@ def do_pandas_job(download_path):
 
         df = pd.read_excel(download_path)
         logger.info("EXCEL leido de {}".format(download_path))
-        df = df.loc[:12, 'colecciones':'ListCode'].astype('str')  # filtro columnas
+        df = df.loc[:12, 'colecciones':'ListCode'].astype('str')
         logger.info("EXCEL sliced")
         df = df.rename(index=pandas_row_mapper)
         logger.info("Renombrado de rows")
@@ -65,21 +64,17 @@ def send_job_to_batch():
 
     logger.info("lambda_invoke_batch")
     trabajos = ['job_calendar', 'job_nomination']
-    jobQueue = 'test_batch_queue_V1'
+    job_queue = 'test_batch_queue_V1'
 
     try:
-        # response = client.submit_job(
-        #     jobName='trabajo_test',
-        #     jobQueue='test_batch_queue_V1',
-        #     jobDefinition='calendario:1'
-        # )
+
         for j in trabajos:
-            response = client.submit_job(
+            client.submit_job(
                 jobName=j,
-                jobQueue=jobQueue,
+                jobQueue=job_queue,
                 jobDefinition='calendario:1'
             )
-            logger.info("trabajo :{}, enviado a la cola: {}".format(j, jobQueue))
+            logger.info("trabajo :{}, enviado a la cola: {}".format(j, job_queue))
         return True
     except Exception as e:
         logger.error("Error al despachar los trabajos al Batch: {}".format(e))

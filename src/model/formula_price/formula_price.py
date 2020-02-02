@@ -3,14 +3,14 @@ from src.model.formula_price.prices import Prices
 
 
 class PrecioFormula(AireGas):
-    formulaCode = None  # String
-    formulaDes = None  # String
-    From = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
-    To = None  # DateTime (ISO8601 (yyyy-MM-ddThh:mm:ss))
-    compoundIndex = []  # Array<String>
+    formula_code = None
+    formula_des = None
+    _from = None
+    _to = None
+    compound_index = []
     unidad = str
-    divisia = str
-    prices = {}  # segun modelo funcional es un objeto y no una matriz, e.d, relacion 1:1
+    divisa = str
+    prices = {}
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -18,11 +18,11 @@ class PrecioFormula(AireGas):
 
     def load_data(self):
         super().load_data()
-        self.formulaCode = self.json_entity_data['formulaCode']
-        self.formulaDes = self.json_entity_data['formulaDes']
-        self.From = self.json_entity_data['from']
-        self.To = self.json_entity_data['to']
-        self.compoundIndex = self.json_entity_data['compoundIndex']
+        self.formula_code = self.json_entity_data['formulaCode']
+        self.formula_des = self.json_entity_data['formulaDes']
+        self._from = self.json_entity_data['from']
+        self._to = self.json_entity_data['to']
+        self.compound_index = self.json_entity_data['compoundIndex']
         prices = self.json_entity_data["prices"]
 
         prices and self.load_prices(prices)
@@ -40,11 +40,11 @@ class PrecioFormula(AireGas):
         json_parent = AireGas.get_json(self)
 
         json_parent.update({
-            "formulaCode": self.formulaCode,
-            "formulaDes": self.formulaDes,
-            "from": self.From,
-            "to": self.To,
-            "compoundIndex": self.compoundIndex,
+            "formulaCode": self.formula_code,
+            "formulaDes": self.formula_des,
+            "from": self._from,
+            "to": self._to,
+            "compoundIndex": self.compound_index,
             "prices": self.get_prices()
         })
         return json_parent
@@ -52,7 +52,7 @@ class PrecioFormula(AireGas):
     @property
     def unique(self):
         # identificador univoco de la entidad
-        return self.formulaCode
+        return self.formula_code
 
 
     @property

@@ -3,12 +3,12 @@ from src.mongodb.mongo_client import MongoAireGas
 from common_config import *
 from importlib import import_module
 from src.model.calendar.calendar import Calendario
-from src.model.b70_calendar.b70_calendar import B70_Calendar
-from src.model.atr_amount.atr_amount import Atr_Amount
+from src.model.b70_calendar.b70calendar import B70Calendar
+from src.model.atr_amount.atramount import Atr_Amount
 from src.model.consumption.consumption import Consumption
-from src.model.night_consumption.night_consumption import Night_Consumption
+from src.model.night_consumption.nightconsumption import Night_Consumption
 from src.model.cli.cli import Cli
-from src.model.gas_quality_detail.gas_quality_detail import Gas_Quality_Detail
+from src.model.gas_quality_detail.gasqualitydetail import GasQualityDetail
 from src.model.nomination.nomination import Nominacion
 from src.model.formula_price.formula_price import PrecioFormula
 from src.model.forecast.forecast import Forecast

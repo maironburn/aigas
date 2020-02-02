@@ -9,8 +9,8 @@ class Invoice(object):
     name = None  # String
     IBAN = None  # String
     swift = None  # String
-    paymentTerm = None  # String
-    paymentMethod = None  # String
+    payment_term = None  # String
+    payment_method = None  # String
 
     _logger = None
     json_entity_data = None
@@ -29,8 +29,8 @@ class Invoice(object):
             self.name = self.json_entity_data['name']
             self.IBAN = self.json_entity_data['IBAN']
             self.swift = self.json_entity_data['swift']
-            self.paymentTerm = self.json_entity_data['paymentTerm']
-            self.paymentMethod = self.json_entity_data['paymentMethod']
+            self.payment_term = self.json_entity_data['paymentTerm']
+            self.payment_method = self.json_entity_data['paymentMethod']
 
         else:
             self._logger.error("{} faltan campos en {}".format(self.__class__.__name__,
@@ -42,6 +42,6 @@ class Invoice(object):
                 "name": self.name,
                 "IBAN": self.IBAN,
                 "swift": self.swift,
-                "paymentTerm": self.paymentTerm,
-                "paymentMethod": self.paymentMethod
+                "paymentTerm": self.payment_term,
+                "paymentMethod": self.payment_method
                 }

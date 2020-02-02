@@ -1,23 +1,23 @@
 from src.model.airegas_base import AireGas
 
 
-class Gas_Quality_Detail(AireGas):
-    CLI = ""  # String
-    date = []  # Array<Date (ISO8601 (yyyy-MM-dd))>
-    meter = []  # Array<String>
-    detailPCS = []  # Array<Integer>
-    detailPCI = []  # Array<Integer>
-    detailDensity = []  # Array<Integer>
-    detailN2 = []  # Array<Integer>
-    detailPressure = []  # Array<Integer>
-    detailTemp = []  # Array<Integer>
-    detailValueZ = []  # Array<Integer>
-    detailValueK = []  # Array<Integer>
-    detailLectm3 = []  # Array<Integer>
-    detailConsm3 = []  # Array<Integer>
-    detailAdjustementskWh = []  # Array<Integer>
-    detailConskWh = []  # Array<Integer>
-    detailCO2 = []  # Array<Integer>
+class GasQualityDetail(AireGas):
+    CLI = ""
+    date = []
+    meter = []
+    detailPCS = []
+    detailPCI = []
+    detailDensity = []
+    detailN2 = []
+    detailPressure = []
+    detailTemp = []
+    detailValueZ = []
+    detailValueK = []
+    detailLectm3 = []
+    detailConsm3 = []
+    detailAdjustementskWh = []
+    detailConskWh = []
+    detailCO2 = []
 
     def __init__(self, **kw):
         super().__init__(**kw)

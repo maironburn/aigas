@@ -1,9 +1,10 @@
 from src.model.airegas_base import AireGas
 
 
-class Regulated_Price(AireGas):
-    regulatedPriceName = None  # String
-    regulatedDates = []  # Array<Date (ISO8601 (yyyy-MM-dd))>
+class RegulatedPrice(AireGas):
+    regulatedPriceName = None
+    regulatedDates = []
+    regulatedDates = []
     regulatedVal = []  # Array<Integer>
 
     def __init__(self, **kw):

@@ -2,32 +2,33 @@ from common_config import *
 from src.helper.json_helper import get_entity_from_samples
 from importlib import import_module
 from src.model.calendar.calendar import Calendario
-from src.model.b70_calendar.b70_calendar import B70_Calendar
-from src.model.atr_amount.atr_amount import Atr_Amount
+from src.model.b70_calendar.b70calendar import B70Calendar
+from src.model.atr_amount.atramount import AtrAmount
 from src.model.consumption.consumption import Consumption
-from src.model.night_consumption.night_consumption import Night_Consumption
+from src.model.night_consumption.nightconsumption import NightConsumption
 from src.model.cli.cli import Cli
-from src.model.gas_quality_detail.gas_quality_detail import Gas_Quality_Detail
+from src.model.gas_quality_detail.gasqualitydetail import GasQualityDetail
 from src.model.nomination.nomination import Nominacion
 from src.model.formula_price.formula_price import PrecioFormula
 from src.model.forecast.forecast import Forecast
-from src.model.regulated_price.regulated_price import Regulated_Price
+from src.model.regulated_price.regulated_price import RegulatedPrice
 from src.model.molecule_tax.molecule_tax import TasaMolecula
 import auger
 
 dict_instances = {'Calendar': Calendario,
-                  'B70_Calendar': B70_Calendar,
-                  'Atr_Amount': Atr_Amount,
+                  'B70_Calendar': B70Calendar,
+                  'Atr_Amount': AtrAmount,
                   'Consumption': Consumption,
-                  'Night_Consumption' : Night_Consumption,
-                  'Cli' : Cli,
-                  'Gas_Quality_Detail': Gas_Quality_Detail,
-                  'Nomination' : Nominacion,
-                  'Formula_Price' : PrecioFormula,
-                  'Forecast' : Forecast,
-                  'Regulated_Price' : Regulated_Price,
-                  'Molecule_Tax' : TasaMolecula
+                  'Night_Consumption': NightConsumption,
+                  'Cli': Cli,
+                  'Gas_Quality_Detail': GasQualityDetail,
+                  'Nomination': Nominacion,
+                  'Formula_Price': PrecioFormula,
+                  'Forecast': Forecast,
+                  'Regulated_Price': RegulatedPrice,
+                  'Molecule_Tax': TasaMolecula
                   }
+
 
 def main():
     module = import_module("common_config")
@@ -40,21 +41,20 @@ def main():
         print(instance.get_json())
 
 
-
 if __name__ == "__main__":
+    with auger.magic([
+        AtrAmount,
+        B70Calendar,
+        Calendario,
+        Cli,
+        Consumption,
+        NightConsumption,
+        GasQualityDetail,
+        Nominacion,
+        PrecioFormula,
+        Forecast,
+        RegulatedPrice,
+        TasaMolecula
+    ]):
+        main()
 
- with auger.magic([
-     Atr_Amount,
-     B70_Calendar,
-     Calendario,
-     Cli,
-     Consumption,
-     Night_Consumption,
-     Gas_Quality_Detail,
-     Nominacion,
-     PrecioFormula,
-     Forecast,
-     Regulated_Price,
-     TasaMolecula
- ]):   # this is the new line and invokes Auger
-    main()
