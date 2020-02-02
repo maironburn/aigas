@@ -63,8 +63,10 @@ class MongoVersionController(MongoAireGas):
 
         info_db_dict = self.set_collection_info()
         dict_document = self.client[info_db_dict['collection']].find_one(sort=[(last, -1)])
-        print("document with max ({}) value: {}".format(last, dict_document))
-        return dict_document[last]
+        if dict_document:
+            print("document with max ({}) value: {}".format(last, dict_document))
+            return dict_document[last]
+        return None
 
     @property
     def instance(self):

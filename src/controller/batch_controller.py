@@ -44,8 +44,8 @@ class BatchController(object):
     def process_data_carga_masiva(self):
         '''
 
-        Procedemnte de la lectura del son de carga masiva, lee el diccionario correspondiente asociado a la coleccion y
-        procesa los datos para darle el formato adecuado de cara a la posterior construccion de la query para
+        Procedemnte de la lectura del son de carga masiva, lee el diccionario correspondiente asociado a la coleccion
+        y procesa los datos para darle el formato adecuado de cara a la posterior construccion de la query para
         consumir la API de airegas
         :return:
         '''
@@ -77,11 +77,13 @@ class BatchController(object):
         collection_entity = self.instance()
         self.mongo_controller.instance = collection_entity
         last_modified = self.mongo_controller.check_max_last_modified()
-        url = "{}/{}".format(self.end_point_api, self.instance.__name__)
-        rest_consumer = AiregasRestConsumer(**{'url': url})
-        response = rest_consumer.query_for_api_rest(**{'fromLastModified': last_modified})
-
-        self.run_proccess_response_from_api(response, url)
+        if last_modified:
+            url = "{}/{}".format(self.end_point_api, self.instance.__name__)
+            rest_consumer = AiregasRestConsumer(**{'url': url})
+            response = rest_consumer.query_for_api_rest(**{'fromLastModified': last_modified})
+            self.run_proccess_response_from_api(response, url)
+        else:
+            print("No hay ningun campo {} en {}".format( 'fromLastModified',self.instance.__name__))
 
     def run_proccess_response_from_api(self, response, url):
 
