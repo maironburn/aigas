@@ -45,11 +45,12 @@ def check_collection(collecion_to_ingest):
         # clase asociada en dict
         return dict_instances_mapper[collecion_to_ingest]
 
+    print("Argumento/Coleccion no valida: {}".format(collecion_to_ingest))
     return None
 
 
 BUCKET_NAME = os.getenv('BUCKET_NAME') or 'liqgas-des'
-FILE = os.getenv('BUCKET_NAME') or 'airegas_carga_masiva_batch.json'
+FILE = os.getenv('KEY') or 'airegas_carga_masiva_batch.json'
 DOCUMENTDB_URL = os.getenv('DOCUMENTDB_URL')
 DATABASE = os.getenv('DATABASE')
 AIREGAS_ENDPOINT_URL = os.getenv('AIREGAS_ENDPOINT_URL') or 'http://127.0.0.1:8080/'
@@ -62,11 +63,12 @@ if __name__ == '__main__':
 
     if num_arguments == 2 and set_credentials():
         instance = check_collection(sys.argv[1])
-        mongolo = MongoVersionController(**{'DOCUMENTDB_URL': DOCUMENTDB_URL, 'DATABASE': DATABASE})
-        if mongolo.connect_db() and instance:
+        mongo_ver_controller = MongoVersionController(**{'DOCUMENTDB_URL': DOCUMENTDB_URL, 'DATABASE': DATABASE})
+        if instance and mongo_ver_controller.connect_db():
 
             batch_controller = BatchController(
-                **{'bucket': BUCKET_NAME, 'key': FILE, 'instance': instance, 'mongo_version_controller': mongolo,
+                **{'bucket': BUCKET_NAME, 'key': FILE, 'instance': instance,
+                   'mongo_version_controller': mongo_ver_controller,
                    'AIREGAS_ENDPOINT_URL': AIREGAS_ENDPOINT_URL})
             # se comprueba si existe en S3 el ficero json de carga masiva
             if batch_controller.check_if_carga_masiva():
@@ -74,14 +76,11 @@ if __name__ == '__main__':
 
             else:
                 print("Modo Delta")
-
+                batch_controller.do_delta_procedure()
         else:
-            print("Sin conexion a la base de datos, URL: {}, Database: {}".format(DOCUMENTDB_URL, DATABASE))
-            # consulta por lastModified
-            # consume APi
-            # persiste
-
+            print("Argumento invalido o Sin conexion a la base de datos, URL: {}, Database: {}".format(DOCUMENTDB_URL,
+                                                                                                       DATABASE))
     else:
-        print("Batch no pudo iniciarse, Argumento no reconocido: {}".format(sys.argv[1]))
+        print("Batch no pudo iniciarse, numero de Argumentos invalido: {}".format(sys.argv[1]))
 
     print("--- Ejecucion de la carga masiva %s seconds ---" % (time.time() - start_time))

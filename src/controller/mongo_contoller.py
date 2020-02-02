@@ -4,9 +4,7 @@ from datetime import datetime
 from bson.objectid import ObjectId
 
 
-
 class MongoVersionController(MongoAireGas):
-
     _instance = AireGas
     '''
     Clase para satisfacer las necesidades del versionado
@@ -50,8 +48,8 @@ class MongoVersionController(MongoAireGas):
                 self.client[info_db_dict['version_collection']].insert_one(element)
 
                 print("Borrando {} con id: {} de {}".format(self.instance.__class__.__name__,
-                                                           element['_id'],
-                                                           info_db_dict['collection']))
+                                                            element['_id'],
+                                                            info_db_dict['collection']))
                 self.client[info_db_dict['collection']].delete_one({'_id': ObjectId(element['_id'])})
 
             return self.client[info_db_dict['collection']].insert_one(self.instance.get_json()).inserted_id
@@ -61,14 +59,19 @@ class MongoVersionController(MongoAireGas):
 
         return False
 
+    def check_max_last_modified(self, last='maxLastModified'):
 
-@property
-def instance(self):
-    # identificador univoco de la entidad
-    return self._instance
+        info_db_dict = self.set_collection_info()
+        dict_document = self.client[info_db_dict['collection']].find_one(sort=[(last, -1)])
+        print("document with max ({}) value: {}".format(last, dict_document))
+        return dict_document[last]
 
+    @property
+    def instance(self):
+        # identificador univoco de la entidad
+        return self._instance
 
-@instance.setter
-def instance(self, value):
-    if issubclass(value.__class__, AireGas):
-        self._instance = value
+    @instance.setter
+    def instance(self, value):
+        if issubclass(value.__class__, AireGas):
+            self._instance = value

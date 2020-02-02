@@ -21,11 +21,12 @@ class AireGas(object):
     def __init__(self, **kw):
 
         self.json_entity_data = kw.get('entity_data', None)
+        self.collection_name = "{}".format(collection_mapper[self.__class__.__name__]).lower()
+        self.collection_name_old = "{}_old".format(collection_mapper[self.__class__.__name__]).lower()
 
         if isinstance(self.json_entity_data, dict):
             print("Loading data {} from json".format(self.__class__.__name__))
-            self.collection_name = "{}".format(collection_mapper[self.__class__.__name__]).lower()
-            self.collection_name_old = "{}_old".format(collection_mapper[self.__class__.__name__]).lower()
+
             self.load_data()
 
     def load_data(self):
@@ -42,7 +43,6 @@ class AireGas(object):
             "ts": self.ts,
             "maxLastModified": self._max_last_modified
         }
-
 
     @property
     def unique(self):

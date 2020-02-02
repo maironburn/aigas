@@ -70,12 +70,28 @@ class BatchController(object):
         # construccion de la query para consumir de AireGas
         rest_consumer = AiregasRestConsumer(**{'url': url})
         response = rest_consumer.query_for_api_rest(**data_to_build_query)
+        self.run_proccess_response_from_api(response, url)
+
+    def do_delta_procedure(self):
+
+        collection_entity = self.instance()
+        self.mongo_controller.instance = collection_entity
+        last_modified = self.mongo_controller.check_max_last_modified()
+        url = "{}/{}".format(self.end_point_api, self.instance.__name__)
+        rest_consumer = AiregasRestConsumer(**{'url': url})
+        response = rest_consumer.query_for_api_rest(**{'fromLastModified': last_modified})
+
+        self.run_proccess_response_from_api(response, url)
+
+    def run_proccess_response_from_api(self, response, url):
+
         if isinstance(response, list):
             # insercion de DocumentDB de la coleccion recuperada del API
             for elements in response:
                 collection_entity = self.instance(**{'entity_data': elements})
                 self.mongo_controller.instance = collection_entity
                 inserted_id = self.mongo_controller.insert_or_version()
+
                 print("Insercion en Document DB, coleccion: {} , id: {}".format(self.instance.__name__, inserted_id))
 
         else:

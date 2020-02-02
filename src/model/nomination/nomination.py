@@ -1,5 +1,5 @@
 from src.model.airegas_base import AireGas
-from src.model.nomination.nomination_details import Nomination_Details
+from src.model.nomination.nomination_details import NominationDetails
 
 
 class Nominacion(AireGas):
