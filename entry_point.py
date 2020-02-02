@@ -12,7 +12,7 @@ from src.model.gas_quality_detail.gasqualitydetail import GasQualityDetail
 from src.model.nomination.nomination import Nominacion
 from src.model.formula_price.formula_price import PrecioFormula
 from src.model.forecast.forecast import Forecast
-from src.model.regulated_price.regulated_price import Regulated_Price
+from src.model.regulated_price.regulated_price import RegulatedPrice
 from src.model.molecule_tax.molecule_tax import TasaMolecula
 from src.helper.airegasrestconsumer import AiregasRestConsumer
 from src.controller.mongo_contoller import MongoVersionController
