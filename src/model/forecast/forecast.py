@@ -3,9 +3,8 @@ from src.model.forecast.forecastdetails import ForecastDetails
 
 
 class Forecast(AireGas):
-    CLI = str
-    _cli = str
-    unidad = str
+    idContract = str
+    unit = str
     prevision = {}
 
     def __init__(self, **kw):
@@ -14,8 +13,9 @@ class Forecast(AireGas):
 
     def load_data(self):
         super().load_data()
-        self.CLI = self.json_entity_data['CLI']
-        prevision = self.json_entity_data["prevision"]
+        self.idContract = self.json_entity_data['idContract']
+
+        prevision = self.json_entity_data["forecast"]
         prevision and self.load_prevision(prevision)
 
     def load_prevision(self, prevision):
@@ -29,15 +29,16 @@ class Forecast(AireGas):
         json_parent = AireGas.get_json(self)
 
         json_parent.update({
-            "CLI": self.CLI,
-            "prevision": self.get_prevision()
+            "idContract": self.idContract,
+            "unit": self.unit,
+            "forecast": self.get_prevision()
         })
         return json_parent
 
     @property
     def unique(self):
         # identificador univoco de la entidad
-        return self.CLI
+        return self.idContract
 
     @property
     def unique_str(self):

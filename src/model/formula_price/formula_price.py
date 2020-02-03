@@ -5,10 +5,13 @@ from src.model.formula_price.prices import Prices
 class PrecioFormula(AireGas):
     formula_code = None
     formula_des = None
+    currency = None
+    unit = None
+    compound_index = None
+    dailyDetail = []
     _from = None
     _to = None
-    compound_index = []
-    unidad = str
+
     divisa = str
     prices = {}
 
@@ -20,9 +23,13 @@ class PrecioFormula(AireGas):
         super().load_data()
         self.formula_code = self.json_entity_data['formulaCode']
         self.formula_des = self.json_entity_data['formulaDes']
+        self.currency = self.json_entity_data['currency']
+        self.unit = self.json_entity_data['unit']
+        self.compound_index = self.json_entity_data['compoundIndex']
+        self.dailyDetail = self.json_entity_data['dailyDetail']
         self._from = self.json_entity_data['from']
         self._to = self.json_entity_data['to']
-        self.compound_index = self.json_entity_data['compoundIndex']
+
         prices = self.json_entity_data["prices"]
 
         prices and self.load_prices(prices)
@@ -53,7 +60,6 @@ class PrecioFormula(AireGas):
     def unique(self):
         # identificador univoco de la entidad
         return self.formula_code
-
 
     @property
     def unique_str(self):

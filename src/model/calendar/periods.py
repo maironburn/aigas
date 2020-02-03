@@ -22,23 +22,22 @@ class Periods(object):
         self.load_data()
 
     def load_data(self):
-
         self._logger.info("Checking fields from entity {}".format(self.__class__.__name__))
 
         self.id_period = self.json_entity_data['idPeriod']
         self._from = self.json_entity_data['from']
         self._to = self.json_entity_data['to']
-        self.calendar_dates = self.json_entity_data['calendarDates']
-        self.dates = self.json_entity_data['dates']
         self.last_modified = self.json_entity_data['lastModified']
+        self.calendar_dates = self.json_entity_data['calendarDates']
         self.active = self.json_entity_data['active']
+        self.dates = self.json_entity_data['dates']
 
     def get_json(self):
         return {"idPeriod": self.id_period,
                 "from": self._from,
                 "to": self._to,
+                "lastModified": self.last_modified,
                 "calendarDates": self.calendar_dates,
-                "dates" : self.dates,
-                "lastModified" : self.last_modified,
-                "active": self.active
+                "active": self.active,
+                "dates": self.dates
                 }

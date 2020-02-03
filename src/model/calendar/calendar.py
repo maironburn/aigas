@@ -6,7 +6,7 @@ class Calendario(AireGas):
 
     calendarCode = ''
     expirationDate = ''
-    Periods = []
+    periods = []
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -16,20 +16,22 @@ class Calendario(AireGas):
 
         super().load_data()
         self.calendarCode = self.json_entity_data['calendarCode']
-        periods = self.json_entity_data['Periods']
+        self.expirationDate = self.json_entity_data['expirationDate']
+
+        periods = self.json_entity_data['periods']
         periods and self.load_periods(periods)
 
     def load_periods(self, periods):
         print("Iniciando la carga de {} periodos asociados al calendar ".format(len(periods)))
         for p in periods:
-            self.Periods.append(Periods(**{'entity_data': p, 'logger': self._logger}))
+            self.periods.append(periods(**{'entity_data': p, 'logger': self._logger}))
 
-        print("Instanciados {} periodos  ".format(len(self.Periods)))
+        print("Instanciados {} periodos  ".format(len(self.periods)))
 
     def get_periods(self):
 
         periods = []
-        for p in self.Periods:
+        for p in self.periods:
             periods.append(p.get_json())
 
         return periods
@@ -39,8 +41,9 @@ class Calendario(AireGas):
 
         json_parent = AireGas.get_json(self)
         json_parent.update({
-            #'maxLastModified' : self._maxLastModified,
+
             "calendarCode": self.calendarCode,
+            "expirationDate": self.expirationDate,
             "periods": self.get_periods()
         })
         return json_parent
