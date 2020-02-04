@@ -76,23 +76,19 @@ class BatchController(object):
 
         collection_entity = self.instance()
         self.mongo_controller.instance = collection_entity
-        last_modified = self.mongo_controller.check_max_last_modified()
-        if last_modified:
-            url = "{}/{}".format(self.end_point_api, self.instance.__name__)
-            rest_consumer = AiregasRestConsumer(**{'url': url})
-            response = rest_consumer.query_for_api_rest(**{'fromLastModified': last_modified})
-            self.run_proccess_response_from_api(response, url)
-        else:
-            print("No hay ningun campo {} en {}, Colleccion sin documentos o no actualizada con este campo".format('fromLastModified', self.instance.__name__))
+        response = [{"taxCode": "MERMAS", "taxDes": "MERMAS BOE", "from": "2020-06-06", "to": None,
+                              "maxLastModified": "2020-01-27 ", "taxVal": "0.66666"}]
+        # self.run_proccess_response_from_api(response, url)
+        self.run_proccess_response_from_api(response)
 
-    def run_proccess_response_from_api(self, response, url):
+    def run_proccess_response_from_api(self, response):
 
         if isinstance(response, list):
             # insercion de DocumentDB de la coleccion recuperada del API
             for elements in response:
                 collection_entity = self.instance(**{'entity_data': elements})
                 self.mongo_controller.instance = collection_entity
-                inserted_id = self.mongo_controller.insert_or_version()
+                inserted_id = self.mongo_controller.tasa_molec_version()
 
                 print("Insercion en Document DB, coleccion: {} , id: {}".format(self.instance.__name__, inserted_id))
 
