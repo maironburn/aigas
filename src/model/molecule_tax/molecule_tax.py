@@ -7,6 +7,7 @@ class TasaMolecula(AireGas):
     From = None
     To = None
     taxVal = None
+    last_modified = None
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -27,8 +28,8 @@ class TasaMolecula(AireGas):
             "taxDes": self.taxDes,
             "from": self.From,
             "to": self.To,
-            "taxVal": self.taxVal
-
+            "taxVal": self.taxVal,
+            "last_modified": self.last_modified
         })
         return json_parent
 

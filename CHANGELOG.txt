@@ -1,24 +1,32 @@
-- Las collecciones son nombradas de acuerdo a su correspondiente modelo en minúsculas
-- Driver de conexión MongoDB
-- El api de Airegas aun no está operativo, por ello, los datos de entrada son mockeados por los ficheros json incluídos en el modelo de datos
-- String de conexión en common_config.py
-    Para el testeo he usado una MongoDb local
-
-	MONGODB_TEST = {'db_name': "airegas",
-					'host': 'localhost',
-					'port': "27017",
-					'user': '',
-					'pwd': ''
-					}
+## [1.0.0] - 2020-02-01
 
 
-- Este código en su versión final residirá en una imagen de docker
- y a través de la definición de trabajo de Batch AWS se le pasará un parámetro que especifique
- el procesamiento a realizar (ingesta de calendario, consumo nocturno ...etc)
- En esta primer versión tenemos un solo punto de entrada que realiza el procesamiento de todas las
- entidades
+Integraciones actuales:
 
-- Aun no está implementada la lógica de versionado
+    - Tasa Molécula
+    - Previsión
+    - Nominación
+    - Precio Fórmula
+    - Calendario
 
-- Punto de entrada main.py
-Hará un insert en todas las colecciones
+
+- Modos de actuación.
+
+    - Carga masiva.
+        Soporta un excel para realizar cargas masivas parciales
+        En cada colección se puede especificar los campos: from / to / fromMaxLastModified / toMaxLastModified / ListCodes
+        Así como un listado de clientes para la liquidación posterior
+
+    - Modo Delta.
+        se consulta fromLastModified de cada colección, se consume el api con este dato en la query
+        y se persisten en DocumentDB
+
+- Variables de Entorno usadas:
+
+    BUCKET_NAME = os.getenv('BUCKET_NAME') --> Nombre del bucket en el que se van a depositar los excels
+    FILE = os.getenv('KEY')  --> corresponde al prefix S3 (path y/o nombre del fichero)
+    DOCUMENTDB_URL = os.getenv('DOCUMENTDB_URL') --> url de conexion para DocumentDB
+    DATABASE = os.getenv('DATABASE') --> Nombre de la base de datos
+    AIREGAS_ENDPOINT_URL = Ip base del endpoint de las Api de Airegas
+    AWS_SECRET_ACCESS_KEY
+    AWS_ACCESS_KEY_ID

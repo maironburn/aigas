@@ -1,6 +1,5 @@
 from pymongo import MongoClient
 from logger.app_logger import AppLogger
-from common_config import MONGODB_LOCAL, MONGODB_ATLAS
 
 
 class MongoAireGas(object):
@@ -32,15 +31,13 @@ class MongoAireGas(object):
 
         return False
 
-
-    def database_exist(self,dbname):
+    def database_exist(self, dbname):
 
         if self.mongo_con:
             dbnames = self.mongo_con.list_database_names()
             if dbname in dbnames:
                 return True
         return False
-
 
     def collection_exists(self, collection_name):
 
