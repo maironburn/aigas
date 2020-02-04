@@ -9,11 +9,8 @@ class PrecioFormula(AireGas):
     unit = None
     compound_index = None
     dailyDetail = []
-    _from = None
-    _to = None
 
     divisa = str
-    prices = {}
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -26,33 +23,34 @@ class PrecioFormula(AireGas):
         self.currency = self.json_entity_data['currency']
         self.unit = self.json_entity_data['unit']
         self.compound_index = self.json_entity_data['compoundIndex']
-        self.dailyDetail = self.json_entity_data['dailyDetail']
-        self._from = self.json_entity_data['from']
-        self._to = self.json_entity_data['to']
-
-        prices = self.json_entity_data["prices"]
-
-        prices and self.load_prices(prices)
+        dailyDetail = self.json_entity_data['dailyDetail']
+        dailyDetail and self.load_prices(dailyDetail)
 
     def load_prices(self, prices):
-        self._logger.info(
-            "Iniciando la carga de {} prices asociados a {} ".format(len(prices), self.__class__.__name__))
-        self.prices = Prices(**{'entity_data': prices, 'logger': self._logger})
+        for p in prices:
+            self.dailyDetail.append(Prices(**{'entity_data': p}))
 
     def get_prices(self):
-        return self.prices.get_json()
+
+        details = []
+        for n in self.dailyDetail:
+            details.append(n.get_json())
+
+        return details
 
     # <editor-fold desc="getter and setters">
+
+
     def get_json(self):
         json_parent = AireGas.get_json(self)
 
         json_parent.update({
             "formulaCode": self.formula_code,
             "formulaDes": self.formula_des,
-            "from": self._from,
-            "to": self._to,
+            "currency": self.currency,
+            "unit": self.unit,
             "compoundIndex": self.compound_index,
-            "prices": self.get_prices()
+            "dailyDetail": self.get_prices()
         })
         return json_parent
 

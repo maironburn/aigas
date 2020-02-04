@@ -25,6 +25,7 @@ collection_mapper = {
     'Calendario': 'Calendar',
     'Nominacion': 'Nomination',
     'TasaMolecula': 'Molecule_Tax',
+    'Prevision' : 'ForeCast',
     'PrecioFormula': 'Formula_Price'
 }
 

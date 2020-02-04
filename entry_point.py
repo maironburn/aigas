@@ -11,7 +11,7 @@ from src.model.cli.cli import Cli
 from src.model.gas_quality_detail.gasqualitydetail import GasQualityDetail
 from src.model.nomination.nomination import Nominacion
 from src.model.formula_price.formula_price import PrecioFormula
-from src.model.forecast.forecast import Forecast
+from src.model.forecast.prevision import Prevision
 from src.model.regulated_price.regulated_price import RegulatedPrice
 from src.model.molecule_tax.molecule_tax import TasaMolecula
 from src.helper.airegasrestconsumer import AiregasRestConsumer
@@ -24,19 +24,23 @@ import os
 from src.helper.aws_helper import *
 from src.controller.batch_controller import BatchController
 
-dict_instances_mapper = {'Calendario': Calendario
-                         # 'B70_Calendar': B70_Calendar,
-                         # 'Atr_Amount': Atr_Amount,
-                         # 'Consumption': Consumption,
-                         # 'Night_Consumption': Night_Consumption,
-                         # 'Cli': Cli,
-                         # 'Gas_Quality_Detail': Gas_Quality_Detail,
-                         # 'Nominacion': Nominacion,
-                         # 'Formula_Price': PrecioFormula,
-                         # 'Forecast': Forecast,
-                         # 'Regulated_Price': Regulated_Price,
-                         # 'TasaMolecula': TasaMolecula
-                         }
+dict_instances_mapper = {
+    'Calendario': Calendario,
+    'Nominacion': Nominacion,
+    'Prevision': Prevision,
+    'PrecioFormula': PrecioFormula
+    # 'B70_Calendar': B70_Calendar,
+    # 'Atr_Amount': Atr_Amount,
+    # 'Consumption': Consumption,
+    # 'Night_Consumption': Night_Consumption,
+    # 'Cli': Cli,
+    # 'Gas_Quality_Detail': Gas_Quality_Detail,
+
+    # 'Formula_Price': PrecioFormula,
+
+    # 'Regulated_Price': Regulated_Price,
+    # 'TasaMolecula': TasaMolecula
+}
 
 
 def check_collection(collecion_to_ingest):

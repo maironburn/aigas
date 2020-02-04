@@ -11,7 +11,7 @@ class Periods(object):
     calendar_dates = []
     dates = []
     active = []
-    last_modified = str
+    last_modified = None
 
     _logger = None
     json_entity_data = None

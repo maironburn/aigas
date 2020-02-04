@@ -13,11 +13,10 @@ class AiregasRestConsumer(object):
     _http = None
     _query_params = None
 
-
     def __init__(self, **kwargs):
         self.init_pool_request()
 
-        self._url = kwargs.get('url') if kwargs and kwargs.get('url') else ENDPOINT_URL
+        self._url = kwargs.get('url')
 
     def init_pool_request(self):
         try:
@@ -25,7 +24,7 @@ class AiregasRestConsumer(object):
 
             return True
         except Exception as e:
-           print("Error iniciando urllib3->{}".format(e))
+            print("Error iniciando urllib3->{}".format(e))
 
         return None
 
@@ -40,9 +39,9 @@ class AiregasRestConsumer(object):
 
         return False
 
-    def query_for_api_rest(self, **query_prams):
+    def query_for_api_rest(self, **query_params):
         try:
-
+            query_prams = dict((k[0].lower() + k[1:], _) for k, _ in query_params.items())
             r = self.http.request('GET', self.url, fields=query_prams)
             print("Connection to {} successful".format(self.url))
             return json.loads(r.data.decode('utf-8'))
@@ -75,5 +74,3 @@ class AiregasRestConsumer(object):
     def query_params(self, value):
         if value:
             self._query_params = value
-
-

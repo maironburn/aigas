@@ -5,7 +5,7 @@ from src.model.nomination.nomination_details import NominationDetails
 class Nominacion(AireGas):
 
     idContract = str
-    nominations = {}
+    nominations = []
     unit = str
 
     def __init__(self, **kw):
@@ -18,16 +18,20 @@ class Nominacion(AireGas):
         self.unit = self.json_entity_data['unit']
 
         nominations = self.json_entity_data['nominations']
-
-        nominations and self.load_nomination(nominations)
+        nominations and self.load_nominations(nominations)
 
     def load_nominations(self, nominations):
-        # self._logger.info(
-        #     "Iniciando la carga del objeto nomination asociada a {} ".format(self.__class__.__name__))
-        self.nominations = NominationDetails(**{'entity_data': nominations, 'logger': self._logger})
+
+        for n in nominations:
+            self.nominations.append(NominationDetails(**{'entity_data': n, 'logger': self._logger}))
 
     def get_nomination(self):
-        return self.nominations.get_json()
+
+        nominations = []
+        for n in self.nominations:
+            nominations.append(n.get_json())
+
+        return nominations
 
     # <editor-fold desc="getter and setters">
     def get_json(self):
@@ -35,6 +39,7 @@ class Nominacion(AireGas):
 
         json_parent.update({
             "idContract": self.idContract,
+            "unit": self.unit,
             "nominations": self.get_nomination()
         })
         return json_parent

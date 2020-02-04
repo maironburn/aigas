@@ -10,7 +10,7 @@ from src.model.cli.cli import Cli
 from src.model.gas_quality_detail.gasqualitydetail import GasQualityDetail
 from src.model.nomination.nomination import Nominacion
 from src.model.formula_price.formula_price import PrecioFormula
-from src.model.forecast.forecast import Forecast
+from src.model.forecast.prevision import Prevision
 from src.model.regulated_price.regulated_price import RegulatedPrice
 from src.model.molecule_tax.molecule_tax import TasaMolecula
 import auger
@@ -22,9 +22,9 @@ dict_instances = {'Calendar': Calendario,
                   'Night_Consumption': NightConsumption,
                   'Cli': Cli,
                   'Gas_Quality_Detail': GasQualityDetail,
-                  'Nomination': Nominacion,
+                  'Nomination': Prevision,
                   'Formula_Price': PrecioFormula,
-                  'Forecast': Forecast,
+                  'Forecast': Prevision,
                   'Regulated_Price': RegulatedPrice,
                   'Molecule_Tax': TasaMolecula
                   }
@@ -50,9 +50,9 @@ if __name__ == "__main__":
         Consumption,
         NightConsumption,
         GasQualityDetail,
-        Nominacion,
+        Prevision,
         PrecioFormula,
-        Forecast,
+        Prevision,
         RegulatedPrice,
         TasaMolecula
     ]):

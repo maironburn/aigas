@@ -31,6 +31,7 @@ class MongoVersionController(MongoAireGas):
 
         info_db_dict = self.set_collection_info()
         try:
+
             element = self.client[info_db_dict['collection']].find_one(
                 {info_db_dict['unique_str']: info_db_dict['unique']})
             if element:
@@ -50,7 +51,7 @@ class MongoVersionController(MongoAireGas):
                 print("Borrando {} con id: {} de {}".format(self.instance.__class__.__name__,
                                                             element['_id'],
                                                             info_db_dict['collection']))
-                self.client[info_db_dict['collection']].delete_one({'_id': ObjectId(element['_id'])})
+                self.client[info_db_dict['collection']].delete_one({info_db_dict['unique_str']: info_db_dict['unique']})
 
             return self.client[info_db_dict['collection']].insert_one(self.instance.get_json()).inserted_id
 

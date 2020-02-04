@@ -20,18 +20,17 @@ class Prices(object):
         self.load_data()
 
     def load_data(self):
-        self._logger.info("Checking fields from entity {}".format(self.__class__.__name__))
 
-        self.day = self.json_entity_data['formulaDates']
+        self.day = self.json_entity_data['day']
         self.formula_price = self.json_entity_data['formulaPrice']
         self.formula_price_detail = self.json_entity_data['formulaPriceDetail']
         self.last_modified = self.json_entity_data['lastModified']
         self.expiration_date = self.json_entity_data['expirationDate']
 
     def get_json(self):
-        return {"formulaDates": self.formula_dates,
+        return {"day": self.day,
                 "formulaPrice": self.formula_price,
                 "formulaPriceDetail": self.formula_price_detail,
-                "last_modified": self.last_modified,
+                "lastModified": self.last_modified,
                 "expirationDate": self.expiration_date
                 }

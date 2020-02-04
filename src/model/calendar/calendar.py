@@ -24,7 +24,7 @@ class Calendario(AireGas):
     def load_periods(self, periods):
         print("Iniciando la carga de {} periodos asociados al calendar ".format(len(periods)))
         for p in periods:
-            self.periods.append(periods(**{'entity_data': p, 'logger': self._logger}))
+            self.periods.append(Periods(**{'entity_data': p, 'logger': self._logger}))
 
         print("Instanciados {} periodos  ".format(len(self.periods)))
 

@@ -83,7 +83,7 @@ class BatchController(object):
             response = rest_consumer.query_for_api_rest(**{'fromLastModified': last_modified})
             self.run_proccess_response_from_api(response, url)
         else:
-            print("No hay ningun campo {} en {}".format( 'fromLastModified',self.instance.__name__))
+            print("No hay ningun campo {} en {}, Colleccion sin documentos o no actualizada con este campo".format('fromLastModified', self.instance.__name__))
 
     def run_proccess_response_from_api(self, response, url):
 
