@@ -64,9 +64,10 @@ if __name__ == '__main__':
     start_time = time.time()
     module = import_module("common_config")
     num_arguments = len(sys.argv)
-
+    print("num_arguments {}".format(num_arguments))
     if num_arguments == 2 and set_credentials():
         instance = check_collection(sys.argv[1])
+        print("Invocada ingesta de {}".format(instance.__name__))
         mongo_ver_controller = MongoVersionController(**{'DOCUMENTDB_URL': DOCUMENTDB_URL, 'DATABASE': DATABASE})
         if instance and mongo_ver_controller.connect_db():
 
