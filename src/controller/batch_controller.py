@@ -1,7 +1,6 @@
 from src.helper.aws_helper import *
 from src.model.airegas_base import AireGas
-from src.helper.json_helper import valid_date
-from src.controller.mongo_contoller import MongoVersionController
+from src.helper.common_helper import valid_date
 from src.controller.ingesta_controller import AiregasRestConsumer
 
 
@@ -72,25 +71,32 @@ class BatchController(object):
         response = rest_consumer.query_for_api_rest(**data_to_build_query)
         self.run_proccess_response_from_api(response, url)
 
+
     def do_delta_procedure(self):
 
+        # response = [{"taxCode": "MERMAS", "taxDes": "MERMAS BOE", "from": "2020-06-06", "to": None,
+        #                       "maxLastModified": "2020-01-27 ", "taxVal": "0.66666"}]
         collection_entity = self.instance()
         self.mongo_controller.instance = collection_entity
-        response = [{"taxCode": "MERMAS", "taxDes": "MERMAS BOE", "from": "2020-06-06", "to": None,
-                              "maxLastModified": "2020-01-27 ", "taxVal": "0.66666"}]
-        # self.run_proccess_response_from_api(response, url)
-        self.run_proccess_response_from_api(response)
+        last_modified = self.mongo_controller.check_max_last_modified()
+        if last_modified:
+            url = "{}/{}".format(self.end_point_api, self.instance.__name__)
+            rest_consumer = AiregasRestConsumer(**{'url': url})
+            response = rest_consumer.query_for_api_rest(**{'fromLastModified': last_modified})
+            self.run_proccess_response_from_api(response, url)
+        else:
+            print("No hay ningun campo {} en {}, Colleccion sin documentos o no actualizada con este campo".format(
+                'fromLastModified', self.instance.__name__))
 
-    def run_proccess_response_from_api(self, response):
+    def run_proccess_response_from_api(self, response, url):
 
         if isinstance(response, list):
             # insercion de DocumentDB de la coleccion recuperada del API
             for elements in response:
                 collection_entity = self.instance(**{'entity_data': elements})
                 self.mongo_controller.instance = collection_entity
-                inserted_id = self.mongo_controller.tasa_molec_version()
+                self.mongo_controller.insert_or_version()
 
-                print("Insercion en Document DB, coleccion: {} , id: {}".format(self.instance.__name__, inserted_id))
 
         else:
             print("Error al acceder a la API, url: {}".format(url))

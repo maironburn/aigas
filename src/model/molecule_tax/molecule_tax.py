@@ -29,7 +29,8 @@ class TasaMolecula(AireGas):
             "from": self.From,
             "to": self.To,
             "taxVal": self.taxVal,
-            "last_modified": self.last_modified
+            #"last_modified": self.last_modified
+            "last_modified": '2020-01-01'
         })
         return json_parent
 

@@ -5,6 +5,7 @@ import urllib3
 from common_config import LOCAL_ENDPOINT_URL
 import datetime
 
+
 def get_entity_from_samples(json_sample_file):
     if os.path.exists(json_sample_file):
         with open(json_sample_file) as json_file:
@@ -19,6 +20,7 @@ def check_field_integrity(fields_to_check, json_entity_data):
             return False
     return True
 
+
 def valid_date(datestring):
     try:
         datetime.datetime.strptime(datestring, '%Y-%m-%d')
@@ -27,8 +29,11 @@ def valid_date(datestring):
         return False
 
 
-def get_entity_from_rest(from_date, entity):
+def get_date_from_string(date_as_string):
+    return datetime.datetime.strptime(date_as_string, "%Y-%m-%d").date()
 
+
+def get_entity_from_rest(from_date, entity):
     http = urllib3.PoolManager()
     r = http.request('GET', LOCAL_ENDPOINT_URL)
 

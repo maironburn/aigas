@@ -1,5 +1,5 @@
 from common_config import *
-from src.helper.json_helper import get_entity_from_samples
+from src.helper.common_helper import get_entity_from_samples
 from importlib import import_module
 from src.model.calendar.calendar import Calendario
 from src.model.b70_calendar.b70calendar import B70Calendar

@@ -1,4 +1,4 @@
-from src.helper.json_helper import get_entity_from_samples
+from src.helper.common_helper import get_entity_from_samples
 from src.mongodb.mongo_client import MongoAireGas
 from common_config import *
 from importlib import import_module

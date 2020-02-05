@@ -1,13 +1,13 @@
 import json
 
 from logger.app_logger import AppLogger
-from src.helper.json_helper import check_field_integrity
+from src.helper.common_helper import check_field_integrity
 
 
 class Periods(object):
-    id_period = str
-    _from = str
-    _to = str
+    id_period = None
+    _from = None
+    _to = None
     calendar_dates = []
     dates = []
     active = []

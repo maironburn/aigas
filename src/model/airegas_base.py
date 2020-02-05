@@ -7,7 +7,6 @@ class AireGas(object):
     Clase base de todas las colecciones de la ingesta de Datos (airegas)
     '''
 
-
     _logger = None
     json_entity_data = None
     is_temporal_sequence = None
@@ -30,14 +29,18 @@ class AireGas(object):
 
     def load_data(self):
 
-        self._max_last_modified = self.json_entity_data['maxLastModified']
-
+        self._max_last_modified = self.json_entity_data[
+            'maxLastModified'] if 'maxLastModified' in self.json_entity_data.keys() else self.json_entity_data[
+            'lastModified']
 
     # <editor-fold desc="getter and setters">
     def get_json(self):
         return {
             "maxLastModified": self._max_last_modified
         }
+
+    def get_collection_db_info(self):
+        return {'collection': self.collection_name, 'version_collection': self.collection_name_old}
 
     @property
     def unique(self):

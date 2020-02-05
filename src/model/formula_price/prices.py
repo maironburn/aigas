@@ -1,7 +1,7 @@
 import json
 
 from logger.app_logger import AppLogger
-from src.helper.json_helper import check_field_integrity
+from src.helper.common_helper import check_field_integrity
 
 
 class Prices(object):

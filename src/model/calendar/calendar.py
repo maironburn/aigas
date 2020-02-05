@@ -48,6 +48,17 @@ class Calendario(AireGas):
         })
         return json_parent
 
+    def get_collection_db_info(self):
+        collection_info_base = AireGas.get_collection_db_info(self)
+        collection_info_base.update({
+
+            "unique": self.calendarCode,
+            "unique_str": "calendarCode",
+            "last": "maxLastModified"
+        })
+
+        return collection_info_base
+
     @property
     def unique(self):
         # identificador univoco de la entidad
@@ -58,3 +69,4 @@ class Calendario(AireGas):
     def unique_str(self):
         # identificador univoco de la entidad
         return "calendarCode"
+

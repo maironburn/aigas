@@ -4,7 +4,6 @@ import boto3
 import logging
 import uuid
 from urllib.parse import unquote_plus
-# from src.helper.aws_helper import write_to_s3
 import os
 from aws_logging_handlers.S3 import S3Handler
 
@@ -43,7 +42,8 @@ def do_pandas_job(download_path):
 
         df = pd.read_excel(download_path)
         logger.info("EXCEL leido de {}".format(download_path))
-        df = df.loc[:12, 'colecciones':'ListCode'].astype('str')  # filtro columnas
+        # filtro columnas
+        df = df.loc[:12, 'colecciones':'ListCode'].astype('str')
         logger.info("EXCEL sliced")
         df = df.rename(index=pandas_row_mapper)
         logger.info("Renombrado de rows")
@@ -51,13 +51,13 @@ def do_pandas_job(download_path):
         json_massive_load = json.loads(df.T.to_json())
         logger.info("Df transpose")
         logger.info("generado json para la ingesta: \n{}".format(json_massive_load))
-        json_idContract = None
+        json_id_contract = None
 
         if 'idContract' in json_massive_load.keys() and len(json_massive_load['idContract']['From'].split(',')):
-            json_idContract = json_massive_load['idContract']['From'].split(',')
-            logger.info("json idContract: {}".format(json_idContract))
+            json_id_contract = json_massive_load['idContract']['From'].split(',')
+            logger.info("json idContract: {}".format(json_id_contract))
 
-        return json_massive_load, json_idContract
+        return json_massive_load, json_id_contract
 
     except Exception as e:
         logger.error("Error en la lectura Pandas: {}".format(e))
@@ -70,21 +70,17 @@ def send_job_to_batch():
 
     logger.info("lambda_invoke_batch")
     trabajos = ['job_calendar', 'job_nomination']
-    jobQueue = 'test_batch_queue_V1'
+    job_queue = 'test_batch_queue_V1'
 
     try:
-        # response = client.submit_job(
-        #     jobName='trabajo_test',
-        #     jobQueue='test_batch_queue_V1',
-        #     jobDefinition='calendario:1'
-        # )
+
         for j in trabajos:
-            response = client.submit_job(
+            client.submit_job(
                 jobName=j,
-                jobQueue=jobQueue,
+                jobQueue=job_queue,
                 jobDefinition='calendario:1'
             )
-            logger.info("trabajo :{}, enviado a la cola: {}".format(j, jobQueue))
+            logger.info("trabajo :{}, enviado a la cola: {}".format(j, job_queue))
         return True
     except Exception as e:
         logger.error("Error al despachar los trabajos al Batch: {}".format(e))
@@ -110,16 +106,17 @@ def lambda_handler(event, context):
         s3_client.download_file(bucket, key, download_path)
         logger.info("downloadedd file ")
 
-        json_massive_load, json_idContract = do_pandas_job(download_path)
+        json_massive_load, json_id_contract = do_pandas_job(download_path)
         if json_massive_load:
             kw = {'data': json.dumps(json_massive_load), 'bucket_name': bucket,
                   'key': bucket_key}
 
             write_to_s3(**kw)
 
-            if json_idContract:
-                logger.info("pandas_before save->type:{} -> {}".format(type(json_idContract), json_idContract))
-                kw = {'data': json.dumps({'idContract': json_idContract}), 'bucket_name': bucket, 'key': bucket_key_cli}
+            if json_id_contract:
+                logger.info("pandas_before save->type:{} -> {}".format(type(json_id_contract), json_id_contract))
+                kw = {'data': json.dumps({'idContract': json_id_contract}), 'bucket_name': bucket,
+                      'key': bucket_key_cli}
                 write_to_s3(**kw)
 
             '''

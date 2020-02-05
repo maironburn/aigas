@@ -44,6 +44,17 @@ class Nominacion(AireGas):
         })
         return json_parent
 
+    def get_collection_db_info(self):
+        collection_info_base = AireGas.get_collection_db_info(self)
+        collection_info_base.update({
+
+            "unique": self.idContract,
+            "unique_str": "idContract",
+            "last": "maxLastModified"
+        })
+
+        return collection_info_base
+
     @property
     def unique(self):
         # identificador univoco de la entidad

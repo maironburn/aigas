@@ -1,13 +1,13 @@
 import json
 
 from logger.app_logger import AppLogger
-from src.helper.json_helper import check_field_integrity
+from src.helper.common_helper import check_field_integrity
 
 
 class ForecastDetails(object):
     forecast_day = None
     forecast = None
-    lastModified = None
+    last_modified = None
 
     _logger = None
     json_entity_data = None
@@ -21,12 +21,12 @@ class ForecastDetails(object):
 
         self.forecast_day = self.json_entity_data['day']
         self.forecast = self.json_entity_data['forecast']
-        self.lastModified = self.json_entity_data['lastModified']
+        self.last_modified = self.json_entity_data['lastModified']
 
 
     def get_json(self):
 
         return {"day": self.forecast_day,
                 "forecast": self.forecast,
-                "lastModified": self.lastModified
+                "lastModified": self.last_modified
                 }
