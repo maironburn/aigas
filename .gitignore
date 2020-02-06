@@ -5,7 +5,7 @@ __pycache__/
 .idea
 logger/*
 common_config.py
-
+Draft/
 # C extensions
 *.so
 img/temps_imgs
